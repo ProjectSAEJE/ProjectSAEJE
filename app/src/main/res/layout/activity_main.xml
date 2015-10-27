@@ -72,15 +72,7 @@
                 android:onClick="onRadioButtonClicked"
                 android:tag="61.7354"
                 android:text="B1" />
-        </RadioGroup>
 
-        <RadioButton
-            android:id="@+id/radio7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
-            android:tag="61.7354"
-            android:text="B1" />
     </RadioGroup>
 
     </ScrollView>
