@@ -64,6 +64,14 @@
                 android:onClick="onRadioButtonClicked"
                 android:tag="61.7354"
                 android:text="B1" />
+
+            <RadioButton
+                android:id="@+id/radio6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onRadioButtonClicked"
+                android:tag="61.7354"
+                android:text="B1" />
         </RadioGroup>
 
     </ScrollView>
@@ -85,6 +93,7 @@
             android:id="@+id/dial"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" />
+
 
     </LinearLayout>
 
