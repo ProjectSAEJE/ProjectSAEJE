@@ -4,21 +4,9 @@ package com.example.woodev01.projectsaeje;
         import android.os.Bundle;
         import android.os.Handler;
         import android.os.Message;
-        import android.util.Log;
-        import android.view.Menu;
-        import android.view.MenuInflater;
-        import android.view.MenuItem;
-        import android.view.View;
-        import android.widget.RadioButton;
-        import android.widget.RadioGroup;
+
         import android.widget.TextView;
-        import android.widget.Toast;
-
-        import com.example.woodev01.projectsaeje.R;
-
-        import audio.CaptureTask;
         import audio.CaptureThread;
-        import graphics.DailView.DialFace.DialSurfaceView;
         import graphics.DailView.DialFace.DialView;
 
 public class MainActivity extends Activity {
@@ -67,7 +55,6 @@ public class MainActivity extends Activity {
         super.onPause();
 
         mCapture.setRunning(false);
-
     }
 
     @Override
