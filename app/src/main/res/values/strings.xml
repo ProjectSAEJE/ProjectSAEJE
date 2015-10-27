@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ProjectSAEJE</string>
+    <string name="Metronome">Metronome</string>
+    <string name="Clear">Clear</string>
+    <string name="action_settings">Settings</string>
+
+</resources>
