@@ -70,7 +70,4 @@ public class CaptureTask extends AsyncTask<Float, Float, Void> {
         return null;
     }
 
-    @Override protected void onProgressUpdate(Float... freq) {
-        mainActivity.updateDisplay(freq[0]);
-    }
 }
