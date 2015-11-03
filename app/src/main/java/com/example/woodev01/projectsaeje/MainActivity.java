@@ -10,10 +10,7 @@ package com.example.woodev01.projectsaeje;
         import graphics.DailView.DialFace.DialView;
 
 public class MainActivity extends Activity {
-    private DialView dial;
-    private TextView t;
-    //private CaptureTask capture;
-    private float targetFrequency;
+
     private CaptureThread mCapture;
     private Handler mHandler;
 
@@ -23,20 +20,16 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.activity_main);
 
-
-
-
         mHandler = new Handler() {
             @Override
             public void handleMessage(Message m) {
-                updateDisplay(m.getData().getFloat("Freq"));
+               m.getData().getFloat("Freq");
             }
         };
 
         mCapture = new CaptureThread(mHandler);
         mCapture.setRunning(true);
         mCapture.start();
-
     }
 
     @Override
