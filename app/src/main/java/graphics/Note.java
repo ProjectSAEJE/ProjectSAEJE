@@ -12,6 +12,7 @@ public class Note {
     public float x, y; //for drawing to the 2D canvas in the UI/display
     public String type; //"whole", "half", "quarter", "eighth", "sixteenth"...
     public Image image; //An image of this type of note
+    public float z;
 
     public Note() {
     }
