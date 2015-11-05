@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:background="@color/white">
 
 
     <LinearLayout
@@ -15,21 +16,24 @@
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp" />
+        android:layout_marginRight="12dp"
+        android:background="@drawable/open_button"/>
 
     <ImageButton
         android:id="@+id/save"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp" />
+        android:layout_marginRight="12dp"
+        android:background="@drawable/save_button"/>
 
     <ImageButton
         android:id="@+id/start"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginRight="12dp"
-        android:layout_marginLeft="12dp" />
+        android:layout_marginLeft="12dp"
+        android:background="@drawable/record_button"/>
 
 
 

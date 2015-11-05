@@ -1,31 +1,16 @@
 package com.example.woodev01.projectsaeje;
-
+        //hello
         import android.app.Activity;
         import android.os.Bundle;
         import android.os.Handler;
         import android.os.Message;
-        import android.util.Log;
-        import android.view.Menu;
-        import android.view.MenuInflater;
-        import android.view.MenuItem;
-        import android.view.View;
-        import android.widget.RadioButton;
-        import android.widget.RadioGroup;
+
         import android.widget.TextView;
-        import android.widget.Toast;
-
-        import com.example.woodev01.projectsaeje.R;
-
-        import audio.CaptureTask;
         import audio.CaptureThread;
-        import graphics.DailView.DialFace.DialSurfaceView;
         import graphics.DailView.DialFace.DialView;
 
 public class MainActivity extends Activity {
-    private DialView dial;
-    private TextView t;
-    //private CaptureTask capture;
-    private float targetFrequency;
+
     private CaptureThread mCapture;
     private Handler mHandler;
 
@@ -35,20 +20,16 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.activity_main);
 
-
-
-
         mHandler = new Handler() {
             @Override
             public void handleMessage(Message m) {
-                updateDisplay(m.getData().getFloat("Freq"));
+               m.getData().getFloat("Freq");
             }
         };
 
         mCapture = new CaptureThread(mHandler);
         mCapture.setRunning(true);
         mCapture.start();
-
     }
 
     @Override
@@ -67,7 +48,6 @@ public class MainActivity extends Activity {
         super.onPause();
 
         mCapture.setRunning(false);
-
     }
 
     @Override
