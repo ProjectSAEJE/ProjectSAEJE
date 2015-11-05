@@ -5,7 +5,7 @@ package graphics;
  */
 
 import android.graphics.Canvas;
-import android.graphics.drawable.Drawable  // May or may not be pseudocode depending on what Drawable actually is, might be too abstract
+import android.graphics.drawable.Drawable;  // May or may not be pseudocode depending on what Drawable actually is, might be too abstract
 
 public class Note extends Drawable { // As above, may be better to extend from an subclass of Drawable that supports images (for the notes, quarter, eighth, etc.)
 
