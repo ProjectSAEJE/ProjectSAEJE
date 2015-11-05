@@ -7,7 +7,6 @@ package com.example.woodev01.projectsaeje;
 
         import android.widget.TextView;
         import audio.CaptureThread;
-        import graphics.DailView.DialFace.DialView;
 
 public class MainActivity extends Activity {
 
