@@ -19,9 +19,6 @@
         android:icon="@drawable/record_button"
         android:showAsAction="ifRoom|withText"/>
 
-    <item
-        android:id="@+id/clear"
-        android:title="@string/Clear"
-        android:icon="@drawable/record_button"
-        android:showAsAction="ifRoom|withText"/>
+
+
 </menu>
