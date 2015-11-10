@@ -4,6 +4,9 @@
     <string name="app_name">ProjectSAEJE</string>
     <string name="Metronome">Metronome</string>
     <string name="Clear">Clear</string>
+    <string name="Save">Save</string>
+    <string name="Record">Record</string>
+    <string name="Open">Open</string>
     <string name="action_settings">Settings</string>
 
 </resources>

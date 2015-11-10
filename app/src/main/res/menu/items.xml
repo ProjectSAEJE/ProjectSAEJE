@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/record"
+        android:title="@string/Record"
+        android:icon="@drawable/record_button"
+        android:showAsAction="ifRoom|withText"/>
+
+    <item
+        android:id="@+id/save"
+        android:title="@string/Save"
+        android:icon="@drawable/record_button"
+        android:showAsAction="ifRoom|withText"/>
+
+    <item
+        android:id="@+id/open"
+        android:title="@string/Open"
+        android:icon="@drawable/record_button"
+        android:showAsAction="ifRoom|withText"/>
+
+
+
+</menu>

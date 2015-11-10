@@ -11,7 +11,7 @@ import com.example.woodev01.projectsaeje.R;
 
 public class Note {
 
-    public float x, y; //for drawing to the 2D canvas in the UI/display
+    public float x, y; //for drawing to the 2D canvas in the UI/display, y represents a piano note value 1-88
     public String type; //"whole", "half", "quarter", "eighth", "sixteenth"...
     public Image image; //An image of this type of note
 

@@ -2,9 +2,12 @@ package com.example.woodev01.projectsaeje;
 
         import android.app.Activity;
         import android.os.Bundle;
+        import android.view.Menu;
+        import android.view.MenuInflater;
+        import android.view.MenuItem;
+        import android.widget.Toast;
         import android.os.Handler;
         import android.os.Message;
-
         import android.widget.TextView;
         import audio.CaptureThread;
 
@@ -53,6 +56,40 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.items, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+
+        switch (item.getItemId()) {
+            case R.id.record:
+
+                break;
+        }
+        switch (item.getItemId()) {
+            case R.id.open:
+
+                break;
+        }
+        switch (item.getItemId()) {
+            case R.id.save:
+
+                break;
+        }
+        switch (item.getItemId()){
+            case R.id.clear:
+
+                break;
+        }
+        return true;
     }
 
 }
