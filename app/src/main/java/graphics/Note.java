@@ -7,6 +7,8 @@ package graphics;
 import android.graphics.Canvas;
 import android.media.Image;
 
+import com.example.woodev01.projectsaeje.R;
+
 public class Note {
 
     public float x, y; //for drawing to the 2D canvas in the UI/display
@@ -20,7 +22,8 @@ public class Note {
         this.x = 1;
         this.y = y;
         this.type = type;
-        this.image = R.drawable.dial; //the imageFor function would need to have access to a data structure (dictionary?) that maps strings -> images
+        this.image = R.drawable.dial;
+
     }
 
     @Override
@@ -30,11 +33,9 @@ public class Note {
 
     public void setX(float x) {
         this.x = x;
-        this.image.setX(x);
     }
 
     public void setY(float y) {
         this.y = y;
-        this.image.setY(y);
     }
 }
