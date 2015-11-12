@@ -38,4 +38,12 @@ public class Note {
     public void setY(float y) {
         this.y = y;
     }
+
+    public void updateYValue(float freq) {
+        double logCalcX = Math.log(freq/440);
+        double logCalcY = Math.log(2);
+
+        int note = (int)(12 * (logCalcX + 49)/logCalcY);
+        this.y = note;
+    }
 }

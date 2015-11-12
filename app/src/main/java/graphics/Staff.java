@@ -5,12 +5,5 @@ package graphics;
  */
 
 public class Staff {
-    public void updateDisplay(float freq) {
-        double f = freq;
-        double x = Math.log(f/440);
-        double y = Math.log(2);
 
-        int note = (int)(12 * (x + 49)/y);
-
-    }
 }
