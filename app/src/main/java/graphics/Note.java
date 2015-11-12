@@ -4,17 +4,21 @@ package graphics;
  * Created by austinnash on 11/5/15.
  */
 
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.media.Image;
 
 import com.example.woodev01.projectsaeje.R;
 
-public class Note {
+public class Note extends Activity {
 
     public float x, y; //for drawing to the 2D canvas in the UI/display, y represents a piano note value 1-88
     public String type; //"whole", "half", "quarter", "eighth", "sixteenth"...
     public int imageID;
-    public Image image; //An image of this type of note
+    public Bitmap image; //An image of this type of note
+
 
     public Note() {
     }
@@ -26,9 +30,8 @@ public class Note {
         this.imageID = R.drawable.dial;    //An interger representation of dial image. Use with getDrawable(ImageID) in draw function to draw to canvas
     }
 
-    @Override
     public void draw(Canvas canvas) {
-        image.draw(canvas);
+        image = BitmapFactory.decodeResource(getResources(), imageID);
     }
 
     public void setX(float x) {
