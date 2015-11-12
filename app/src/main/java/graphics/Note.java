@@ -23,7 +23,7 @@ public class Note {
         this.x = 1;
         this.y = y;
         this.type = type;
-        this.imageID = R.drawable.dial; //the imageFor function would need to have access to a data structure (dictionary?) that maps strings -> images
+        this.imageID = R.drawable.dial;    //An interger representation of dial image. Use with getDrawable(ImageID) in draw function to draw to canvas
     }
 
     @Override
