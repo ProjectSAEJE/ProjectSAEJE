@@ -1,6 +1,7 @@
 package graphics;
 
 import android.app.Activity;
+import android.graphics.Canvas;
 import android.view.View;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 /**
  * Created by woodev01 on 11/3/15.
  */
+
 
 public class Staff extends Activity {
 
@@ -32,6 +34,13 @@ public class Staff extends Activity {
         return String;
     }
 
+    public void draw(Canvas canvas) {
+        for (Note aNote : this.notes) {
+            aNote.draw(canvas);
+        }
+    }
+
+/*
     //saveData = data to be saved, saejeData = name of the internal file
     private void internalSave(String saveData, String saejeData){
         FileOutputStream fos = null;
@@ -49,7 +58,6 @@ public class Staff extends Activity {
             Toast.makeText(this,"There's a problem saving to the internal file",Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
-
     }
     /*
     String filename = "saeje_file";
@@ -62,4 +70,9 @@ public class Staff extends Activity {
         outputStream.close();
     } catch(Exception e){e.printStackTrace();} //change the Exception
     */
+
 }
+
+
+
+
