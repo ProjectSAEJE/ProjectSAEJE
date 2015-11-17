@@ -15,6 +15,7 @@ public class MainActivity extends Activity {
 
     private CaptureThread mCapture;
     private Handler mHandler;
+    private Boolean isClicked = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -22,16 +23,6 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.activity_main);
 
-        mHandler = new Handler() {
-            @Override
-            public void handleMessage(Message m) {
-               m.getData().getFloat("Freq");
-            }
-        };
-
-        mCapture = new CaptureThread(mHandler);
-        mCapture.setRunning(true);
-        mCapture.start();
     }
 
     @Override
@@ -71,25 +62,39 @@ public class MainActivity extends Activity {
 
         switch (item.getItemId()) {
             case R.id.record:
+                if (!isClicked) {
+                    mHandler = new Handler() {
+                        @Override
+                        public void handleMessage(Message m) {
+                            m.getData().getFloat("Freq");
+                        }
+                    };
 
-                break;
-        }
-        switch (item.getItemId()) {
+                    mCapture = new CaptureThread(mHandler);
+                    mCapture.setRunning(true);
+                    mCapture.start();
+
+                    isClicked = true;
+                }
+                return true;
+
             case R.id.open:
 
-                break;
-        }
-        switch (item.getItemId()) {
+                return true;
+
             case R.id.save:
 
-                break;
-        }
-        switch (item.getItemId()){
+                return true;
+
             case R.id.clear:
 
-                break;
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
         }
-        return true;
+
     }
 
 }
