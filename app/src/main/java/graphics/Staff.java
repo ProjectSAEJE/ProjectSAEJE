@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.view.View;
 import android.widget.Toast;
 
+import graphics.Note;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 /**
@@ -14,6 +17,20 @@ import java.io.IOException;
 
 public class Staff extends Activity {
 
+    public ArrayList<Note> notes;
+
+    public Staff() {
+
+    }
+
+    public Staff(ArrayList<Note> notes){
+        this.notes = notes;
+    }
+
+
+    private String NoteToString(){
+        return String;
+    }
 
     //saveData = data to be saved, saejeData = name of the internal file
     private void internalSave(String saveData, String saejeData){
@@ -27,6 +44,7 @@ public class Staff extends Activity {
 
             buttonShowInternal.setVisibility(View.VISIBLE);
             buttonShowInternal.setOnClickListener(this);
+
         } catch (IOException e){
             Toast.makeText(this,"There's a problem saving to the internal file",Toast.LENGTH_SHORT).show();
             e.printStackTrace();
