@@ -88,7 +88,7 @@ public class MainActivity extends Activity {
 
             case R.id.clear:
 
-                return true;
+                return false;
 
             default:
                 return super.onOptionsItemSelected(item);
