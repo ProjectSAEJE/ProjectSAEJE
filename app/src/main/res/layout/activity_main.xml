@@ -5,41 +5,5 @@
     android:orientation="horizontal">
 
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-    <ImageButton
-        android:id="@+id/open"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:background="@drawable/open_button"/>
-
-    <ImageButton
-        android:id="@+id/save"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:background="@drawable/save_button"/>
-
-    <ImageButton
-        android:id="@+id/start"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginLeft="12dp"
-        android:background="@drawable/record_button"/>
-
-
-
-
-
-
-
-    </LinearLayout>
 
 </LinearLayout>
