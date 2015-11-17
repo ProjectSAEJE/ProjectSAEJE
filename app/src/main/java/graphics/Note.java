@@ -8,8 +8,13 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.woodev01.projectsaeje.R;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class Note extends Activity {
 
@@ -31,6 +36,28 @@ public class Note extends Activity {
 
     public void draw(Canvas canvas) {
         image = BitmapFactory.decodeResource(getResources(), imageID);
+    }
+
+    public void save(String fileName) {
+        String noteVal;
+
+        noteVal = String.valueOf(this.x);
+        noteVal += String.valueOf(this.y);
+        noteVal += String.valueOf(this.type);
+        noteVal += String.valueOf(this.imageID);
+
+        FileOutputStream fos = null;
+        try{
+            fos = openFileOutput(fileName, this.MODE_PRIVATE);
+            fos.write(noteVal.getBytes()); //turns the Note String into a group of bits
+            fos.close();
+
+        } catch (IOException e){
+            Toast.makeText(this, "There's a problem saving to the internal file", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+
+
     }
 
     public void setX(float x) {
