@@ -10,12 +10,14 @@ package com.example.woodev01.projectsaeje;
         import android.os.Message;
         import android.widget.TextView;
         import audio.CaptureThread;
+        import graphics.Staff;
 
 public class MainActivity extends Activity {
 
     private CaptureThread mCapture;
     private Handler mHandler;
     private Boolean isClicked = false;
+    private Staff staff;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,7 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.activity_main);
 
+        Staff staff = new Staff();
     }
 
     @Override
@@ -83,6 +86,8 @@ public class MainActivity extends Activity {
                 return true;
 
             case R.id.save:
+
+                staff.save();
 
                 return true;
 

@@ -21,6 +21,8 @@ import java.util.ArrayList;
 
 public class Staff extends Activity {
 
+    private String fileName;
+
     public ArrayList<Note> notes;
 
     public Staff() {
@@ -31,7 +33,7 @@ public class Staff extends Activity {
         this.notes = notes;
     }
 
-    private void saveNotesToString(String m_Text){
+    public void save(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Title");
 
@@ -45,7 +47,7 @@ public class Staff extends Activity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                m_Text = input.getText().toString();
+                fileName = input.getText().toString();
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -58,7 +60,7 @@ public class Staff extends Activity {
         builder.show();
 
         for (Note aNote: this.notes) {
-            aNote.save(m_Text);
+            aNote.save(fileName);
         }
     }
 
