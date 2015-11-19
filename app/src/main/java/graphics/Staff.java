@@ -31,9 +31,7 @@ public class Staff extends Activity {
         this.notes = notes;
     }
 
-    private String m_Text;
-
-    private void NoteToString(){
+    private void saveNotesToString(String m_Text){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Title");
 
