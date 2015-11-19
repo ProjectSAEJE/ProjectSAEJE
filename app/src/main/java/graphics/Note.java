@@ -8,7 +8,6 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.view.View;
 import android.widget.Toast;
 
 import com.example.woodev01.projectsaeje.R;
@@ -31,11 +30,12 @@ public class Note extends Activity {
         this.x = 1;
         this.y = y;
         this.type = type;
-        this.imageID = R.drawable.dial;    //An integer representation of dial image. Use with getDrawable(ImageID) in draw function to draw to canvas
+        this.imageID = R.drawable.quarter;    //An integer representation of dial image. Use with getDrawable(ImageID) in draw function to draw to canvas
     }
 
     public void draw(Canvas canvas) {
         image = BitmapFactory.decodeResource(getResources(), imageID);
+
     }
 
     public void save(String fileName) {
