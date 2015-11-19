@@ -33,6 +33,11 @@ public class Staff extends Activity {
         this.notes = notes;
     }
 
+    public void addNote(float freq) {
+        Note newNote = new Note(freq, "quarter");
+        notes.add(newNote);
+    }
+
     public void save(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Title");

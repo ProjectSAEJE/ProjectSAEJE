@@ -1,16 +1,18 @@
 package com.example.woodev01.projectsaeje;
-        //hello
-        import android.app.Activity;
-        import android.os.Bundle;
-        import android.view.Menu;
-        import android.view.MenuInflater;
-        import android.view.MenuItem;
-        import android.widget.Toast;
-        import android.os.Handler;
-        import android.os.Message;
-        import android.widget.TextView;
-        import audio.CaptureThread;
-        import graphics.Staff;
+//hello
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
+import android.os.Handler;
+import android.os.Message;
+import android.widget.TextView;
+import audio.CaptureThread;
+import graphics.Note;
+import graphics.Staff;
+
 
 public class MainActivity extends Activity {
 
@@ -19,13 +21,15 @@ public class MainActivity extends Activity {
     private Boolean isClicked = false;
     private Staff staff;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
 
-        Staff staff = new Staff();
+        staff = new Staff();
+        staff.addNote(0);  //This initiates a new note on a freq 0, so that we can change the y freq
     }
 
     @Override
@@ -59,6 +63,13 @@ public class MainActivity extends Activity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    public void updateDisplay(float freq){
+        Note exampleNote = staff.notes.get(0);
+        exampleNote.updateYValue(freq);
+
+        exampleNote.draw(ourCanvas);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
@@ -69,7 +80,7 @@ public class MainActivity extends Activity {
                     mHandler = new Handler() {
                         @Override
                         public void handleMessage(Message m) {
-                            m.getData().getFloat("Freq");
+                            updateDisplay(m.getData().getFloat("Freq"));
                         }
                     };
 

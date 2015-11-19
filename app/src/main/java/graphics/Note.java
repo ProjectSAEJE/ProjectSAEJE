@@ -22,7 +22,6 @@ public class Note extends Activity {
     public int imageID;
     public Bitmap image; //An image of this type of note
 
-
     public Note() {
     }
 
@@ -34,7 +33,7 @@ public class Note extends Activity {
     }
 
     public void draw(Canvas canvas) {
-        image = BitmapFactory.decodeResource(getResources(), imageID);
+        image = BitmapFactory.decodeResource(getResources(), this.imageID);
 
     }
 
