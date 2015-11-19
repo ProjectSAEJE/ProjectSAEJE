@@ -31,7 +31,7 @@ public class Note extends Activity {
         this.x = 1;
         this.y = y;
         this.type = type;
-        this.imageID = R.drawable.dial;    //An interger representation of dial image. Use with getDrawable(ImageID) in draw function to draw to canvas
+        this.imageID = R.drawable.dial;    //An integer representation of dial image. Use with getDrawable(ImageID) in draw function to draw to canvas
     }
 
     public void draw(Canvas canvas) {
