@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         staff = new Staff();
-        staff.addNote(0);  //This initiates a new note on a freq 0, so that we can change the y freq
+        staff.addNote(new Note(0, "quarter"));  //This initiates a new note on a freq 0, so that we can change the y freq
     }
 
     @Override

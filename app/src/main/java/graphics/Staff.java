@@ -14,7 +14,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 /**
  * Created by woodev01 on 11/3/15.
  */
@@ -33,8 +32,7 @@ public class Staff extends Activity {
         this.notes = notes;
     }
 
-    public void addNote(float freq) {
-        Note newNote = new Note(freq, "quarter");
+    public void addNote(Note newNote) {
         notes.add(newNote);
     }
 
