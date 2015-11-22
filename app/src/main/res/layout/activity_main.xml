@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="horizontal">
+    android:background="#FFCCCCCC"
+    android:orientation="horizontal"
+    tools:context=".MainActivity">
 
     <graphics.DrawingView
         android:id="@+id/drawing"
@@ -14,7 +17,5 @@
         android:layout_marginTop="3dp"
         android:layout_weight="1"
         android:background="#FFFFFFFF" />
-
-
 
 </LinearLayout>

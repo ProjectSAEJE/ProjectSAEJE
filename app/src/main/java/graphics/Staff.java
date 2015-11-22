@@ -25,6 +25,7 @@ public class Staff extends Activity {
     public ArrayList<Note> notes;
 
     public Staff() {
+        this.notes = new ArrayList<>();
 
     }
 

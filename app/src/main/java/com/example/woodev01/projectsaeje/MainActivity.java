@@ -1,15 +1,12 @@
 package com.example.woodev01.projectsaeje;
 //hello
 import android.app.Activity;
-import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 import android.os.Handler;
 import android.os.Message;
-import android.widget.TextView;
 import audio.CaptureThread;
 import graphics.DrawingView;
 import graphics.Note;
@@ -32,10 +29,9 @@ public class MainActivity extends Activity {
 
         drawView = (DrawingView)findViewById(R.id.drawing);
 
-        drawView.startNew();
-
         this.staff = new Staff();
-        staff.addNote(new Note(0, "quarter"));  //This initiates a new note on a freq 0, so that we can change the y freq
+        Note note = new Note(0,"quarter");
+        staff.addNote(note);  //This initiates a new note on a freq 0, so that we can change the y freq
     }
 
     @Override
