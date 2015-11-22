@@ -1,6 +1,7 @@
 package com.example.woodev01.projectsaeje;
 //hello
 import android.app.Activity;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,6 +11,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.TextView;
 import audio.CaptureThread;
+import graphics.DrawingView;
 import graphics.Note;
 import graphics.Staff;
 
@@ -20,7 +22,7 @@ public class MainActivity extends Activity {
     private Handler mHandler;
     private Boolean isClicked = false;
     private Staff staff;
-
+    private DrawingView drawView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,7 +30,11 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.activity_main);
 
-        staff = new Staff();
+        drawView = (DrawingView)findViewById(R.id.drawing);
+
+        drawView.startNew();
+
+        this.staff = new Staff();
         staff.addNote(new Note(0, "quarter"));  //This initiates a new note on a freq 0, so that we can change the y freq
     }
 
@@ -67,7 +73,7 @@ public class MainActivity extends Activity {
         Note exampleNote = staff.notes.get(0);
         exampleNote.updateYValue(freq);
 
-        exampleNote.draw(ourCanvas);
+        exampleNote.draw(drawView);
     }
 
     @Override

@@ -32,7 +32,7 @@ public class Note extends Activity {
         this.imageID = R.drawable.quarter;    //An integer representation of dial image. Use with getDrawable(ImageID) in draw function to draw to canvas
     }
 
-    public void draw(Canvas canvas) {
+    public void draw(DrawingView DrawView) {
         image = BitmapFactory.decodeResource(getResources(), this.imageID);
 
     }
