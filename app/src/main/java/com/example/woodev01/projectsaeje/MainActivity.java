@@ -42,7 +42,6 @@ public class MainActivity extends Activity {
             mCapture.setRunning(false);
             mCapture = null;
         }
-
     }
 
     @Override
@@ -55,7 +54,6 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
     @Override
@@ -110,9 +108,6 @@ public class MainActivity extends Activity {
 
             default:
                 return super.onOptionsItemSelected(item);
-
         }
-
     }
-
 }
