@@ -5,25 +5,25 @@
     <item
         android:id="@+id/record"
         android:title="@string/Record"
-        android:icon="@drawable/record_button"
-        app:showAsAction="ifRoom|withText"/>
+        android:icon="@drawable/ic_play_arrow"
+        android:showAsAction="ifRoom|withText"/>
 
     <item
         android:id="@+id/save"
         android:title="@string/Save"
-        android:icon="@drawable/record_button"
-        app:showAsAction="ifRoom|withText"/>
+        android:icon="@drawable/ic_save"
+        android:showAsAction="ifRoom|withText"/>
 
     <item
         android:id="@+id/open"
         android:title="@string/Open"
-        android:icon="@drawable/record_button"
-        app:showAsAction="ifRoom|withText"/>
+        android:icon="@drawable/ic_open_in_browser"
+        android:showAsAction="ifRoom|withText"/>
 
     <item
         android:id="@+id/clear"
         android:title="@string/Clear"
-        android:icon="@drawable/record_button"
-        app:showAsAction="ifRoom|withText"/>
+        android:icon="@drawable/ic_clear"
+        android:showAsAction="ifRoom|withText"/>
 
 </menu>
