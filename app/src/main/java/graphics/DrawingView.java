@@ -14,10 +14,8 @@ import com.example.woodev01.projectsaeje.R;
 
 
 public class DrawingView extends View {
-    //drawing path
-    private Path drawPath;
     //drawing and canvas paint
-    private Paint drawPaint, canvasPaint;
+    private Paint canvasPaint;
     //canvas
     private Canvas drawCanvas;
     //canvas bitmap
@@ -31,8 +29,6 @@ public class DrawingView extends View {
     }
 
     private void setupDrawing() {
-        drawPath = new Path();
-        drawPaint = new Paint();
         canvasPaint = new Paint(Paint.DITHER_FLAG);
     }
 
@@ -46,7 +42,6 @@ public class DrawingView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
-        canvas.drawPath(drawPath, drawPaint);
     }
 
     public void startNew(){
