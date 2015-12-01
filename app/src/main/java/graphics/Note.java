@@ -31,11 +31,9 @@ public class Note {
 
 
     public Note(float y, String type, MainActivity myActivity) {
-        this.x = 1;
+        this.x = 500;
         this.y = y;
         this.type = type;
-        this.imageID = R.drawable.ic_quarter_note;    //An integer representation of dial image. Use with getDrawable(ImageID) in draw function to draw to canvas
-        this.myActivity = myActivity;
 
         this.image = BitmapFactory.decodeResource(myActivity.getResources(), R.drawable.ic_quarter_note);
 
@@ -112,13 +110,12 @@ public class Note {
         this.y = y;
     }
 
-    public void updateYValue(float freq) {
+    public void updateYValue(float freq, Note aNote) {
         double logCalcX = Math.log(freq / 440);
         double logCalcY = Math.log(2);
 
         int note = (int) (12 * (logCalcX + 49) / logCalcY);
-        this.y = note;
+        aNote.y = note;
     }
-
 }
 
