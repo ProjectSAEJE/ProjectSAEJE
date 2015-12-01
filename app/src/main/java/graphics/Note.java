@@ -8,33 +8,34 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.drawable.Drawable;
-import android.view.View;
 import android.widget.Toast;
 
 import com.example.woodev01.projectsaeje.R;
-import com.example.woodev01.projectsaeje.MainActivity;
 
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class Note extends Drawable {
-
+public class Note extends Activity {
 
     public float x, y; //for drawing to the 2D canvas in the UI/display, y represents a piano note value 1-88
     public String type; //"whole", "half", "quarter", "eighth", "sixteenth"...
     public int imageID;
     public Bitmap image; //An image of this type of note
-    public MainActivity myActivity;
 
-    public Note(float y, String type, MainActivity myActivity) {
+    public Note() {
+    }
+
+    public Note(float y, String type) {
         this.x = 1;
         this.y = y;
         this.type = type;
         this.imageID = R.drawable.quarter;    //An integer representation of dial image. Use with getDrawable(ImageID) in draw function to draw to canvas
-        this.myActivity = myActivity;
+    }
+
+    public void draw(DrawingView DrawView) {
+        image = BitmapFactory.decodeResource(getResources(), this.imageID);
+
     }
 
     public void save(String fileName) {
@@ -47,12 +48,12 @@ public class Note extends Drawable {
 
         FileOutputStream fos = null;
         try{
-            fos = myActivity.openFileOutput(fileName, this.myActivity.MODE_PRIVATE);
+            fos = openFileOutput(fileName, this.MODE_PRIVATE);
             fos.write(noteVal.getBytes()); //turns the Note String into a group of bits
             fos.close();
 
         } catch (IOException e){
-            Toast.makeText(myActivity, "There's a problem saving to the internal file", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "There's a problem saving to the internal file", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }
@@ -114,26 +115,5 @@ public class Note extends Drawable {
 
         int note = (int)(12 * (logCalcX + 49)/logCalcY);
         this.y = note;
-    }
-
-    @Override
-    public void draw(Canvas canvas) {
-        image = BitmapFactory.decodeResource(myActivity.getResources(), this.imageID);
-        canvas.setBitmap(image);
-    }
-
-    @Override
-    public void setAlpha(int alpha) {
-
-    }
-
-    @Override
-    public void setColorFilter(ColorFilter cf) {
-
-    }
-
-    @Override
-    public int getOpacity() {
-        return 0;
     }
 }
