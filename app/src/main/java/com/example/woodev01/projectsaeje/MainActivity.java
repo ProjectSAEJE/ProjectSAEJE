@@ -43,12 +43,12 @@ public class MainActivity extends Activity {
         }
     }
 
-    @Override
+    /*@Override
     protected void onPause() {
         super.onPause();
 
         mCapture.setRunning(false);
-    }
+    }*/
 
     @Override
     protected void onResume() {
