@@ -17,14 +17,17 @@ public class DrawingView extends View {
     //drawing and canvas paint
     private Paint canvasPaint;
     //canvas
-    private Canvas drawCanvas;
+    public Canvas drawCanvas;
     //canvas bitmap
     private Bitmap canvasBitmap;
 
+    private Staff myStaff;
 
 
-    public DrawingView(Context context, AttributeSet attrs){
+
+    public DrawingView(Context context, AttributeSet attrs, Staff myStaff){
         super(context, attrs);
+        this.myStaff = myStaff;
         setupDrawing();
     }
 
@@ -40,8 +43,11 @@ public class DrawingView extends View {
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    public void onDraw(Canvas canvas) {
         canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
+        for (Note aNote: this.myStaff.notes) {
+            canvas.drawBitmap(aNote.image, aNote.x, aNote.y, null);
+        }
     }
 
     public void startNew(){
