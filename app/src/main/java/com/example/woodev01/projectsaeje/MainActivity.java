@@ -1,5 +1,5 @@
 package com.example.woodev01.projectsaeje;
-//hello
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,7 +24,6 @@ public class MainActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
         drawView = (DrawingView)findViewById(R.id.drawing);
@@ -42,7 +41,6 @@ public class MainActivity extends Activity {
             mCapture.setRunning(false);
             mCapture = null;
         }
-
     }
 
     @Override
