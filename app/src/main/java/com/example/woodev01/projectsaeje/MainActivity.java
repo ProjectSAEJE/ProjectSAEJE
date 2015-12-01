@@ -1,17 +1,16 @@
 package com.example.woodev01.projectsaeje;
-//hello
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.os.Handler;
-import android.os.Message;
-import audio.CaptureThread;
-import graphics.DrawingView;
-import graphics.Note;
-import graphics.Staff;
-
+        //hello
+        import android.app.Activity;
+        import android.os.Bundle;
+        import android.view.Menu;
+        import android.view.MenuInflater;
+        import android.view.MenuItem;
+        import android.widget.Toast;
+        import android.os.Handler;
+        import android.os.Message;
+        import android.widget.TextView;
+        import audio.CaptureThread;
+        import graphics.Staff;
 
 public class MainActivity extends Activity {
 
@@ -19,7 +18,6 @@ public class MainActivity extends Activity {
     private Handler mHandler;
     private Boolean isClicked = false;
     private Staff staff;
-    private DrawingView drawView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,11 +25,8 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.activity_main);
 
-        drawView = (DrawingView)findViewById(R.id.drawing);
+        Staff staff = new Staff();
 
-        this.staff = new Staff();
-        Note note = new Note(0,"quarter");
-        staff.addNote(note);  //This initiates a new note on a freq 0, so that we can change the y freq
     }
 
     @Override
@@ -63,13 +58,6 @@ public class MainActivity extends Activity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void updateDisplay(float freq){
-        Note exampleNote = staff.notes.get(0);
-        exampleNote.updateYValue(freq);
-
-        exampleNote.draw(drawView);
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
@@ -80,7 +68,7 @@ public class MainActivity extends Activity {
                     mHandler = new Handler() {
                         @Override
                         public void handleMessage(Message m) {
-                            updateDisplay(m.getData().getFloat("Freq"));
+                            m.getData().getFloat("Freq");
                         }
                     };
 

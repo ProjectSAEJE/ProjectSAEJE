@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
 /**
  * Created by woodev01 on 11/3/15.
  */
@@ -25,16 +26,11 @@ public class Staff extends Activity {
     public ArrayList<Note> notes;
 
     public Staff() {
-        this.notes = new ArrayList<>();
 
     }
 
     public Staff(ArrayList<Note> notes){
         this.notes = notes;
-    }
-
-    public void addNote(Note newNote) {
-        notes.add(newNote);
     }
 
     public void save(){
