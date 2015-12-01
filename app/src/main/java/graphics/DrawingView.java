@@ -17,7 +17,7 @@ public class DrawingView extends View {
     //drawing and canvas paint
     private Paint canvasPaint;
     //canvas
-    private Canvas drawCanvas;
+    public Canvas drawCanvas;
     //canvas bitmap
     private Bitmap canvasBitmap;
 

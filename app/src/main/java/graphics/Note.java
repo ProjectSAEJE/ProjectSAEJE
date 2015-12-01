@@ -33,7 +33,7 @@ public class Note extends Drawable {
         this.x = 1;
         this.y = y;
         this.type = type;
-        this.imageID = R.drawable.quarter;    //An integer representation of dial image. Use with getDrawable(ImageID) in draw function to draw to canvas
+        this.imageID = R.drawable.ic_quarter_note;    //An integer representation of dial image. Use with getDrawable(ImageID) in draw function to draw to canvas
         this.myActivity = myActivity;
     }
 

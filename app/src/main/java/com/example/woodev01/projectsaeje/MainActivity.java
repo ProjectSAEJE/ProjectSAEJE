@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
         drawView = (DrawingView)findViewById(R.id.drawing);
 
         this.staff = new Staff();
-        Note note = new Note(0,"quarter");
+        Note note = new Note(0,"quarter",this);
         staff.addNote(note);  //This initiates a new note on a freq 0, so that we can change the y freq
     }
 
@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
         Note exampleNote = staff.notes.get(0);
         exampleNote.updateYValue(freq);
 
-        exampleNote.draw(drawView);
+        exampleNote.draw(drawView.drawCanvas);
     }
 
     @Override
