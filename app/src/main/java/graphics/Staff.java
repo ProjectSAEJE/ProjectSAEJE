@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import graphics.Note;
+import file.SaveDialogBuilder;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -19,50 +20,27 @@ import java.util.ArrayList;
  * Created by woodev01 on 11/3/15.
  */
 
-public class Staff extends Activity {
+public class Staff {
 
     private String fileName;
+    public Activity activity;
 
     public ArrayList<Note> notes;
 
-    public Staff() {
+    public Staff() {}
 
-    }
-
-    public Staff(ArrayList<Note> notes){
+    public Staff(ArrayList<Note> notes, Activity activity){
         this.notes = notes;
+        this.activity = activity;
     }
-
 
     public void addNote(Note newNote) {
         notes.add(newNote);
     }
 
     public void save(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Title");
-
-        // Set up the input
-        final EditText input = new EditText(this);
-        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        builder.setView(input);
-
-        // Set up the buttons
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                fileName = input.getText().toString();
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        builder.show();
+        SaveDialogBuilder builder = new SaveDialogBuilder(this.activity);
+        fileName = builder.showDialogAndReturnFileName();
 
         for (Note aNote: this.notes) {
             aNote.save(fileName);

@@ -114,8 +114,8 @@ public class Note {
         double logCalcX = Math.log(freq / 440);
         double logCalcY = Math.log(2);
 
-        int note = (int) (12 * (logCalcX + 49) / logCalcY);
-        aNote.y = note;
+        int pianoNoteNumber = (int) (12 * (logCalcX + 49) / logCalcY);
+        aNote.y = pianoNoteNumber;
     }
 }
 

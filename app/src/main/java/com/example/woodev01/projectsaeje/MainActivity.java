@@ -7,6 +7,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.os.Handler;
 import android.os.Message;
+
+import java.util.ArrayList;
+
 import audio.CaptureThread;
 import graphics.DrawingView;
 import graphics.Note;
@@ -24,14 +27,16 @@ public class MainActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.staff = new Staff();
         setContentView(R.layout.activity_main);
 
         drawView = (DrawingView)findViewById(R.id.drawing);
-
+        this.staff = new Staff();
 
         Note note = new Note(250,"quarter",this);
-        staff.addNote(note);  //This initiates a new note on a freq 0, so that we can change the y freq
+        ArrayList<Note> notes = new ArrayList<>();
+        notes.set(0, note);
+
+        staff = new Staff(notes, this);
     }
 
     @Override
