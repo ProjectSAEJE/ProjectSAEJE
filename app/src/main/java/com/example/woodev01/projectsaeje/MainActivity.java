@@ -18,18 +18,19 @@ public class MainActivity extends Activity {
     private CaptureThread mCapture;
     private Handler mHandler;
     private Boolean isClicked = false;
-    private Staff staff;
+    public static Staff staff;
     private DrawingView drawView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.staff = new Staff();
         setContentView(R.layout.activity_main);
 
         drawView = (DrawingView)findViewById(R.id.drawing);
 
-        this.staff = new Staff();
-        Note note = new Note(0,"quarter",this);
+
+        Note note = new Note(250,"quarter",this);
         staff.addNote(note);  //This initiates a new note on a freq 0, so that we can change the y freq
     }
 
@@ -64,9 +65,9 @@ public class MainActivity extends Activity {
 
     public void updateDisplay(float freq){
         Note exampleNote = staff.notes.get(0);
-        exampleNote.updateYValue(freq);
+        exampleNote.updateYValue(freq, exampleNote);
 
-        exampleNote.draw(drawView.drawCanvas);
+        drawView.draw(drawView.drawCanvas);
     }
 
     @Override

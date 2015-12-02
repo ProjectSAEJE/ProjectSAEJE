@@ -9,7 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 
-
+import com.example.woodev01.projectsaeje.MainActivity;
 import com.example.woodev01.projectsaeje.R;
 
 
@@ -20,7 +20,6 @@ public class DrawingView extends View {
     public Canvas drawCanvas;
     //canvas bitmap
     private Bitmap canvasBitmap;
-
 
 
     public DrawingView(Context context, AttributeSet attrs){
@@ -40,8 +39,12 @@ public class DrawingView extends View {
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    public void onDraw(Canvas canvas) {
         canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
+        for (Note aNote: MainActivity.staff.notes) {
+            canvas.drawBitmap(aNote.image, aNote.x, aNote.y, null);
+        }
+        invalidate();
     }
 
     public void startNew(){
