@@ -4,20 +4,14 @@ package graphics;
  * Created by austinnash on 11/5/15.
  */
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.drawable.Drawable;
-import android.view.View;
 import android.widget.Toast;
 
 import com.example.woodev01.projectsaeje.R;
-import com.example.woodev01.projectsaeje.MainActivity;
+import projectsaeje.Main.MainActivity;
 
 import java.io.FileOutputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
 
 public class Note {

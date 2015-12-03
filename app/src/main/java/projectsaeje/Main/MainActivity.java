@@ -1,14 +1,14 @@
-package com.example.woodev01.projectsaeje;
+package projectsaeje.Main;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.os.Handler;
 import android.os.Message;
+
+import com.example.woodev01.projectsaeje.R;
 
 import java.util.ArrayList;
 

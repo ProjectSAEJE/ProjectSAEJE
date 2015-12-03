@@ -1,4 +1,4 @@
-package com.example.woodev01.projectsaeje;
+package projectsaeje.Main;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
