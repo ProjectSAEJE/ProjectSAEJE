@@ -115,8 +115,8 @@ public class Note {
         double logCalcY = Math.log(2);
 
         int pianoNoteNumber = (int) (12 * (logCalcX + 49) / logCalcY);
-        aNote.y = pianoNoteNumber;
-        aNote.x += 5;
+        aNote.y = (pianoNoteNumber%12)*80;
+        aNote.x += 10;
     }
 }
 
