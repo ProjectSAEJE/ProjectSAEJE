@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.Toast;
@@ -26,7 +27,7 @@ public class Note {
     public float x, y; //for drawing to the 2D canvas in the UI/display, y represents a piano note value 1-88
     public String type; //"whole", "half", "quarter", "eighth", "sixteenth"...
     public int imageID;
-    public Bitmap image; //An image of this type of note
+    public BitmapDrawable image; //An image of this type of note
     public MainActivity myActivity;
 
 
@@ -35,7 +36,7 @@ public class Note {
         this.y = y;
         this.type = type;
 
-        this.image = BitmapFactory.decodeResource(myActivity.getResources(), R.drawable.ic_quarter_note);
+        this.image = (BitmapDrawable) myActivity.getResources().getDrawable(R.drawable.ic_quarter_note);
 
     }
 
