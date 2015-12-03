@@ -1,6 +1,8 @@
 package com.example.woodev01.projectsaeje;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -107,7 +109,9 @@ public class MainActivity extends Activity {
                 return true;
 
             case R.id.clear:
-
+                //Bitmap newBackgroundBitmap = Bitmap.createBitmap(BitmapFactory.decodeFile("~/AndroidStudioProjects/ProjectSAEJE/app/src/main/res/drawable/ic_staff.png"));
+                //drawView.drawCanvas.drawBitmap(newBackgroundBitmap, 0, 0, null);
+                //staff.notes.get(0).x = 0;
                 return true;
 
             default:
