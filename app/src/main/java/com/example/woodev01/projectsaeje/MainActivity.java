@@ -15,7 +15,6 @@ import graphics.DrawingView;
 import graphics.Note;
 import graphics.Staff;
 
-
 public class MainActivity extends Activity {
 
     private CaptureThread mCapture;
@@ -34,7 +33,7 @@ public class MainActivity extends Activity {
 
         Note note = new Note(250,"quarter",this);
         ArrayList<Note> notes = new ArrayList<>();
-        notes.set(0, note);
+        notes.add(note);
 
         staff = new Staff(notes, this);
     }
