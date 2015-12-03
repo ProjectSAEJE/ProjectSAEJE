@@ -31,7 +31,7 @@ public class Note {
 
 
     public Note(float y, String type, MainActivity myActivity) {
-        this.x = 500;
+        this.x = 30;
         this.y = y;
         this.type = type;
 
