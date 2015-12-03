@@ -117,7 +117,7 @@ public class Note {
 
         int pianoNoteNumber = (int) (12 * (logCalcX + 49) / logCalcY);
         aNote.y = (pianoNoteNumber%12)*80;
-        aNote.x += 10;
+        aNote.x = (aNote.x+20)%2000;
     }
 }
 
