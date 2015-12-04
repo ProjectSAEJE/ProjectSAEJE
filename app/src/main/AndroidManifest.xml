@@ -19,7 +19,7 @@
         android:label="@string/app_name"
         >
         <activity
-            android:name="projectsaeje.Main.MainActivity"
+            android:name="projectsaeje.MainActivity"
             android:label="@string/app_name"
             android:uiOptions="splitActionBarWhenNarrow"
                     android:screenOrientation="landscape">

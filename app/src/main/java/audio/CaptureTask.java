@@ -1,6 +1,6 @@
 package audio;
 
-import projectsaeje.Main.MainActivity;
+import projectsaeje.MainActivity;
 
 import android.media.AudioFormat;
 import android.media.AudioRecord;

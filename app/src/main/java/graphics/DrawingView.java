@@ -8,7 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 
-import projectsaeje.Main.MainActivity;
+import projectsaeje.MainActivity;
 
 
 public class DrawingView extends View {

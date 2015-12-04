@@ -9,7 +9,7 @@ import android.graphics.BitmapFactory;
 import android.widget.Toast;
 
 import com.example.woodev01.projectsaeje.R;
-import projectsaeje.Main.MainActivity;
+import projectsaeje.MainActivity;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

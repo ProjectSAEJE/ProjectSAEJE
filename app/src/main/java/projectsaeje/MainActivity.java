@@ -1,4 +1,4 @@
-package projectsaeje.Main;
+package projectsaeje;
 
 import android.app.Activity;
 import android.os.Bundle;

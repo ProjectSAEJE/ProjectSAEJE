@@ -1,4 +1,4 @@
-package projectsaeje.Main;
+package projectsaeje.androidTest;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
