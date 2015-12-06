@@ -71,7 +71,22 @@ public class MainActivity extends Activity {
 
     public void updateDisplay(float freq){
         Note exampleNote = staff.notes.get(0);
-        exampleNote.updateYValue(freq, exampleNote);
+        int screenNoteNumber = exampleNote.updateYValue(freq)%12;
+
+        switch (screenNoteNumber) {
+            case 0:  exampleNote.setY(300);
+            case 1:  exampleNote.setY(300);
+            case 2:  exampleNote.setY(drawView.getHeight()/2);
+            case 3:  exampleNote.setY((drawView.getHeight()*2)/3);
+            case 4:  exampleNote.setY((drawView.getHeight()*2)/3);
+            case 5:  exampleNote.setY(150);
+            case 6:  exampleNote.setY(150);
+            case 7:  exampleNote.setY(100);
+            case 8:  exampleNote.setY(50);
+            case 9:  exampleNote.setY(400);
+            case 10: exampleNote.setY(450);
+            case 11: exampleNote.setY(450);
+        }
 
         drawView.draw(drawView.drawCanvas);
     }
