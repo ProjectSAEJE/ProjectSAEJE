@@ -147,6 +147,8 @@ public class MainActivity extends Activity {
                 {
                     //changes stop icon back to play icon on the record button
                     item.setIcon(R.drawable.ic_play_arrow);
+                    mCapture.setRunning(false);
+                    isClicked = false;
                 }
 
                 return true;
