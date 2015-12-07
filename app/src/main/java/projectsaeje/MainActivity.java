@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
     private Handler mHandler;
     private Boolean isClicked = false;
     public static Staff staff;
-    private DrawingView drawView;
+    public DrawingView drawView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -112,6 +112,10 @@ public class MainActivity extends Activity {
                 //Bitmap newBackgroundBitmap = Bitmap.createBitmap(BitmapFactory.decodeFile("~/AndroidStudioProjects/ProjectSAEJE/app/src/main/res/drawable/ic_staff.png"));
                 //drawView.drawCanvas.drawBitmap(newBackgroundBitmap, 0, 0, null);
                 //staff.notes.get(0).x = 0;
+
+                drawView.startNew();
+                staff.notes.get(0).x = 0;
+
                 return true;
 
             default:

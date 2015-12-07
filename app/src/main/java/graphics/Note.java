@@ -16,7 +16,6 @@ import java.io.IOException;
 
 public class Note {
 
-
     public float x, y; //for drawing to the 2D canvas in the UI/display, y represents a piano note value 1-88
     public String type; //"whole", "half", "quarter", "eighth", "sixteenth"...
     public int imageID;
@@ -30,7 +29,6 @@ public class Note {
         this.type = type;
 
         this.image = BitmapFactory.decodeResource(myActivity.getResources(), R.drawable.ic_quarter_note);
-
     }
 
     public void save(String fileName) {
@@ -110,7 +108,7 @@ public class Note {
 
         int pianoNoteNumber = (int) (12 * (logCalcX + 49) / logCalcY);
         aNote.y = (pianoNoteNumber%12)*80;
-        aNote.x = (aNote.x+20)%2000;
+        aNote.x = (aNote.x+20) % 2000;
     }
 }
 

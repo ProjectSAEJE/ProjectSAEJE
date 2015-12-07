@@ -46,5 +46,4 @@ public class Staff {
             aNote.save(fileName);
         }
     }
-
 }
