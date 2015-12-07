@@ -33,7 +33,7 @@ public class MainActivity extends Activity {
         drawView = (DrawingView)findViewById(R.id.drawing);
         this.staff = new Staff();
 
-        Note note = new Note(250,"quarter",this,drawView);
+        Note note = new Note(250,"quarter",this);
         ArrayList<Note> notes = new ArrayList<>();
         notes.add(note);
 
@@ -73,48 +73,50 @@ public class MainActivity extends Activity {
         Note exampleNote = staff.notes.get(0);
         int screenNoteNumber = exampleNote.updateYValue(freq)%12;
 
+        //drawView.startNew();
+
         switch (screenNoteNumber) {
             case 0:
-                exampleNote.y = drawView.drawCanvas.getHeight()/2-315;
+                exampleNote.y = drawView.drawCanvas.getHeight()/2-320;
                 break;
             case 1:
-                exampleNote.y = 10000;
+                exampleNote.y = drawView.drawCanvas.getHeight()/2-415;
                 break;
             case 2:
-                exampleNote.y = 10000;
+                exampleNote.y = drawView.drawCanvas.getHeight()/2-415;
                 break;
             case 3:
-                exampleNote.y = 10000;
+                exampleNote.y = drawView.drawCanvas.getHeight()/2+155;
                 break;
             case 4:
-                exampleNote.y = drawView.drawCanvas.getHeight()/2+45;
+                exampleNote.y = drawView.drawCanvas.getHeight()/2+60;
                 break;
             case 5:
-                exampleNote.y = drawView.drawCanvas.getHeight()/2+45;
+                exampleNote.y = drawView.drawCanvas.getHeight()/2+60;
                 break;
             case 6:
-                exampleNote.y = drawView.drawCanvas.getHeight()/2-45;
+                exampleNote.y = drawView.drawCanvas.getHeight()/2-35;
                 break;
             case 7:
-                exampleNote.y = drawView.drawCanvas.getHeight()/2-45;
+                exampleNote.y = drawView.drawCanvas.getHeight()/2-35;
                 break;
             case 8:
-                exampleNote.y = drawView.drawCanvas.getHeight()/2-135;
+                exampleNote.y = drawView.drawCanvas.getHeight()/2-130;
                 break;
             case 9:
-                exampleNote.y = drawView.drawCanvas.getHeight()/2-135;
+                exampleNote.y = drawView.drawCanvas.getHeight()/2-130;
                 break;
             case 10:
                 exampleNote.y = drawView.drawCanvas.getHeight()/2-225;
                 break;
             case 11:
-                exampleNote.y = drawView.drawCanvas.getHeight()/2-315;
+                exampleNote.y = drawView.drawCanvas.getHeight()/2-320;
                 break;
             default:
                 break;
         }
 
-        exampleNote.x += 30;
+        exampleNote.x += 65;
 
         drawView.draw(drawView.drawCanvas);
     }
