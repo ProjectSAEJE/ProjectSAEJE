@@ -100,6 +100,10 @@ public class MainActivity extends Activity {
         switch (item.getItemId()) {
             case R.id.record:
                 if (!isClicked) {
+
+                    //set record icon to stop icon
+                    item.setIcon(R.drawable.ic_stop);
+
                     mHandler = new Handler() {
                         @Override
                         public void handleMessage(Message m) {
@@ -113,6 +117,12 @@ public class MainActivity extends Activity {
 
                     isClicked = true;
                 }
+                else
+                {
+                    //changes stop icon back to play icon on the record button
+                    item.setIcon(R.drawable.ic_play_arrow);
+                }
+
                 return true;
 
             case R.id.open:

@@ -29,8 +29,10 @@ public class Note {
         this.y = y;
         this.type = type;
 
-        this.image = BitmapFactory.decodeResource(myActivity.getResources(), R.drawable.ic_quarter_note);
+        Bitmap b = BitmapFactory.decodeResource(myActivity.getResources(), R.drawable.ic_quarter_note);
 
+        //Creates a ScaledBitmap to make quater not a certain size
+        this.image = Bitmap.createScaledBitmap(b,300,300, false);
     }
 
     public void save(String fileName) {
