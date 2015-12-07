@@ -33,7 +33,7 @@ public class MainActivity extends Activity {
         drawView = (DrawingView)findViewById(R.id.drawing);
         this.staff = new Staff();
 
-        Note note = new Note(250,"quarter",this);
+        Note note = new Note(250,"quarter",this,drawView);
         ArrayList<Note> notes = new ArrayList<>();
         notes.add(note);
 
@@ -71,7 +71,24 @@ public class MainActivity extends Activity {
 
     public void updateDisplay(float freq){
         Note exampleNote = staff.notes.get(0);
-        exampleNote.updateYValue(freq, exampleNote);
+        int screenNoteNumber = exampleNote.updateYValue(freq)%12;
+
+        switch (screenNoteNumber) {
+            case 0:  exampleNote.y = 300;
+            case 1:  exampleNote.y = 300;
+            case 2:  exampleNote.y = drawView.getHeight()/2;
+            case 3:  exampleNote.y = (drawView.getHeight()*2)/3;
+            case 4:  exampleNote.y = (drawView.getHeight()*2)/3;
+            case 5:  exampleNote.y = 150;
+            case 6:  exampleNote.y = 150;
+            case 7:  exampleNote.y = 100;
+            case 8:  exampleNote.y = 50;
+            case 9:  exampleNote.y = 400;
+            case 10: exampleNote.y = 450;
+            case 11: exampleNote.y = 450;
+        }
+
+        exampleNote.x += 20;
 
         drawView.draw(drawView.drawCanvas);
     }
@@ -83,6 +100,10 @@ public class MainActivity extends Activity {
         switch (item.getItemId()) {
             case R.id.record:
                 if (!isClicked) {
+
+                    //set record icon to stop icon
+                    item.setIcon(R.drawable.ic_stop);
+
                     mHandler = new Handler() {
                         @Override
                         public void handleMessage(Message m) {
@@ -96,6 +117,12 @@ public class MainActivity extends Activity {
 
                     isClicked = true;
                 }
+                else
+                {
+                    //changes stop icon back to play icon on the record button
+                    item.setIcon(R.drawable.ic_play_arrow);
+                }
+
                 return true;
 
             case R.id.open:

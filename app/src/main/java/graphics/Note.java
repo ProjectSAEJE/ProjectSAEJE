@@ -16,19 +16,24 @@ import java.io.IOException;
 
 public class Note {
 
+
     public float x, y; //for drawing to the 2D canvas in the UI/display, y represents a piano note value 1-88
     public String type; //"whole", "half", "quarter", "eighth", "sixteenth"...
     public int imageID;
     public Bitmap image; //An image of this type of note
     public MainActivity myActivity;
+    public DrawingView drawingView;
 
 
-    public Note(float y, String type, MainActivity myActivity) {
+    public Note(float y, String type, MainActivity myActivity, DrawingView drawingView) {
         this.x = 30;
         this.y = y;
         this.type = type;
 
-        this.image = BitmapFactory.decodeResource(myActivity.getResources(), R.drawable.ic_quarter_note);
+        Bitmap b = BitmapFactory.decodeResource(myActivity.getResources(), R.drawable.ic_quarter_note);
+
+        //Creates a ScaledBitmap to make quater not a certain size
+        this.image = Bitmap.createScaledBitmap(b,300,300, false);
     }
 
     public void save(String fileName) {
@@ -102,13 +107,12 @@ public class Note {
         this.y = y;
     }
 
-    public void updateYValue(float freq, Note aNote) {
+    public int updateYValue(float freq) {
         double logCalcX = Math.log(freq / 440);
         double logCalcY = Math.log(2);
 
         int pianoNoteNumber = (int) (12 * (logCalcX + 49) / logCalcY);
-        aNote.y = (pianoNoteNumber%12)*80;
-        aNote.x = (aNote.x+20) % 2000;
+        return pianoNoteNumber;
     }
 }
 
