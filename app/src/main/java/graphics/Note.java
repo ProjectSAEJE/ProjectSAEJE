@@ -22,9 +22,10 @@ public class Note {
     public int imageID;
     public Bitmap image; //An image of this type of note
     public MainActivity myActivity;
+    public DrawingView drawingView;
 
 
-    public Note(float y, String type, MainActivity myActivity) {
+    public Note(float y, String type, MainActivity myActivity, DrawingView drawingView) {
         this.x = 30;
         this.y = y;
         this.type = type;
