@@ -88,6 +88,8 @@ public class MainActivity extends Activity {
             case 11: exampleNote.setY(450);
         }
 
+        exampleNote.x += 20;
+
         drawView.draw(drawView.drawCanvas);
     }
 
