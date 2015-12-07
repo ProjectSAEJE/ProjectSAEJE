@@ -75,7 +75,7 @@ public class MainActivity extends Activity {
 
         switch (screenNoteNumber) {
             case 0:
-                exampleNote.y = drawView.drawCanvas.getHeight()/2-275;
+                exampleNote.y = drawView.drawCanvas.getHeight()/2-315;
                 break;
             case 1:
                 exampleNote.y = 10000;
@@ -87,34 +87,34 @@ public class MainActivity extends Activity {
                 exampleNote.y = 10000;
                 break;
             case 4:
-                exampleNote.y = 10000;
+                exampleNote.y = drawView.drawCanvas.getHeight()/2+45;
                 break;
             case 5:
-                exampleNote.y = 10000;
+                exampleNote.y = drawView.drawCanvas.getHeight()/2+45;
                 break;
             case 6:
-                exampleNote.y = 10000;
+                exampleNote.y = drawView.drawCanvas.getHeight()/2-45;
                 break;
             case 7:
-                exampleNote.y = 10000;
+                exampleNote.y = drawView.drawCanvas.getHeight()/2-45;
                 break;
             case 8:
-                exampleNote.y = 10000;
+                exampleNote.y = drawView.drawCanvas.getHeight()/2-135;
                 break;
             case 9:
-                exampleNote.y = 10000;
+                exampleNote.y = drawView.drawCanvas.getHeight()/2-135;
                 break;
             case 10:
                 exampleNote.y = drawView.drawCanvas.getHeight()/2-225;
                 break;
             case 11:
-                exampleNote.y = drawView.drawCanvas.getHeight()/2-275;
+                exampleNote.y = drawView.drawCanvas.getHeight()/2-315;
                 break;
             default:
                 break;
         }
 
-        exampleNote.x += 20;
+        exampleNote.x += 30;
 
         drawView.draw(drawView.drawCanvas);
     }
