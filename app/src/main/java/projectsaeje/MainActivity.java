@@ -105,7 +105,7 @@ public class MainActivity extends Activity {
             case 4: // F
                 Bitmap f = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note);
                 exampleNote.image = Bitmap.createScaledBitmap(f,300,300, false);
-                exampleNote.y = drawView.drawCanvas.getHeight()/2+60;
+                exampleNote.y = drawView.drawCanvas.getHeight()/2+62;
                 break;
             case 5: // F#
                 Bitmap f_sharp = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note_sharp);
