@@ -97,7 +97,7 @@ public class MainActivity extends Activity {
                 Bitmap d_sharp = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note_sharp_line);
                 exampleNote.image = Bitmap.createScaledBitmap(d_sharp,350,350, false);
                 exampleNote.x = 775;
-                exampleNote.y = drawView.drawCanvas.getHeight()/2-460;
+                exampleNote.y = drawView.drawCanvas.getHeight()/2-435;
                 break;
             case 3: // E
                 Bitmap e = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note);
@@ -127,7 +127,7 @@ public class MainActivity extends Activity {
                 Bitmap g_sharp = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note_sharp_line);
                 exampleNote.image = Bitmap.createScaledBitmap(g_sharp,350,350, false);
                 exampleNote.x = 775;
-                exampleNote.y = drawView.drawCanvas.getHeight()/2-70;
+                exampleNote.y = drawView.drawCanvas.getHeight()/2-45;
                 break;
             case 8: // A
                 Bitmap a = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note);
