@@ -150,7 +150,11 @@ public class MainActivity extends Activity {
         }
 
         //exampleNote.x += 65;
-
+/*
+        if (exampleNote.x == 1000) {
+            drawView.startNew();
+        }
+*/
         drawView.draw(drawView.drawCanvas);
     }
 
@@ -204,7 +208,7 @@ public class MainActivity extends Activity {
                 //staff.notes.get(0).x = 0;
 
                 drawView.startNew();
-                staff.notes.get(0).x = 0;
+                staff.notes.get(0).x = 800;
 
                 return true;
 
