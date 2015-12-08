@@ -75,7 +75,7 @@ public class MainActivity extends Activity {
         Note exampleNote = staff.notes.get(0);
         int screenNoteNumber = exampleNote.updateYValue(freq)%12;
 
-        drawView.startNew();
+        //drawView.startNew();
 
         switch (screenNoteNumber) {
             case 0: // C#
@@ -132,7 +132,7 @@ public class MainActivity extends Activity {
             case 9: // A#
                 Bitmap a_sharp = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note_sharp);
                 exampleNote.image = Bitmap.createScaledBitmap(a_sharp,320,320, false);
-                //exampleNote.x += 20;
+                //exampleNote.x += 65;
                 exampleNote.y = drawView.drawCanvas.getHeight()/2-125;
                 break;
             case 10: // B
@@ -149,12 +149,13 @@ public class MainActivity extends Activity {
                 break;
         }
 
-        //exampleNote.x += 65;
-/*
-        if (exampleNote.x == 1000) {
+        exampleNote.x += 130;
+
+        if (exampleNote.x >= 1600) {
             drawView.startNew();
+            staff.notes.get(0).x = 0;
         }
-*/
+
         drawView.draw(drawView.drawCanvas);
     }
 
@@ -208,7 +209,7 @@ public class MainActivity extends Activity {
                 //staff.notes.get(0).x = 0;
 
                 drawView.startNew();
-                staff.notes.get(0).x = 800;
+                staff.notes.get(0).x = 0;
 
                 return true;
 
