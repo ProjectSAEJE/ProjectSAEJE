@@ -20,7 +20,7 @@ public class CaptureThread extends Thread {
 
     @Override
     public void run() {
-        int sRate = 44100;
+        int sRate = 16000;
         int bufferSize = 65536;
         bufferSize = 32768;
 

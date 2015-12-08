@@ -26,6 +26,7 @@ public class MainActivity extends Activity {
     private Boolean isClicked = false;
     public static Staff staff;
     public DrawingView drawView;
+    public static Integer helper = new Integer(0);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,12 +76,12 @@ public class MainActivity extends Activity {
         Note exampleNote = staff.notes.get(0);
         int screenNoteNumber = exampleNote.updateYValue(freq)%12;
 
-        //drawView.startNew();
+        drawView.startNew();
 
         switch (screenNoteNumber) {
             case 0: // C#
                 // changes note resource image to that of a sharp note
-                Bitmap c_sharp = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note_sharp);
+                Bitmap c_sharp = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note_sharp_space);
                 exampleNote.image = Bitmap.createScaledBitmap(c_sharp,320,320, false);
                 //exampleNote.x += 20;
                 exampleNote.y = drawView.drawCanvas.getHeight()/2-320;
@@ -108,7 +109,7 @@ public class MainActivity extends Activity {
                 exampleNote.y = drawView.drawCanvas.getHeight()/2+62;
                 break;
             case 5: // F#
-                Bitmap f_sharp = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note_sharp);
+                Bitmap f_sharp = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note_sharp_space);
                 exampleNote.image = Bitmap.createScaledBitmap(f_sharp,320,320, false);
                 //exampleNote.x += 20;
                 exampleNote.y = drawView.drawCanvas.getHeight()/2+60;
@@ -130,7 +131,7 @@ public class MainActivity extends Activity {
                 exampleNote.y = drawView.drawCanvas.getHeight()/2-125;
                 break;
             case 9: // A#
-                Bitmap a_sharp = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note_sharp);
+                Bitmap a_sharp = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note_sharp_space);
                 exampleNote.image = Bitmap.createScaledBitmap(a_sharp,320,320, false);
                 //exampleNote.x += 65;
                 exampleNote.y = drawView.drawCanvas.getHeight()/2-125;
@@ -148,14 +149,14 @@ public class MainActivity extends Activity {
             default: // Shouldn't ever happen...
                 break;
         }
-
+/*
         exampleNote.x += 130;
 
         if (exampleNote.x >= 1600) {
             drawView.startNew();
             staff.notes.get(0).x = 0;
         }
-
+*/
         drawView.draw(drawView.drawCanvas);
     }
 
@@ -172,7 +173,7 @@ public class MainActivity extends Activity {
 
                     mHandler = new Handler() {
                         @Override
-                        public void handleMessage(Message m) {
+                        public synchronized void handleMessage(Message m) {
                             updateDisplay(m.getData().getFloat("Freq"));
                         }
                     };
@@ -209,7 +210,7 @@ public class MainActivity extends Activity {
                 //staff.notes.get(0).x = 0;
 
                 drawView.startNew();
-                staff.notes.get(0).x = 0;
+                staff.notes.get(0).x = 800;
 
                 return true;
 
