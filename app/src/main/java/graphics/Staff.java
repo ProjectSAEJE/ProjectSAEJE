@@ -25,7 +25,7 @@ public class Staff {
     private String fileName;
     public Activity activity;
 
-    public ArrayList<Note> notes; //*
+    public ArrayList<Note> notes;
     //* next: implement public ArrayList<Measure> measures instead of notes ---  each Measure object in measures contains its own array list of Notes
 
     public Staff() {}

@@ -106,13 +106,5 @@ public class Note {
     public void setY(float y) {
         this.y = y;
     }
-
-    public int updateYValue(float freq) {
-        double logCalcX = Math.log(freq / 440);
-        double logCalcY = Math.log(2);
-
-        int pianoNoteNumber = (int) (12 * (logCalcX + 49) / logCalcY);
-        return pianoNoteNumber;
-    }
 }
 
