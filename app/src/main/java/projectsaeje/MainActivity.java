@@ -26,7 +26,7 @@ public class MainActivity extends Activity {
     private Boolean isClicked = false;
     public static Staff staff;
     public DrawingView drawView;
-    public static Integer helper = new Integer(0);
+    public static Integer xVal = new Integer(0);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
         drawView = (DrawingView)findViewById(R.id.drawing);
         this.staff = new Staff();
 
-        Note note = new Note(250,"quarter",this);
+        Note note = new Note(250, 0, "quarter",this);
         ArrayList<Note> notes = new ArrayList<>();
         notes.add(note);
 
@@ -73,97 +73,83 @@ public class MainActivity extends Activity {
     }
 
     public void updateDisplay(float freq){
-        Note exampleNote = staff.notes.get(0);
-        int screenNoteNumber = exampleNote.updateYValue(freq)%12;
+        xVal += 130;
+        Note newNote = new Note(0, xVal, "quarter", this);
+        int screenNoteNumber = newNote.updateYValue(freq)%12;
 
-        drawView.startNew();
+
 
         switch (screenNoteNumber) {
             case 0: // C#
                 // changes note resource image to that of a sharp note
                 Bitmap c_sharp = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note_sharp_space);
-                exampleNote.image = Bitmap.createScaledBitmap(c_sharp,400,400, false);
-                exampleNote.x = 750;
-                exampleNote.y = drawView.drawCanvas.getHeight()/2-365;
+                newNote.image = Bitmap.createScaledBitmap(c_sharp,400,400, false);
+                newNote.y = drawView.drawCanvas.getHeight()/2-365;
                 break;
             case 1: // D
                 // changes note resource image to that of a natural note
                 Bitmap d = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note);
-                exampleNote.image = Bitmap.createScaledBitmap(d,300,300, false);
-                exampleNote.y = drawView.drawCanvas.getHeight()/2-415;
-                exampleNote.x = 800;
+                newNote.image = Bitmap.createScaledBitmap(d,300,300, false);
+                newNote.y = drawView.drawCanvas.getHeight()/2-415;
                 break;
             case 2: // D#
                 Bitmap d_sharp = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note_sharp_line);
-                exampleNote.image = Bitmap.createScaledBitmap(d_sharp,350,350, false);
-                exampleNote.x = 775;
-                exampleNote.y = drawView.drawCanvas.getHeight()/2-435;
+                newNote.image = Bitmap.createScaledBitmap(d_sharp,350,350, false);
+                newNote.y = drawView.drawCanvas.getHeight()/2-435;
                 break;
             case 3: // E
                 Bitmap e = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note);
-                exampleNote.image = Bitmap.createScaledBitmap(e,300,300, false);
-                exampleNote.y = drawView.drawCanvas.getHeight()/2+155;
-                exampleNote.x = 800;
+                newNote.image = Bitmap.createScaledBitmap(e,300,300, false);
+                newNote.y = drawView.drawCanvas.getHeight()/2+155;
                 break;
             case 4: // F
                 Bitmap f = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note);
-                exampleNote.image = Bitmap.createScaledBitmap(f,300,300, false);
-                exampleNote.y = drawView.drawCanvas.getHeight()/2+62;
-                exampleNote.x = 800;
+                newNote.image = Bitmap.createScaledBitmap(f,300,300, false);
+                newNote.y = drawView.drawCanvas.getHeight()/2+62;
                 break;
             case 5: // F#
                 Bitmap f_sharp = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note_sharp_space);
-                exampleNote.image = Bitmap.createScaledBitmap(f_sharp,400,400, false);
-                exampleNote.x = 750;
-                exampleNote.y = drawView.drawCanvas.getHeight()/2+15;
+                newNote.image = Bitmap.createScaledBitmap(f_sharp,400,400, false);
+                newNote.y = drawView.drawCanvas.getHeight()/2+15;
                 break;
             case 6: // G
                 Bitmap g = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note);
-                exampleNote.image = Bitmap.createScaledBitmap(g,300,300, false);
-                exampleNote.y = drawView.drawCanvas.getHeight()/2-30;
-                exampleNote.x = 800;
+                newNote.image = Bitmap.createScaledBitmap(g,300,300, false);
+                newNote.y = drawView.drawCanvas.getHeight()/2-30;
                 break;
             case 7: // G#
                 Bitmap g_sharp = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note_sharp_line);
-                exampleNote.image = Bitmap.createScaledBitmap(g_sharp,350,350, false);
-                exampleNote.x = 775;
-                exampleNote.y = drawView.drawCanvas.getHeight()/2-45;
+                newNote.image = Bitmap.createScaledBitmap(g_sharp,350,350, false);
+                newNote.y = drawView.drawCanvas.getHeight()/2-45;
                 break;
             case 8: // A
                 Bitmap a = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note);
-                exampleNote.image = Bitmap.createScaledBitmap(a,300,300, false);
-                exampleNote.y = drawView.drawCanvas.getHeight()/2-125;
-                exampleNote.x = 800;
+                newNote.image = Bitmap.createScaledBitmap(a,300,300, false);
+                newNote.y = drawView.drawCanvas.getHeight()/2-125;
                 break;
             case 9: // A#
                 Bitmap a_sharp = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note_sharp_space);
-                exampleNote.image = Bitmap.createScaledBitmap(a_sharp,400,400, false);
-                exampleNote.x = 750;
-                exampleNote.y = drawView.drawCanvas.getHeight()/2-170;
+                newNote.image = Bitmap.createScaledBitmap(a_sharp,400,400, false);
+                newNote.y = drawView.drawCanvas.getHeight()/2-170;
                 break;
             case 10: // B
                 Bitmap b = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note);
-                exampleNote.image = Bitmap.createScaledBitmap(b,300,300, false);
-                exampleNote.y = drawView.drawCanvas.getHeight()/2-225;
-                exampleNote.x = 800;
+                newNote.image = Bitmap.createScaledBitmap(b,300,300, false);
+                newNote.y = drawView.drawCanvas.getHeight()/2-225;
                 break;
             case 11: // C
                 Bitmap c = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note);
-                exampleNote.image = Bitmap.createScaledBitmap(c,300,300, false);
-                exampleNote.y = drawView.drawCanvas.getHeight()/2-320;
-                exampleNote.x = 800;
+                newNote.image = Bitmap.createScaledBitmap(c,300,300, false);
+                newNote.y = drawView.drawCanvas.getHeight()/2-320;
                 break;
             default: // Shouldn't ever happen...
                 break;
         }
-/*
-        exampleNote.x += 130;
 
-        if (exampleNote.x >= 1600) {
-            drawView.startNew();
-            staff.notes.get(0).x = 0;
-        }
-*/
+        staff.notes.add(newNote);
+
+
+        drawView.startNew();
         drawView.draw(drawView.drawCanvas);
     }
 
@@ -215,9 +201,10 @@ public class MainActivity extends Activity {
                 //Bitmap newBackgroundBitmap = Bitmap.createBitmap(BitmapFactory.decodeFile("~/AndroidStudioProjects/ProjectSAEJE/app/src/main/res/drawable/ic_staff.png"));
                 //drawView.drawCanvas.drawBitmap(newBackgroundBitmap, 0, 0, null);
                 //staff.notes.get(0).x = 0;
+                xVal = 0;
+                staff.notes.clear();
 
                 drawView.startNew();
-                staff.notes.get(0).x = 800;
 
                 return true;
 

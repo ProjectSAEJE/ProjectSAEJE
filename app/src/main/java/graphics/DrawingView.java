@@ -40,7 +40,7 @@ public class DrawingView extends View {
     public void onDraw(Canvas canvas) {
         canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
         for (Note aNote: MainActivity.staff.notes) {
-            canvas.drawBitmap(aNote.image.getBitmap(), aNote.x, aNote.y, null);
+            canvas.drawBitmap(aNote.image, aNote.x, aNote.y, null);
         }
         this.invalidate();
     }
