@@ -26,7 +26,13 @@ public class MainActivity extends Activity {
     private Boolean isClicked = false;
     public static Staff staff;
     public DrawingView drawView;
+
+    // These will hold note mapping values:
     public static Integer xVal = new Integer(0);
+    private ArrayList<Integer> yVals = new ArrayList<>();
+    private ArrayList<Integer> sizes = new ArrayList<>();
+    private ArrayList<Integer> noteImages = new ArrayList<>();
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,48 @@ public class MainActivity extends Activity {
         notes.add(note);
 
         staff = new Staff(notes, this);
+
+        // Builds the arrayList of Y values:
+        yVals.add(drawView.drawCanvas.getHeight()/2-365);
+        yVals.add(drawView.drawCanvas.getHeight()/2-415);
+        yVals.add(drawView.drawCanvas.getHeight()/2-435);
+        yVals.add(drawView.drawCanvas.getHeight()/2+155);
+        yVals.add(drawView.drawCanvas.getHeight()/2+62);
+        yVals.add(drawView.drawCanvas.getHeight()/2+15);
+        yVals.add(drawView.drawCanvas.getHeight()/2-30);
+        yVals.add(drawView.drawCanvas.getHeight()/2-45);
+        yVals.add(drawView.drawCanvas.getHeight()/2-125);
+        yVals.add(drawView.drawCanvas.getHeight()/2-170);
+        yVals.add(drawView.drawCanvas.getHeight()/2-225);
+        yVals.add(drawView.drawCanvas.getHeight()/2-320);
+
+        // Builds the arrayList of Note image size parameters:
+        sizes.add(400);
+        sizes.add(300);
+        sizes.add(350);
+        sizes.add(300);
+        sizes.add(300);
+        sizes.add(400);
+        sizes.add(300);
+        sizes.add(350);
+        sizes.add(300);
+        sizes.add(400);
+        sizes.add(300);
+        sizes.add(300);
+
+        // Builds the arrayList of image resource names:
+        noteImages.add(R.drawable.ic_quarter_note_sharp_space);
+        noteImages.add(R.drawable.ic_quarter_note);
+        noteImages.add(R.drawable.ic_quarter_note_sharp_line);
+        noteImages.add(R.drawable.ic_quarter_note);
+        noteImages.add(R.drawable.ic_quarter_note);
+        noteImages.add(R.drawable.ic_quarter_note_sharp_space);
+        noteImages.add(R.drawable.ic_quarter_note);
+        noteImages.add(R.drawable.ic_quarter_note_sharp_line);
+        noteImages.add(R.drawable.ic_quarter_note);
+        noteImages.add(R.drawable.ic_quarter_note_sharp_space);
+        noteImages.add(R.drawable.ic_quarter_note);
+        noteImages.add(R.drawable.ic_quarter_note);
     }
 
     @Override
@@ -77,8 +125,18 @@ public class MainActivity extends Activity {
         Note newNote = new Note(0, xVal, "quarter", this);
         int screenNoteNumber = newNote.updateYValue(freq)%12;
 
+        // Retrieve values from arrayLists:
+        int y = yVals.get(screenNoteNumber);
+        int s = sizes.get(screenNoteNumber);
+        int r = noteImages.get(screenNoteNumber);
 
 
+        // Modify newNote with retrieved values:
+        Bitmap b = BitmapFactory.decodeResource(this.getResources(), r);
+        newNote.image = Bitmap.createScaledBitmap(b, s, s, false);
+        newNote.y = y;
+
+        /*
         switch (screenNoteNumber) {
             case 0: // C#
                 // changes note resource image to that of a sharp note
@@ -145,7 +203,7 @@ public class MainActivity extends Activity {
             default: // Shouldn't ever happen...
                 break;
         }
-
+        */
         staff.notes.add(newNote);
 
 
