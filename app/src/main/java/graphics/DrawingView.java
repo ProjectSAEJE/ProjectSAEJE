@@ -6,11 +6,9 @@ import android.util.AttributeSet;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.PorterDuff;
 
-import com.example.woodev01.projectsaeje.MainActivity;
-import com.example.woodev01.projectsaeje.R;
+import projectsaeje.MainActivity;
 
 
 public class DrawingView extends View {

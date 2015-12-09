@@ -1,14 +1,11 @@
 package audio;
 
-import com.example.woodev01.projectsaeje.MainActivity;
+import projectsaeje.MainActivity;
 
 import android.media.AudioFormat;
-import android.media.AudioManager;
 import android.media.AudioRecord;
-import android.media.AudioTrack;
 import android.media.MediaRecorder.AudioSource;
 import android.os.AsyncTask;
-import android.util.Log;
 
 
 public class CaptureTask extends AsyncTask<Float, Float, Void> {

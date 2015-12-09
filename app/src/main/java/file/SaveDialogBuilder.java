@@ -12,7 +12,7 @@ import android.widget.EditText;
 public class SaveDialogBuilder extends AlertDialog.Builder {
 
     private Activity activity;
-    String fileName;
+    public String fileName;
 
     public SaveDialogBuilder(Activity activity) {
         super(activity);
