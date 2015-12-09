@@ -26,7 +26,8 @@ public class MainActivity extends Activity {
     private Boolean isClicked = false;
     public static Staff staff;
     public DrawingView drawView;
-    public static Integer xVal = new Integer(0);
+    public static Integer xVal = 0;
+    public static Integer demoLoopCounter = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,6 +82,15 @@ public class MainActivity extends Activity {
     }
 
     public void updateDisplay(float freq){
+        if (demoLoopCounter == 12) {
+            xVal = 0;
+            demoLoopCounter = 0;
+            staff.notes.clear();
+            drawView.startNew();
+        }
+
+        demoLoopCounter += 1;
+
         xVal += 130;
         Note newNote = new Note(0, xVal, "quarter", this);
         int screenNoteNumber = NoteEvaluator(freq)%12;
@@ -149,6 +159,9 @@ public class MainActivity extends Activity {
                 newNote.y = drawView.drawCanvas.getHeight()/2-320;
                 break;
             default: // Shouldn't ever happen...
+                Bitmap rest = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_stop);
+                newNote.image = Bitmap.createScaledBitmap(rest,300,300, false);
+                newNote.y = drawView.drawCanvas.getHeight()/2 - 150;
                 break;
         }
 
