@@ -159,7 +159,7 @@ public class MainActivity extends Activity {
                 newNote.y = drawView.drawCanvas.getHeight()/2-320;
                 break;
             default: // Shouldn't ever happen...
-                Bitmap rest = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_stop);
+                Bitmap rest = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_rest);
                 newNote.image = Bitmap.createScaledBitmap(rest,300,300, false);
                 newNote.y = drawView.drawCanvas.getHeight()/2 - 150;
                 break;
