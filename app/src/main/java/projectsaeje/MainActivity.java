@@ -158,7 +158,7 @@ public class MainActivity extends Activity {
                 newNote.image = Bitmap.createScaledBitmap(c,300,300, false);
                 newNote.y = drawView.drawCanvas.getHeight()/2-320;
                 break;
-            default: // Shouldn't ever happen...
+            default: // Quarter Rest
                 Bitmap rest = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_rest);
                 newNote.image = Bitmap.createScaledBitmap(rest,300,300, false);
                 newNote.y = drawView.drawCanvas.getHeight()/2 - 150;
@@ -172,6 +172,8 @@ public class MainActivity extends Activity {
         drawView.draw(drawView.drawCanvas);
     }
 
+    private MenuItem recordItem;
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
@@ -179,9 +181,10 @@ public class MainActivity extends Activity {
         switch (item.getItemId()) {
             case R.id.record:
                 if (!isClicked) {
-
+                    recordItem = item;
                     //set record icon to stop icon
                     item.setIcon(R.drawable.ic_stop);
+                    item.setTitle(R.string.Pause);
 
                     mHandler = new Handler() {
                         @Override
@@ -200,6 +203,7 @@ public class MainActivity extends Activity {
                 {
                     //changes stop icon back to play icon on the record button
                     item.setIcon(R.drawable.ic_play_arrow);
+                    item.setTitle(R.string.Resume);
                     mCapture.setRunning(false);
                     isClicked = false;
                 }
@@ -217,12 +221,12 @@ public class MainActivity extends Activity {
                 return true;
 
             case R.id.clear:
-                //Bitmap newBackgroundBitmap = Bitmap.createBitmap(BitmapFactory.decodeFile("~/AndroidStudioProjects/ProjectSAEJE/app/src/main/res/drawable/ic_staff.png"));
-                //drawView.drawCanvas.drawBitmap(newBackgroundBitmap, 0, 0, null);
-                //staff.notes.get(0).x = 0;
+                mCapture.setRunning(false);
                 xVal = 0;
                 staff.notes.clear();
-
+                recordItem.setTitle(R.string.Record);
+                recordItem.setIcon(R.drawable.ic_play_arrow);
+                isClicked = false;
                 drawView.startNew();
 
                 return true;
