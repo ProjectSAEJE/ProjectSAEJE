@@ -4,16 +4,15 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.os.Handler;
-import android.os.Message;
 
 import com.example.woodev01.projectsaeje.R;
 
 import java.util.ArrayList;
-import java.lang.Math;
 
 import audio.CaptureThread;
 import graphics.DrawingView;
@@ -38,18 +37,18 @@ public class MainActivity extends Activity {
     private void buildNoteMaps() {
         if (yVals.isEmpty()) {
             // Builds the arrayList of Y values:
-            yVals.add(drawView.drawCanvas.getHeight()/2-365);
-            yVals.add(drawView.drawCanvas.getHeight()/2-415);
-            yVals.add(drawView.drawCanvas.getHeight()/2-435);
-            yVals.add(drawView.drawCanvas.getHeight()/2+155);
-            yVals.add(drawView.drawCanvas.getHeight()/2+62);
-            yVals.add(drawView.drawCanvas.getHeight()/2+15);
-            yVals.add(drawView.drawCanvas.getHeight()/2-30);
-            yVals.add(drawView.drawCanvas.getHeight()/2-45);
-            yVals.add(drawView.drawCanvas.getHeight()/2-125);
-            yVals.add(drawView.drawCanvas.getHeight()/2-170);
-            yVals.add(drawView.drawCanvas.getHeight()/2-225);
-            yVals.add(drawView.drawCanvas.getHeight()/2-320);
+            yVals.add(drawView.drawCanvas.getHeight() / 2 - 365);
+            yVals.add(drawView.drawCanvas.getHeight() / 2 - 415);
+            yVals.add(drawView.drawCanvas.getHeight() / 2 - 435);
+            yVals.add(drawView.drawCanvas.getHeight() / 2 + 155);
+            yVals.add(drawView.drawCanvas.getHeight() / 2 + 62);
+            yVals.add(drawView.drawCanvas.getHeight() / 2 + 15);
+            yVals.add(drawView.drawCanvas.getHeight() / 2 - 30);
+            yVals.add(drawView.drawCanvas.getHeight() / 2 - 45);
+            yVals.add(drawView.drawCanvas.getHeight() / 2 - 125);
+            yVals.add(drawView.drawCanvas.getHeight() / 2 - 170);
+            yVals.add(drawView.drawCanvas.getHeight() / 2 - 225);
+            yVals.add(drawView.drawCanvas.getHeight() / 2 - 320);
         }
 
         if (sizes.isEmpty()) {
@@ -90,10 +89,10 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        drawView = (DrawingView)findViewById(R.id.drawing);
+        drawView = (DrawingView) findViewById(R.id.drawing);
         this.staff = new Staff();
 
-        Note note = new Note(250, 0, "quarter",this);
+        Note note = new Note(250, 0, "quarter", this);
         ArrayList<Note> notes = new ArrayList<>();
         notes.add(note);
 
@@ -130,10 +129,18 @@ public class MainActivity extends Activity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void updateDisplay(float freq){
+    public int NoteEvaluator(float freq) {
+        double logCalcX = Math.log(freq / 440);
+        double logCalcY = Math.log(2);
+
+        int pianoNoteNumber = (int) (12 * (logCalcX + 49) / logCalcY);
+        return pianoNoteNumber;
+    }
+
+    public void updateDisplay(float freq) {
         xVal += 130;
         Note newNote = new Note(0, xVal, "quarter", this);
-        int screenNoteNumber = Math.abs(newNote.updateYValue(freq)%12);
+        int screenNoteNumber = Math.abs(NoteEvaluator(freq)%12);
 
         // Retrieve values from arrayLists:
         int y = yVals.get(screenNoteNumber);
@@ -248,9 +255,7 @@ public class MainActivity extends Activity {
                     mCapture.start();
 
                     isClicked = true;
-                }
-                else
-                {
+                } else {
                     //changes stop icon back to play icon on the record button
                     item.setIcon(R.drawable.ic_play_arrow);
                     mCapture.setRunning(false);
