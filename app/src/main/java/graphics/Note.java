@@ -9,10 +9,11 @@ import android.graphics.BitmapFactory;
 import android.widget.Toast;
 
 import com.example.woodev01.projectsaeje.R;
-import projectsaeje.MainActivity;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import projectsaeje.MainActivity;
 
 public class Note {
 
@@ -24,7 +25,6 @@ public class Note {
     public MainActivity myActivity;
 
 
-
     public Note(float y, float x, String type, MainActivity myActivity) {
         this.x = x;
         this.y = y;
@@ -32,8 +32,8 @@ public class Note {
 
         Bitmap b = BitmapFactory.decodeResource(myActivity.getResources(), R.drawable.ic_quarter_note);
 
-        //Creates a ScaledBitmap to make quater not a certain size
-        this.image = Bitmap.createScaledBitmap(b,300,300, false);
+        //Creates a ScaledBitmap to make quarter note a certain size
+        this.image = Bitmap.createScaledBitmap(b, 300, 300, false);
     }
 
     public void save(String fileName) {
@@ -106,5 +106,6 @@ public class Note {
     public void setY(float y) {
         this.y = y;
     }
+
 }
 

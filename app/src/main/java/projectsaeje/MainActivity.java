@@ -4,11 +4,11 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.os.Handler;
-import android.os.Message;
 
 import com.example.woodev01.projectsaeje.R;
 
@@ -26,22 +26,78 @@ public class MainActivity extends Activity {
     private Boolean isClicked = false;
     public static Staff staff;
     public DrawingView drawView;
-    public static Integer xVal = 0;
-    public static Integer demoLoopCounter = 0;
+    private Boolean noteMapsBuilt = false;
+
+    // These will hold note mapping values:
+    public static Integer xVal = new Integer(0);
+    private ArrayList<Integer> yVals = new ArrayList<>();
+    private ArrayList<Integer> sizes = new ArrayList<>();
+    private ArrayList<Integer> noteImages = new ArrayList<>();
+
+    private void buildNoteMaps() {
+        if (yVals.isEmpty()) {
+            // Builds the arrayList of Y values:
+            yVals.add(drawView.drawCanvas.getHeight() / 2 - 365);
+            yVals.add(drawView.drawCanvas.getHeight() / 2 - 415);
+            yVals.add(drawView.drawCanvas.getHeight() / 2 - 435);
+            yVals.add(drawView.drawCanvas.getHeight() / 2 + 155);
+            yVals.add(drawView.drawCanvas.getHeight() / 2 + 62);
+            yVals.add(drawView.drawCanvas.getHeight() / 2 + 15);
+            yVals.add(drawView.drawCanvas.getHeight() / 2 - 30);
+            yVals.add(drawView.drawCanvas.getHeight() / 2 - 45);
+            yVals.add(drawView.drawCanvas.getHeight() / 2 - 125);
+            yVals.add(drawView.drawCanvas.getHeight() / 2 - 170);
+            yVals.add(drawView.drawCanvas.getHeight() / 2 - 225);
+            yVals.add(drawView.drawCanvas.getHeight() / 2 - 320);
+        }
+
+        if (sizes.isEmpty()) {
+            // Builds the arrayList of Note image size parameters:
+            sizes.add(400);
+            sizes.add(300);
+            sizes.add(350);
+            sizes.add(300);
+            sizes.add(300);
+            sizes.add(400);
+            sizes.add(300);
+            sizes.add(350);
+            sizes.add(300);
+            sizes.add(400);
+            sizes.add(300);
+            sizes.add(300);
+        }
+
+        if (noteImages.isEmpty()) {
+            // Builds the arrayList of image resource names:
+            noteImages.add(R.drawable.ic_quarter_note_sharp_space);
+            noteImages.add(R.drawable.ic_quarter_note);
+            noteImages.add(R.drawable.ic_quarter_note_sharp_line);
+            noteImages.add(R.drawable.ic_quarter_note);
+            noteImages.add(R.drawable.ic_quarter_note);
+            noteImages.add(R.drawable.ic_quarter_note_sharp_space);
+            noteImages.add(R.drawable.ic_quarter_note);
+            noteImages.add(R.drawable.ic_quarter_note_sharp_line);
+            noteImages.add(R.drawable.ic_quarter_note);
+            noteImages.add(R.drawable.ic_quarter_note_sharp_space);
+            noteImages.add(R.drawable.ic_quarter_note);
+            noteImages.add(R.drawable.ic_quarter_note);
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        drawView = (DrawingView)findViewById(R.id.drawing);
+        drawView = (DrawingView) findViewById(R.id.drawing);
         this.staff = new Staff();
 
-        Note note = new Note(250, 0, "quarter",this);
+        Note note = new Note(250, 0, "quarter", this);
         ArrayList<Note> notes = new ArrayList<>();
         notes.add(note);
 
         staff = new Staff(notes, this);
+
     }
 
     @Override
@@ -81,20 +137,23 @@ public class MainActivity extends Activity {
         return pianoNoteNumber;
     }
 
-    public void updateDisplay(float freq){
-        if (demoLoopCounter == 12) {
-            xVal = 0;
-            demoLoopCounter = 0;
-            staff.notes.clear();
-            drawView.startNew();
-        }
-
-        demoLoopCounter += 1;
-
+    public void updateDisplay(float freq) {
         xVal += 130;
         Note newNote = new Note(0, xVal, "quarter", this);
-        int screenNoteNumber = NoteEvaluator(freq)%12;
+        int screenNoteNumber = Math.abs(NoteEvaluator(freq)%12);
 
+        // Retrieve values from arrayLists:
+        int y = yVals.get(screenNoteNumber);
+        int s = sizes.get(screenNoteNumber);
+        int r = noteImages.get(screenNoteNumber);
+
+
+        // Modify newNote with retrieved values:
+        Bitmap b = BitmapFactory.decodeResource(this.getResources(), r);
+        newNote.image = Bitmap.createScaledBitmap(b, s, s, false);
+        newNote.y = y;
+
+        /*
         switch (screenNoteNumber) {
             case 0: // C#
                 // changes note resource image to that of a sharp note
@@ -159,12 +218,9 @@ public class MainActivity extends Activity {
                 newNote.y = drawView.drawCanvas.getHeight()/2-320;
                 break;
             default: // Shouldn't ever happen...
-                Bitmap rest = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_stop);
-                newNote.image = Bitmap.createScaledBitmap(rest,300,300, false);
-                newNote.y = drawView.drawCanvas.getHeight()/2 - 150;
                 break;
         }
-
+        */
         staff.notes.add(newNote);
 
 
@@ -179,6 +235,10 @@ public class MainActivity extends Activity {
         switch (item.getItemId()) {
             case R.id.record:
                 if (!isClicked) {
+
+                    if (!noteMapsBuilt) {
+                        buildNoteMaps();
+                    }
 
                     //set record icon to stop icon
                     item.setIcon(R.drawable.ic_stop);
@@ -195,9 +255,7 @@ public class MainActivity extends Activity {
                     mCapture.start();
 
                     isClicked = true;
-                }
-                else
-                {
+                } else {
                     //changes stop icon back to play icon on the record button
                     item.setIcon(R.drawable.ic_play_arrow);
                     mCapture.setRunning(false);
