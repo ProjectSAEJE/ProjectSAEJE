@@ -32,7 +32,7 @@ public class Note {
 
         Bitmap b = BitmapFactory.decodeResource(myActivity.getResources(), R.drawable.ic_quarter_note);
 
-        //Creates a ScaledBitmap to make quater not a certain size
+        //Creates a ScaledBitmap to make quarter note a certain size
         this.image = Bitmap.createScaledBitmap(b,300,300, false);
     }
 
