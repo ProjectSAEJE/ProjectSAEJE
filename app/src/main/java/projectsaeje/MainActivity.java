@@ -221,6 +221,7 @@ public class MainActivity extends Activity {
                 return true;
 
             case R.id.clear:
+                //Stop recording
                 mCapture.setRunning(false);
                 xVal = 0;
                 staff.notes.clear();
