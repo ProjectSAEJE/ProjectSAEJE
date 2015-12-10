@@ -228,6 +228,7 @@ public class MainActivity extends Activity {
                 recordItem.setTitle(R.string.Record);
                 recordItem.setIcon(R.drawable.ic_play_arrow);
                 isClicked = false;
+                demoLoopCounter = 0;
                 drawView.startNew();
 
                 return true;
