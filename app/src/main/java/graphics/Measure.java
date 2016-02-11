@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import music.Note;
 
-
 public class Measure {
     private int number; //starts as 1 not 0 per music composition norms
     private ArrayList<Note> notes;
