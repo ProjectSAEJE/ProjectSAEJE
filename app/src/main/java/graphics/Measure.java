@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import java.util.ArrayList;
 import java.util.Vector;
 
-
 public class Measure {
     private int number; //starts as 1 not 0 per music composition norms
     private ArrayList<Note> notes;
