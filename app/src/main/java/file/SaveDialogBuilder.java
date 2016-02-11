@@ -6,9 +6,6 @@ import android.content.DialogInterface;
 import android.text.InputType;
 import android.widget.EditText;
 
-/**
- * Created by austinnash on 12/1/15.
- */
 public class SaveDialogBuilder extends AlertDialog.Builder {
 
     private Activity activity;

@@ -10,7 +10,6 @@ import android.graphics.PorterDuff;
 
 import projectsaeje.MainActivity;
 
-
 public class DrawingView extends View {
     //drawing and canvas paint
     private Paint canvasPaint;

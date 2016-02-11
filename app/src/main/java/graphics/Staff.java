@@ -16,10 +16,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-/**
- * Created by woodev01 on 11/3/15.
- */
-
 public class Staff {
 
     private String fileName;

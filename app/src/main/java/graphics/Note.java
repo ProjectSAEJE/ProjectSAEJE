@@ -1,9 +1,5 @@
 package graphics;
 
-/**
- * Created by austinnash on 11/5/15.
- */
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.Toast;
