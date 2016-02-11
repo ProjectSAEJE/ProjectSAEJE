@@ -30,4 +30,6 @@ public class Measure {
     public void addNote(Note note) {
         notes.add(note);
     }
+
+    //random comment to be nuked whenever
 }
