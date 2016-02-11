@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 
+import music.Note;
 import projectsaeje.MainActivity;
 
 public class DrawingView extends View {

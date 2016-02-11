@@ -1,4 +1,4 @@
-package graphics;
+package music;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

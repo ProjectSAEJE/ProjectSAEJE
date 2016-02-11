@@ -1,18 +1,10 @@
 package graphics;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.text.InputType;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
 
-import graphics.Note;
+import music.Note;
 import file.SaveDialogBuilder;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
 

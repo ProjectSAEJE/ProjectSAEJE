@@ -3,7 +3,8 @@ package graphics;
 import android.graphics.Bitmap;
 
 import java.util.ArrayList;
-import java.util.Vector;
+
+import music.Note;
 
 
 public class Measure {
