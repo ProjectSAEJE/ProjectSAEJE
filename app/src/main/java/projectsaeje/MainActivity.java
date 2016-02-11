@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import audio.CaptureThread;
 import graphics.DrawingView;
 import music.Note;
-import graphics.Staff;
+import music.Staff;
 
 public class MainActivity extends Activity {
 

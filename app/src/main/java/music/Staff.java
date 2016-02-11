@@ -1,4 +1,4 @@
-package graphics;
+package music;
 
 import android.app.Activity;
 
