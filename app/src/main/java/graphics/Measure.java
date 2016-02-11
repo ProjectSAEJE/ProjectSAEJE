@@ -3,11 +3,8 @@ package graphics;
 import android.graphics.Bitmap;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
-/**
- * Created by austinnash on 12/6/15.
- */
+import music.Note;
 
 public class Measure {
     private int number; //starts as 1 not 0 per music composition norms

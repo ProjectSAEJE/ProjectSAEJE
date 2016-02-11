@@ -1,8 +1,4 @@
-package graphics;
-
-/**
- * Created by austinnash on 11/5/15.
- */
+package music;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
