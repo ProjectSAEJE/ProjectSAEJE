@@ -27,12 +27,12 @@ public class Staff {
         notes.add(newNote);
     }
 
-    public void save(){
-        SaveDialogBuilder builder = new SaveDialogBuilder(this.activity);
-        fileName = builder.showDialogAndReturnFileName();
-
-        for (Note aNote: this.notes) {
-            aNote.save(fileName);
-        }
-    }
+//    public void save(){
+//        SaveDialogBuilder builder = new SaveDialogBuilder(this.activity);
+//        fileName = builder.showDialogAndReturnFileName();
+//
+//        for (Note aNote: this.notes) {
+//            aNote.save(fileName);
+//        }
+//    }
 }

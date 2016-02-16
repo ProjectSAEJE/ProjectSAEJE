@@ -1,8 +1,5 @@
 package file;
 
-/**
- * Created by woodev01 on 2/11/16.
- */
 public class LoadDialogBuilder {
 
     /*

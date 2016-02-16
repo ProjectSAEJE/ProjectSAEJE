@@ -8,6 +8,28 @@ import android.widget.EditText;
 
 public class SaveDialogBuilder extends AlertDialog.Builder {
 
+    //THIS part belongs in a class which will call the save builder... in theory
+
+    //    public void save(String fileName) {
+//        String noteVal;
+//
+//        noteVal = String.valueOf(this.x);
+//        noteVal += String.valueOf(this.y);
+//        noteVal += String.valueOf(this.type);
+//        noteVal += String.valueOf(this.imageID);
+//
+//        FileOutputStream fos = null;
+//        try {
+//            fos = myActivity.openFileOutput(fileName, this.myActivity.MODE_PRIVATE);
+//            fos.write(noteVal.getBytes()); //turns the Note String into a group of bits
+//            fos.close();
+//
+//        } catch (IOException e) {
+//            Toast.makeText(myActivity, "There's a problem saving to the internal file", Toast.LENGTH_SHORT).show();
+//            e.printStackTrace();
+//        }
+//    }
+
     private Activity activity;
     public String fileName;
 
