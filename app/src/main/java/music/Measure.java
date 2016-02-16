@@ -11,7 +11,7 @@ public class Measure {
     private ArrayList<Note> notes;
     private float xPos;
     private float yPos;
-    private Bitmap staffImage; //THIS IS CURRENTLY A DUMMY VARIABLE. Rework the staff object so that the staff image is actually a bitmap object, not simply the background specified in xml?
+    private Bitmap staffImage; //Rework the staff object so that the staff image is actually a bitmap object, not simply the background specified in xml?
 
     //Other possible fields:
     //private Activity activity?
@@ -31,5 +31,4 @@ public class Measure {
         notes.add(note);
     }
 
-    //random comment to be nuked whenever
 }
