@@ -4,32 +4,23 @@ import android.graphics.Bitmap;
 
 import java.util.ArrayList;
 
-import music.Note;
+import graphics.NoteDisplay;
+import graphics.DrawingView;
+import projectsaeje.MainActivity;
 
 public class Measure {
-    private int number; //starts as 1 not 0 per music composition norms
-    private ArrayList<Note> notes;
-    private float xPos;
-    private float yPos;
-    private Bitmap staffImage; //THIS IS CURRENTLY A DUMMY VARIABLE. Rework the staff object so that the staff image is actually a bitmap object, not simply the background specified in xml?
-
-    //Other possible fields:
-    //private Activity activity?
-    //private View view?
-    //private Bitmap staffPNG?
+    private int measureNumber; //starts as 1 not 0 per music composition norms
+    private ArrayList<Note> notes; //an arrayList of Notes
 
     public Measure() {}
 
-    public Measure(int number, ArrayList<Note> notes) {
-        this.number = number;
+    public Measure(int measureNumber, ArrayList<Note> notes) {
+        this.measureNumber = measureNumber;
         this.notes = notes;
-        xPos = staffImage.getWidth() * (number - 1);
-        yPos = 0;
     }
 
     public void addNote(Note note) {
         notes.add(note);
     }
 
-    //random comment to be nuked whenever
 }

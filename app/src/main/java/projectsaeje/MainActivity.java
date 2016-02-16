@@ -85,7 +85,7 @@ public class MainActivity extends Activity {
         if (demoLoopCounter == 12) {
             xVal = 0;
             demoLoopCounter = 0;
-            staff.notes.clear();
+            staff.measures.clear();
             drawView.startNew();
         }
 

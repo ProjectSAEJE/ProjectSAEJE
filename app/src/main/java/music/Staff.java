@@ -2,7 +2,6 @@ package music;
 
 import android.app.Activity;
 
-import music.Note;
 import file.SaveDialogBuilder;
 
 import java.util.ArrayList;
@@ -13,18 +12,17 @@ public class Staff {
     private String fileName;
     public Activity activity;
 
-    public ArrayList<Note> notes;
-    //* next: implement public ArrayList<Measure> measures instead of notes ---  each Measure object in measures contains its own array list of Notes
+    public ArrayList<Measure> measures;
 
     public Staff() {}
 
-    public Staff(ArrayList<Note> notes, Activity activity){
-        this.notes = notes;
+    public Staff(ArrayList<Measure> measures, Activity activity){
+        this.measures = measures;
         this.activity = activity;
     }
 
-    public void addNote(Note newNote) {
-        notes.add(newNote);
+    public void addMeasure(Measure newMeasure) {
+        measures.add(newMeasure);
     }
 
 //    public void save(){
