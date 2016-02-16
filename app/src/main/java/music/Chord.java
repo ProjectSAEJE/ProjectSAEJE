@@ -1,35 +1,33 @@
 package music;
 
+import java.util.ArrayList;
+import music.Note;
+
 /**
  * Created by jorgja02 on 2/11/16.
  */
 
 public class Chord {
 
-    /*
-    public MajorChord(){
+    public Note root;
+    public ArrayList<Note> intervalNotes;
 
-        //root = note;
-        //3rd = note.getVal() + 4
-        //5th = note.getVal() + 7
-        //MChord = root + 3rd + 5th
-        //return MChord;
-        return;
-
+    public Chord(Note root) {
+        this.root = root;
     }
-    */
 
-    /*
-    public MinorChord(){
-
-        //root = note;
-        //3rd = note.getVal() + 3
-        //5th = note.getVal() + 7
-        //mChord = root + 3rd + 5th
-        //return mChord;
-        return;
-
+    public setToMajorChord(){
+        int thirdNum = root.getVal() + 4;
+        int fifthNum = root.getVal() + 7;
+        intervalNotes.set(0, new Note(thirdNum));
+        intervalNotes.set(1, new Note(fifthNum));
     }
-    */
+
+    public setToMinorChord(){
+        int thirdNum = root.getVal() + 3;
+        int fifthNum = root.getVal() + 7;
+        intervalNotes.set(0, new Note(thirdNum));
+        intervalNotes.set(1, new Note(fifthNum));
+    }
 
 }
