@@ -16,18 +16,20 @@ public class Chord {
         this.root = root;
     }
 
-    public setToMajorChord(){
-        int thirdNum = root.getVal() + 4;
+    public void setToMajorChord(){
+        int majThirdNum = root.getVal() + 4;
         int fifthNum = root.getVal() + 7;
-        intervalNotes.set(0, new Note(thirdNum));
+        intervalNotes.set(0, new Note(majThirdNum));
         intervalNotes.set(1, new Note(fifthNum));
+
     }
 
-    public setToMinorChord(){
-        int thirdNum = root.getVal() + 3;
+    public void setToMinorChord(){
+        int minThirdNum = root.getVal() + 3;
         int fifthNum = root.getVal() + 7;
-        intervalNotes.set(0, new Note(thirdNum));
+        intervalNotes.set(0, new Note(minThirdNum));
         intervalNotes.set(1, new Note(fifthNum));
+
     }
 
 }
