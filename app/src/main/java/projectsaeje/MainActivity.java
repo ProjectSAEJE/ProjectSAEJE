@@ -19,6 +19,8 @@ import graphics.DrawingView;
 import music.Note;
 import music.Staff;
 
+
+
 public class MainActivity extends Activity {
 
     private CaptureThread mCapture;
@@ -28,18 +30,25 @@ public class MainActivity extends Activity {
     public DrawingView drawView;
     public static Integer xVal = 0;
     public static Integer demoLoopCounter = 0;
+    public static ArrayList<Integer> bmvals = new ArrayList<Integer>();
+    public static ArrayList<Integer> svals = new ArrayList<Integer>();
+    public static ArrayList<Integer> yvals = new ArrayList<Integer>();
+    public Boolean arraysBuilt = false;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        drawView = (DrawingView)findViewById(R.id.drawing);
+        drawView = (DrawingView) findViewById(R.id.drawing);
         this.staff = new Staff();
 
-        Note note = new Note(250, 0, "quarter",this);
+        Note note = new Note(250, 0, "quarter", this);
         ArrayList<Note> notes = new ArrayList<>();
         notes.add(note);
+
 
         staff = new Staff(notes, this);
     }
@@ -81,7 +90,58 @@ public class MainActivity extends Activity {
         return pianoNoteNumber;
     }
 
+    public void populateArrays(){
+        int middle = drawView.drawCanvas.getHeight()/2;
+
+
+        bmvals.add(R.drawable.ic_quarter_note_sharp_space);
+        bmvals.add(R.drawable.ic_quarter_note);
+        bmvals.add(R.drawable.ic_quarter_note_sharp_line);
+        bmvals.add(R.drawable.ic_quarter_note);
+        bmvals.add(R.drawable.ic_quarter_note);
+        bmvals.add(R.drawable.ic_quarter_note_sharp_space);
+        bmvals.add(R.drawable.ic_quarter_note);
+        bmvals.add(R.drawable.ic_quarter_note_sharp_line);
+        bmvals.add(R.drawable.ic_quarter_note);
+        bmvals.add(R.drawable.ic_quarter_note_sharp_space);
+        bmvals.add(R.drawable.ic_quarter_note);
+        bmvals.add(R.drawable.ic_quarter_note);
+
+        svals.add(400);
+        svals.add(300);
+        svals.add(350);
+        svals.add(300);
+        svals.add(300);
+        svals.add(400);
+        svals.add(300);
+        svals.add(350);
+        svals.add(300);
+        svals.add(400);
+        svals.add(300);
+        svals.add(300);
+
+        yvals.add(middle-365);
+        yvals.add(middle-415);
+        yvals.add(middle-435);
+        yvals.add(middle+155);
+        yvals.add(middle+62);
+        yvals.add(middle+15);
+        yvals.add(middle-30);
+        yvals.add(middle-45);
+        yvals.add(middle-125);
+        yvals.add(middle-170);
+        yvals.add(middle-225);
+        yvals.add(middle-320);
+
+        arraysBuilt = true;
+
+    }
+
     public void updateDisplay(float freq){
+        if (!arraysBuilt){
+            populateArrays();
+        }
+
         if (demoLoopCounter == 12) {
             xVal = 0;
             demoLoopCounter = 0;
@@ -95,6 +155,33 @@ public class MainActivity extends Activity {
         Note newNote = new Note(0, xVal, "quarter", this);
         int screenNoteNumber = NoteEvaluator(freq)%12;
 
+
+
+        try{
+
+            int sbn = bmvals.get(screenNoteNumber); // Screen Bitmap Number
+            int sns = svals.get(screenNoteNumber); // Screen Note Size
+            int sny = yvals.get(screenNoteNumber); // Screen Note Y-value
+
+            Bitmap b = BitmapFactory.decodeResource(this.getResources(),sbn);
+            newNote.image = Bitmap.createScaledBitmap(b,sns,sns, false);
+            newNote.y = sny;
+
+        } catch(Exception e) {
+
+            Bitmap b = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_rest);
+            newNote.image = Bitmap.createScaledBitmap(b,300,300, false);
+            newNote.y = drawView.drawCanvas.getHeight()/2 - 150;
+
+        } finally {
+
+            staff.notes.add(newNote);
+
+            drawView.startNew();
+            drawView.draw(drawView.drawCanvas);
+
+        }
+/*
         switch (screenNoteNumber) {
             case 0: // C#
                 // changes note resource image to that of a sharp note
@@ -164,12 +251,8 @@ public class MainActivity extends Activity {
                 newNote.y = drawView.drawCanvas.getHeight()/2 - 150;
                 break;
         }
+*/
 
-        staff.notes.add(newNote);
-
-
-        drawView.startNew();
-        drawView.draw(drawView.drawCanvas);
     }
 
     private MenuItem recordItem;
