@@ -7,6 +7,7 @@ import music.Note;
  * Created by jorgja02 on 2/11/16.
  */
 
+/*
 public class Chord {
 
     public Note root;
@@ -33,3 +34,5 @@ public class Chord {
     }
 
 }
+
+*/
