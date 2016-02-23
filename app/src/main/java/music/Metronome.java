@@ -28,7 +28,6 @@ public class Metronome {
         this.timeSignature = timeSignature;
         this.subdivide = subdivide;
         this.running = false;
-        //mPlayer = new MediaPlayer("clickSound.wav");
     }
 
     public class TimeKeeper extends TimerTask {
