@@ -1,7 +1,11 @@
 package music;
 
-import android.media.MediaPlayer;
+import android.media.AudioManager;
+import android.media.SoundPool;
 
+import com.example.woodev01.projectsaeje.R;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
@@ -15,24 +19,26 @@ public class Metronome {
 
     private int bpm;
     private int msPerBeat;
-    private int[] timeSignature;
+    private ArrayList<Integer> timeSignature;
     private Boolean subdivide;
     private Boolean running;
-    private MediaPlayer mPlayer;
+    private SoundPool sPool;
+    int clickSoundID;
+    private Timer timer;
 
     public Metronome() {}
 
-    public Metronome(int bpm, int[] timeSignature, Boolean subdivide) {
+    public Metronome(int bpm, ArrayList<Integer> timeSignature, Boolean subdivide) {
         this.bpm = bpm;
         this.msPerBeat = (int)((float)(60) / (float)(bpm)) * 1000;   //milliseconds per beat = (seconds per beat) * 1000
         this.timeSignature = timeSignature;
         this.subdivide = subdivide;
         this.running = false;
-        //mPlayer = new MediaPlayer("clickSound.wav");
     }
 
     public class TimeKeeper extends TimerTask {
 
+        @Override
         public void run() {
             running = true;
             clickSound();
@@ -41,9 +47,10 @@ public class Metronome {
     }
 
     public void start() {
-        Timer timer = new Timer();
+        this.timer = new Timer();
         //schedule to call TimeKeepers run() method every msPerBeat milliseconds.
-        timer.scheduleAtFixedRate(new TimeKeeper(), 0, msPerBeat);
+        TimeKeeper tk = new TimeKeeper();
+        this.timer.scheduleAtFixedRate(tk, (long) 0, (long) msPerBeat);
     }
 
     public void stop() {
@@ -51,7 +58,7 @@ public class Metronome {
     }
 
     private void clickSound() {
-        mPlayer.start();
+        sPool.play(this.clickSoundID, (float).5, (float).5, 1, 0, (float) 1.0);
     }
 
     private void broadcastBeatOccurrence() {

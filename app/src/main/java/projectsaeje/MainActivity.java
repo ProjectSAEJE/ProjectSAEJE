@@ -13,9 +13,11 @@ import android.os.Message;
 import com.example.woodev01.projectsaeje.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import audio.CaptureThread;
 import graphics.DrawingView;
+import music.Metronome;
 import music.Note;
 import music.Staff;
 
@@ -196,6 +198,14 @@ public class MainActivity extends Activity {
                     mCapture = new CaptureThread(mHandler);
                     mCapture.setRunning(true);
                     mCapture.start();
+
+                    ArrayList<Integer> timeSig = new ArrayList<Integer>();
+
+                    timeSig.add(4);
+                    timeSig.add(4);
+
+                    Metronome metronome = new Metronome(120, timeSig, true);
+                    metronome.start();
 
                     isClicked = true;
                 }
