@@ -53,12 +53,6 @@ public class Chord {
 
     }
 
-    public setToMinorChord(){
-        int thirdNum = root.getVal() + 3;
-        int fifthNum = root.getVal() + 7;
-        intervalNotes.set(0, new Note(thirdNum));
-        intervalNotes.set(1, new Note(fifthNum));
-    }
 
     public void setToMajor7Chord(){
         int majThirdNum = root.getVal() + 4;
