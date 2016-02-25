@@ -1,5 +1,7 @@
 package music;
 
+import android.media.MediaPlayer;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
@@ -24,6 +26,7 @@ public class Metronome {
     private int[] timeSignature;
     private Boolean subdivide;
     private Boolean running;
+    private MediaPlayer mPlayer;
 
     public Metronome() {}
 
@@ -51,7 +54,7 @@ public class Metronome {
 
         public void run() {
             running = true;
-            click();
+            clickSound();
             broadcastBeatOccurrence();
         }
     }
@@ -66,8 +69,8 @@ public class Metronome {
         running = false;
     }
 
-    private void click() {
-        //output sound
+    private void clickSound() {
+        mPlayer.start();
     }
 
     private void broadcastBeatOccurrence() {
