@@ -231,7 +231,7 @@ public class MainActivity extends Activity {
                 //Stop recording
                 mCapture.setRunning(false);
                 xVal = 0;
-                staff.notes.clear();
+                staff.measures.clear();
                 recordItem.setTitle(R.string.Record);
                 recordItem.setIcon(R.drawable.ic_play_arrow);
                 isClicked = false;

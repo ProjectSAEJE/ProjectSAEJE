@@ -9,8 +9,8 @@ import graphics.DrawingView;
 import projectsaeje.MainActivity;
 
 public class Measure {
-    private int measureNumber; //starts as 1 not 0 per music composition norms
-    private ArrayList<Note> notes; //an arrayList of Notes
+    public int measureNumber; //starts as 1 not 0 per music composition norms
+    public ArrayList<Note> notes; //an arrayList of Notes
 
     public Measure() {}
 
