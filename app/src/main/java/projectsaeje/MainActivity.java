@@ -28,6 +28,10 @@ public class MainActivity extends Activity {
     public DrawingView drawView;
     public static Integer xVal = 0;
     public static Integer demoLoopCounter = 0;
+    public static ArrayList<Integer> bmvals = new ArrayList<Integer>();
+    public static ArrayList<Integer> svals = new ArrayList<Integer>();
+    public static ArrayList<Integer> yvals = new ArrayList<Integer>();
+    public Boolean arraysBuilt = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,7 +85,58 @@ public class MainActivity extends Activity {
         return pianoNoteNumber;
     }
 
+    public void populateArrays(){
+        int middle = drawView.drawCanvas.getHeight()/2;
+
+
+        bmvals.add(R.drawable.ic_quarter_note_sharp_space);
+        bmvals.add(R.drawable.ic_quarter_note);
+        bmvals.add(R.drawable.ic_quarter_note_sharp_line);
+        bmvals.add(R.drawable.ic_quarter_note);
+        bmvals.add(R.drawable.ic_quarter_note);
+        bmvals.add(R.drawable.ic_quarter_note_sharp_space);
+        bmvals.add(R.drawable.ic_quarter_note);
+        bmvals.add(R.drawable.ic_quarter_note_sharp_line);
+        bmvals.add(R.drawable.ic_quarter_note);
+        bmvals.add(R.drawable.ic_quarter_note_sharp_space);
+        bmvals.add(R.drawable.ic_quarter_note);
+        bmvals.add(R.drawable.ic_quarter_note);
+
+        svals.add(400);
+        svals.add(300);
+        svals.add(350);
+        svals.add(300);
+        svals.add(300);
+        svals.add(400);
+        svals.add(300);
+        svals.add(350);
+        svals.add(300);
+        svals.add(400);
+        svals.add(300);
+        svals.add(300);
+
+        yvals.add(middle-365);
+        yvals.add(middle-415);
+        yvals.add(middle-435);
+        yvals.add(middle+155);
+        yvals.add(middle+62);
+        yvals.add(middle+15);
+        yvals.add(middle-30);
+        yvals.add(middle-45);
+        yvals.add(middle-125);
+        yvals.add(middle-170);
+        yvals.add(middle-225);
+        yvals.add(middle-320);
+
+        arraysBuilt = true;
+
+    }
+
     public void updateDisplay(float freq){
+        if (!arraysBuilt){
+            populateArrays();
+        }
+
         if (demoLoopCounter == 12) {
             xVal = 0;
             demoLoopCounter = 0;
@@ -95,81 +150,33 @@ public class MainActivity extends Activity {
         Note newNote = new Note(0, xVal, "quarter", this);
         int screenNoteNumber = NoteEvaluator(freq)%12;
 
-        switch (screenNoteNumber) {
-            case 0: // C#
-                // changes note resource image to that of a sharp note
-                Bitmap c_sharp = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note_sharp_space);
-                newNote.image = Bitmap.createScaledBitmap(c_sharp,400,400, false);
-                newNote.y = drawView.drawCanvas.getHeight()/2-365;
-                break;
-            case 1: // D
-                // changes note resource image to that of a natural note
-                Bitmap d = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note);
-                newNote.image = Bitmap.createScaledBitmap(d,300,300, false);
-                newNote.y = drawView.drawCanvas.getHeight()/2-415;
-                break;
-            case 2: // D#
-                Bitmap d_sharp = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note_sharp_line);
-                newNote.image = Bitmap.createScaledBitmap(d_sharp,350,350, false);
-                newNote.y = drawView.drawCanvas.getHeight()/2-435;
-                break;
-            case 3: // E
-                Bitmap e = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note);
-                newNote.image = Bitmap.createScaledBitmap(e,300,300, false);
-                newNote.y = drawView.drawCanvas.getHeight()/2+155;
-                break;
-            case 4: // F
-                Bitmap f = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note);
-                newNote.image = Bitmap.createScaledBitmap(f,300,300, false);
-                newNote.y = drawView.drawCanvas.getHeight()/2+62;
-                break;
-            case 5: // F#
-                Bitmap f_sharp = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note_sharp_space);
-                newNote.image = Bitmap.createScaledBitmap(f_sharp,400,400, false);
-                newNote.y = drawView.drawCanvas.getHeight()/2+15;
-                break;
-            case 6: // G
-                Bitmap g = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note);
-                newNote.image = Bitmap.createScaledBitmap(g,300,300, false);
-                newNote.y = drawView.drawCanvas.getHeight()/2-30;
-                break;
-            case 7: // G#
-                Bitmap g_sharp = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note_sharp_line);
-                newNote.image = Bitmap.createScaledBitmap(g_sharp,350,350, false);
-                newNote.y = drawView.drawCanvas.getHeight()/2-45;
-                break;
-            case 8: // A
-                Bitmap a = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note);
-                newNote.image = Bitmap.createScaledBitmap(a,300,300, false);
-                newNote.y = drawView.drawCanvas.getHeight()/2-125;
-                break;
-            case 9: // A#
-                Bitmap a_sharp = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note_sharp_space);
-                newNote.image = Bitmap.createScaledBitmap(a_sharp,400,400, false);
-                newNote.y = drawView.drawCanvas.getHeight()/2-170;
-                break;
-            case 10: // B
-                Bitmap b = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note);
-                newNote.image = Bitmap.createScaledBitmap(b,300,300, false);
-                newNote.y = drawView.drawCanvas.getHeight()/2-225;
-                break;
-            case 11: // C
-                Bitmap c = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_note);
-                newNote.image = Bitmap.createScaledBitmap(c,300,300, false);
-                newNote.y = drawView.drawCanvas.getHeight()/2-320;
-                break;
-            default: // Quarter Rest
-                Bitmap rest = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_rest);
-                newNote.image = Bitmap.createScaledBitmap(rest,300,300, false);
-                newNote.y = drawView.drawCanvas.getHeight()/2 - 150;
-                break;
+
+
+        try{
+
+            int sbn = bmvals.get(screenNoteNumber); // Screen Bitmap Number
+            int sns = svals.get(screenNoteNumber); // Screen Note Size
+            int sny = yvals.get(screenNoteNumber); // Screen Note Y-value
+
+            Bitmap b = BitmapFactory.decodeResource(this.getResources(),sbn);
+            newNote.image = Bitmap.createScaledBitmap(b,sns,sns, false);
+            newNote.y = sny;
+
+        } catch(Exception e) {
+
+            Bitmap b = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_rest);
+            newNote.image = Bitmap.createScaledBitmap(b,300,300, false);
+            newNote.y = drawView.drawCanvas.getHeight()/2 - 150;
+
+        } finally {
+
+            staff.notes.add(newNote);
+
+            drawView.startNew();
+            drawView.draw(drawView.drawCanvas);
+
         }
 
-        staff.notes.add(newNote);
-
-
-        drawView.startNew();
-        drawView.draw(drawView.drawCanvas);
     }
 
     private MenuItem recordItem;
