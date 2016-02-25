@@ -138,10 +138,6 @@ public class MainActivity extends Activity {
     }
 
     public void updateDisplay(float freq){
-        if (!arraysBuilt){
-            populateArrays();
-        }
-
         if (demoLoopCounter == 12) {
             xVal = 0;
             demoLoopCounter = 0;
@@ -252,6 +248,32 @@ public class MainActivity extends Activity {
                 break;
         }
 */
+
+
+        try{
+
+            int sbn = bmvals.get(screenNoteNumber); // Screen Bitmap Number
+            int sns = svals.get(screenNoteNumber); // Screen Note Size
+            int sny = yvals.get(screenNoteNumber); // Screen Note Y-value
+
+            Bitmap b = BitmapFactory.decodeResource(this.getResources(),sbn);
+            newNote.image = Bitmap.createScaledBitmap(b,sns,sns, false);
+            newNote.y = sny;
+
+        } catch(Exception e) {
+
+            Bitmap b = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_rest);
+            newNote.image = Bitmap.createScaledBitmap(b,300,300, false);
+            newNote.y = drawView.drawCanvas.getHeight()/2 - 150;
+
+        } finally {
+
+            staff.notes.add(newNote);
+
+            drawView.startNew();
+            drawView.draw(drawView.drawCanvas);
+
+        }
 
     }
 
