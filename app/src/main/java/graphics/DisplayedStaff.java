@@ -1,35 +1,42 @@
 package graphics;
 
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
-
 import java.util.ArrayList;
 
-import music.Measure;
-import music.Staff;
+import music.model.Staff;
+import music.model.Note;
 import projectsaeje.MainActivity;
 
 
-public class StaffDisplay extends Drawable {
+public class DisplayedStaff extends Drawable {
 
-    public StaffDisplay(){};
+    public DisplayedStaff(){};
 
 
-    public static void displayStaff(android.graphics.Canvas canvas){
+    public void displayStaff(Canvas canvas){
         Staff s = MainActivity.staff;
         int currentMeasure = (s.measures.get(s.measures.size()-1)).measureNumber;
         Staff boStaff = measureChooser(s, currentMeasure, 0);
+
+        ArrayList<DisplayedNote> onScreenNotes = new ArrayList<>();
+
+        for(Note aNote : boStaff.measures)
+            onScreenNotes.add(new DisplayedNote(aNote, aBitmap, x, y)); //Converts the Note class to a Displayed Note with it's bitmap, x coor and y coor
+
+        for(DisplayedNote aDNote : onScreenNotes)
+            aDNote.displayNote(canvas);
+
     };
 
-    public static Staff measureChooser(Staff theStaff, int currentMeasure, int swipe) {
+    public Staff measureChooser(Staff theStaff, int currentMeasure, int swipe) {
         Staff displayedTwo = new Staff();
 
-        if (swipe == 0)  {
+        if (swipe == 0)
             displayedTwo.measures.add(theStaff.measures.get(currentMeasure - 1));
             displayedTwo.measures.add(theStaff.measures.get(currentMeasure - 2));
-        }
+
 
         return displayedTwo;
     }

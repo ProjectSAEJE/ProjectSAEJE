@@ -1,12 +1,6 @@
-package music;
-
-import android.graphics.Bitmap;
+package music.model;
 
 import java.util.ArrayList;
-
-import graphics.NoteDisplay;
-import graphics.DrawingView;
-import projectsaeje.MainActivity;
 
 public class Measure {
     public int measureNumber; //starts as 1 not 0 per music composition norms

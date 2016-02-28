@@ -1,24 +1,27 @@
 package graphics;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
 
-import com.example.woodev01.projectsaeje.R;
-import projectsaeje.MainActivity;
+import music.model.Note;
 
-public class NoteDisplay extends Drawable {
+public class DisplayedNote extends Drawable {
 
     public Bitmap image;
+    public int x;
+    public int y;
 
-    public NoteDisplay(int imageId, MainActivity myActivity) {
-
-        Bitmap b = BitmapFactory.decodeResource(myActivity.getResources(), imageId);
-
+    public DisplayedNote(Note aNote, Bitmap b, int i, int g) {
+        x = i;
+        y = g;
         //Creates a ScaledBitmap to make quarter note a certain size
-        this.image = Bitmap.createScaledBitmap(b, 300, 300, false);
+        image = Bitmap.createScaledBitmap(b, 300, 300, false);
+    }
+
+    public void displayNote(Canvas canvas){
+        canvas.drawBitmap(image, x, y, null);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package music;
+package music.model;
 
 public class Note {
 

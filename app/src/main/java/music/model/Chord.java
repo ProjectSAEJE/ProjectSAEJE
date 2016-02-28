@@ -1,7 +1,6 @@
-package music;
+package music.model;
 
 import java.util.ArrayList;
-import music.Note;
 
 public class Chord {
 

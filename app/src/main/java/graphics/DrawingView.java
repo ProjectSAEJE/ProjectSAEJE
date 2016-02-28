@@ -8,9 +8,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 
-import music.Measure;
-import projectsaeje.MainActivity;
-
 public class DrawingView extends View {
     //drawing and canvas paint
     private Paint canvasPaint;
@@ -39,7 +36,7 @@ public class DrawingView extends View {
     @Override
     public void onDraw(Canvas canvas) {
         canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
-        StaffDisplay.displayStaff(drawCanvas);
+        DisplayedStaff.draw();
     }
 
     public void startNew(){

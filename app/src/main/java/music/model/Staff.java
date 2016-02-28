@@ -1,8 +1,6 @@
-package music;
+package music.model;
 
 import android.app.Activity;
-
-import file.SaveDialogBuilder;
 
 import java.util.ArrayList;
 
