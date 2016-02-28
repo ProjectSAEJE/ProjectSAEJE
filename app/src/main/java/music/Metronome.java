@@ -18,7 +18,7 @@ import java.util.TimerTask;
 public class Metronome {
 
     private int bpm;
-    private int msPerBeat;
+    private long msPerBeat;
     private ArrayList<Integer> timeSignature;
     private Boolean subdivide;
     private Boolean running;
@@ -30,10 +30,12 @@ public class Metronome {
 
     public Metronome(int bpm, ArrayList<Integer> timeSignature, Boolean subdivide) {
         this.bpm = bpm;
-        this.msPerBeat = (int)((float)(60) / (float)(bpm)) * 1000;   //milliseconds per beat = (seconds per beat) * 1000
+        this.msPerBeat = (long)(((float)(60) / (float)(bpm)) * 1000);   //milliseconds per beat = (seconds per beat) * 1000
         this.timeSignature = timeSignature;
         this.subdivide = subdivide;
         this.running = false;
+        sPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+        clickSoundID = sPool.load("/Users/austinnash/AndroidStudioProjects/ProjectSAEJE/app/src/main/res/raw/metronome_sounds/Sonar/Metronome.wav", 1);
     }
 
     public class TimeKeeper extends TimerTask {
@@ -49,8 +51,7 @@ public class Metronome {
     public void start() {
         this.timer = new Timer();
         //schedule to call TimeKeepers run() method every msPerBeat milliseconds.
-        TimeKeeper tk = new TimeKeeper();
-        this.timer.scheduleAtFixedRate(tk, (long) 0, (long) msPerBeat);
+        timer.scheduleAtFixedRate(new TimeKeeper(), 0, msPerBeat);
     }
 
     public void stop() {
