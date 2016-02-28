@@ -204,7 +204,7 @@ public class MainActivity extends Activity {
                     timeSig.add(4);
                     timeSig.add(4);
 
-                    Metronome metronome = new Metronome(120, timeSig, true);
+                    Metronome metronome = new Metronome(120, timeSig, true, this);
                     metronome.start();
 
                     isClicked = true;
