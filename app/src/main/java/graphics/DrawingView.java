@@ -36,7 +36,6 @@ public class DrawingView extends View {
     @Override
     public void onDraw(Canvas canvas) {
         canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
-        DisplayedStaff.draw();
     }
 
     public void startNew(){

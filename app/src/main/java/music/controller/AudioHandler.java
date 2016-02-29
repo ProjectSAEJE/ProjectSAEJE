@@ -8,16 +8,24 @@ import com.example.woodev01.projectsaeje.R;
 
 import java.util.ArrayList;
 
+import graphics.DrawingView;
+import music.model.Key;
 import music.model.Note;
+import projectsaeje.MainActivity;
 
 /**
  * Created by woodev01 on 2/28/16.
  */
+
 public class AudioHandler {
 
-    public static ArrayList<Integer> bmvals = new ArrayList<Integer>();
-    public static ArrayList<Integer> svals = new ArrayList<Integer>();
-    public static ArrayList<Integer> yvals = new ArrayList<Integer>();
+    private static boolean firstNote = true;
+
+    private static Key theKey = null;
+
+    public static ArrayList<Integer> bmvals = new ArrayList<>();
+    public static ArrayList<Integer> svals = new ArrayList<>();
+    public static ArrayList<Integer> yvals = new ArrayList<>();
 
     public Boolean arraysBuilt = false;
 
@@ -26,36 +34,19 @@ public class AudioHandler {
     }
 
     public void populateArrays(){
-        int middle = drawView.drawCanvas.getHeight()/2;
+        int middle = MainActivity.drawView.drawCanvas.getHeight()/2;
 
 
         bmvals.add(R.drawable.ic_quarter_note_sharp_space);
         bmvals.add(R.drawable.ic_quarter_note);
         bmvals.add(R.drawable.ic_quarter_note_sharp_line);
-        bmvals.add(R.drawable.ic_quarter_note);
-        bmvals.add(R.drawable.ic_quarter_note);
-        bmvals.add(R.drawable.ic_quarter_note_sharp_space);
-        bmvals.add(R.drawable.ic_quarter_note);
-        bmvals.add(R.drawable.ic_quarter_note_sharp_line);
-        bmvals.add(R.drawable.ic_quarter_note);
-        bmvals.add(R.drawable.ic_quarter_note_sharp_space);
-        bmvals.add(R.drawable.ic_quarter_note);
-        bmvals.add(R.drawable.ic_quarter_note);
+
 
         svals.add(400);
         svals.add(300);
         svals.add(350);
-        svals.add(300);
-        svals.add(300);
-        svals.add(400);
-        svals.add(300);
-        svals.add(350);
-        svals.add(300);
-        svals.add(400);
-        svals.add(300);
-        svals.add(300);
 
-        yvals.add(middle-365);
+        yvals.add(middle-365);  //FIX THIS MESSY, GROSS CODE!!!
         yvals.add(middle-415);
         yvals.add(middle-435);
         yvals.add(middle+155);
@@ -81,6 +72,11 @@ public class AudioHandler {
     }
 
     public void update(float freq) {
+
+        if(firstNote == true)
+            theKey = Key(aNote);
+            firstNote = false;
+
         if (demoLoopCounter == 12) {
             xVal = 0;
             demoLoopCounter = 0;
@@ -93,8 +89,6 @@ public class AudioHandler {
         xVal += 130;
         Note newNote = new Note(0, xVal, "quarter", this);
         int screenNoteNumber = NoteEvaluator(freq)%12;
-
-
 
         try{
 

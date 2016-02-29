@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
     private CaptureThread mCapture;
     private Boolean isClicked = false;
     public static Staff staff;
-    public DrawingView drawView;
+    public static DrawingView drawView;
     public static Integer xVal = 0;
     public static Integer demoLoopCounter = 0;
 
