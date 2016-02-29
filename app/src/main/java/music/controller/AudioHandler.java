@@ -2,13 +2,11 @@ package music.controller;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.provider.MediaStore;
 
 import com.example.woodev01.projectsaeje.R;
 
 import java.util.ArrayList;
 
-import graphics.DrawingView;
 import music.model.Key;
 import music.model.Note;
 import projectsaeje.MainActivity;
@@ -23,7 +21,12 @@ public class AudioHandler {
 
     private static Key theKey = null;
 
-    public static ArrayList<Integer> bmvals = new ArrayList<>();
+    public static ArrayList<Integer> wholes = new ArrayList<>();
+    public static ArrayList<Integer> halves = new ArrayList<>();
+    public static ArrayList<Integer> quarters = new ArrayList<>();
+    public static ArrayList<Integer> eighths = new ArrayList<>();
+    public static ArrayList<Integer> sixteenths = new ArrayList<>();
+
     public static ArrayList<Integer> svals = new ArrayList<>();
     public static ArrayList<Integer> yvals = new ArrayList<>();
 
@@ -36,11 +39,9 @@ public class AudioHandler {
     public void populateArrays(){
         int middle = MainActivity.drawView.drawCanvas.getHeight()/2;
 
-
-        bmvals.add(R.drawable.ic_quarter_note_sharp_space);
-        bmvals.add(R.drawable.ic_quarter_note);
-        bmvals.add(R.drawable.ic_quarter_note_sharp_line);
-
+        quarters.add(R.drawable.ic_quarter_note);
+        quarters.add(R.drawable.ic_quarter_note_sharp_space);
+        quarters.add(R.drawable.ic_quarter_note_sharp_line);
 
         svals.add(400);
         svals.add(300);
@@ -92,7 +93,7 @@ public class AudioHandler {
 
         try{
 
-            int sbn = bmvals.get(screenNoteNumber); // Screen Bitmap Number
+            int sbn = quarters.get(screenNoteNumber); // Screen Bitmap Number
             int sns = svals.get(screenNoteNumber); // Screen Note Size
             int sny = yvals.get(screenNoteNumber); // Screen Note Y-value
 
