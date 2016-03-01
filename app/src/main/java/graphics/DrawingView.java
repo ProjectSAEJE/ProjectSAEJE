@@ -35,6 +35,7 @@ public class DrawingView extends View {
 
     @Override
     public void onDraw(Canvas canvas) {
+        
         canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
     }
 
@@ -42,5 +43,4 @@ public class DrawingView extends View {
         drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
         invalidate();
     }
-
 }

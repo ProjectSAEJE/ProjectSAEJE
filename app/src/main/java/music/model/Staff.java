@@ -1,7 +1,6 @@
 package music.model;
 
 import android.app.Activity;
-
 import java.util.ArrayList;
 
 
