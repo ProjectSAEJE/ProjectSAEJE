@@ -1,9 +1,5 @@
 package music.model;
 
-/**
- * Created by woodev01 on 2/28/16.
- */
-
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -12,23 +8,23 @@ public class Key {
     public static Hashtable<String, Integer> key;
 
     // An Array List of every key in the standard circle of fifths
-    private static Hashtable<String,Integer> A = new Hashtable<>();
-    private static Hashtable<String,Integer> B = new Hashtable<>();
-    private static Hashtable<String,Integer> C = new Hashtable<>();
-    private static Hashtable<String,Integer> D = new Hashtable<>();
-    private static Hashtable<String,Integer> E = new Hashtable<>();
-    private static Hashtable<String,Integer> F = new Hashtable<>();
-    private static Hashtable<String,Integer> G = new Hashtable<>();
+    private static Hashtable<Integer, String> A = new Hashtable<>();
+    private static Hashtable<Integer, String> B = new Hashtable<>();
+    private static Hashtable<Integer, String> C = new Hashtable<>();
+    private static Hashtable<Integer, String> D = new Hashtable<>();
+    private static Hashtable<Integer, String> E = new Hashtable<>();
+    private static Hashtable<Integer, String> F = new Hashtable<>();
+    private static Hashtable<Integer, String> G = new Hashtable<>();
 
-    private static Hashtable<String,Integer> AFlat = new Hashtable<>();
-    private static Hashtable<String,Integer> BFlat = new Hashtable<>();
-    private static Hashtable<String,Integer> CFlat = new Hashtable<>();
-    private static Hashtable<String,Integer> DFlat = new Hashtable<>();
-    private static Hashtable<String,Integer> EFlat = new Hashtable<>();
-    private static Hashtable<String,Integer> GFlat = new Hashtable<>();
+    private static Hashtable<Integer, String> AFlat = new Hashtable<>();
+    private static Hashtable<Integer, String> BFlat = new Hashtable<>();
+    private static Hashtable<Integer, String> CFlat = new Hashtable<>();
+    private static Hashtable<Integer, String> DFlat = new Hashtable<>();
+    private static Hashtable<Integer, String> EFlat = new Hashtable<>();
+    private static Hashtable<Integer, String> GFlat = new Hashtable<>();
 
-    private static Hashtable<String,Integer> CSharp = new Hashtable<>();
-    private static Hashtable<String,Integer> FSharp = new Hashtable<>();
+    private static Hashtable<Integer, String> CSharp = new Hashtable<>();
+    private static Hashtable<Integer, String> FSharp = new Hashtable<>();
 
     public static ArrayList<Hashtable> autoKeys = new ArrayList<>();
     public static ArrayList<Hashtable> possibleKeys = new ArrayList<>();
@@ -77,62 +73,125 @@ public class Key {
         autoKeys.add(AFlat);  //11
 
 
-        AFlat.put("Ab", 11);
-        AFlat.put("Bb", 1);
-        AFlat.put("C", 3);
-        AFlat.put("Db", 4);
-        AFlat.put("Eb", 6);
-        AFlat.put("F", 8);
-        AFlat.put("G", 10);
+        AFlat.put(11, "Ab");
+        AFlat.put(1, "Bb");
+        AFlat.put(3, "C");
+        AFlat.put(4, "Db");
+        AFlat.put(6, "Eb");
+        AFlat.put(8, "F");
+        AFlat.put(10, "G");
 
-        A.put("A", 0);
-        A.put("B", 2);
-        A.put("C#", 4);
-        A.put("D", 5);
-        A.put("E", 7);
-        A.put("F#", 9);
-        A.put("G#", 11);
+        A.put(0, "A");
+        A.put(2, "B");
+        A.put(4, "C#");
+        A.put(5, "D");
+        A.put(7, "E");
+        A.put(9, "F#");
+        A.put(11, "G#");
 
-        BFlat.put("Bb", 1);
-        BFlat.put("C", 3);
-        BFlat.put("D", 5);
-        BFlat.put("Eb", 6);
-        BFlat.put("F", 8);
-        BFlat.put("G", 10);
-        BFlat.put("A", 0);
+        BFlat.put(1, "Bb");
+        BFlat.put(3, "C");
+        BFlat.put(5, "D");
+        BFlat.put(6, "Eb");
+        BFlat.put(8, "F");
+        BFlat.put(10, "G");
+        BFlat.put(0, "A");
 
-        B.put("B", 2);
-        B.put("C#", 4);
-        B.put("D#", 6);
-        B.put("E", 7);
-        B.put("F#", 9);
-        B.put("G#", 11);
-        B.put("A#", 1);
+        B.put(2, "B");
+        B.put(4, "C#");
+        B.put(6, "D#");
+        B.put(7, "E");
+        B.put(9, "F#");
+        B.put(11, "G#");
+        B.put(1, "A#");
 
-        CFlat.put("Cb", 2);
-        CFlat.put("Db", 4);
-        CFlat.put("Eb", 6);
-        CFlat.put("Fb", 7);
-        CFlat.put("Gb", 9);
-        CFlat.put("Ab", 11);
-        CFlat.put("Bb", 1);
+        CFlat.put(2, "Cb");
+        CFlat.put(4, "Db");
+        CFlat.put(6, "Eb");
+        CFlat.put(7, "Fb");
+        CFlat.put(9, "Gb");
+        CFlat.put(11, "Ab");
+        CFlat.put(1, "Bb");
 
-        C.put("C", 3);
-        C.put("D", 5);
-        C.put("E", 7);
-        C.put("F", 8);
-        C.put("G", 10);
-        C.put("A", 0);
-        C.put("B", 2);
+        C.put(3, "C");
+        C.put(5, "D");
+        C.put(7, "E");
+        C.put(8, "F");
+        C.put(10, "G");
+        C.put(0, "A");
+        C.put(2, "B");
 
-        CSharp.put("C#", 4);
-        CSharp.put("D#", 6);
-        CSharp.put("E#", 8);
-        CSharp.put("F#", 9);
-        CSharp.put("G#", 11);
-        CSharp.put("A#", 1);
-        CSharp.put("B#", 3);
+        CSharp.put(4, "C#");
+        CSharp.put(6, "D#");
+        CSharp.put(8, "E#");
+        CSharp.put(9, "F#");
+        CSharp.put(11, "G#");
+        CSharp.put(1, "A#");
+        CSharp.put(3, "B#");
 
+        DFlat.put(4, "Db");
+        DFlat.put(6, "Eb");
+        DFlat.put(8, "F");
+        DFlat.put(9, "Gb");
+        DFlat.put(11, "Ab");
+        DFlat.put(1, "Bb");
+        DFlat.put(3, "C");
+
+        D.put(5, "D");
+        D.put(7, "E");
+        D.put(9, "F#");
+        D.put(10, "G");
+        D.put(0, "A");
+        D.put(2, "B");
+        D.put(4, "C#");
+
+        EFlat.put(6, "Eb");
+        EFlat.put(8, "F");
+        EFlat.put(10, "G");
+        EFlat.put(11, "Ab");
+        EFlat.put(1, "Bb");
+        EFlat.put(3, "C");
+        EFlat.put(5, "D");
+
+        E.put(7, "E");
+        E.put(9, "F#");
+        E.put(11, "G#");
+        E.put(0, "A");
+        E.put(2, "B");
+        E.put(4, "C#");
+        E.put(6, "D#");
+
+        F.put(8, "F");
+        F.put(10, "G");
+        F.put(0, "A");
+        F.put(1, "Bb");
+        F.put(3, "C");
+        F.put(5, "D");
+        F.put(7, "E");
+
+        FSharp.put(9, "F#");
+        FSharp.put(11, "G#");
+        FSharp.put(1, "A#");
+        FSharp.put(2, "B");
+        FSharp.put(4, "C#");
+        FSharp.put(6, "D#");
+        FSharp.put(8, "E#");
+
+        GFlat.put(9, "Gb");
+        GFlat.put(11, "Ab");
+        GFlat.put(1, "Bb");
+        GFlat.put(2, "Cb");
+        GFlat.put(4, "Db");
+        GFlat.put(6, "Eb");
+        GFlat.put(8, "F");
+
+        G.put(10, "G");
+        G.put(0, "A");
+        G.put(2, "B");
+        G.put(3, "C");
+        G.put(5, "D");
+        G.put(7, "E");
+        G.put(9, "F#");
 
 
     }

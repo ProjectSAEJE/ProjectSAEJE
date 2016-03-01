@@ -47,18 +47,18 @@ public class AudioHandler {
         svals.add(300);
         svals.add(350);
 
-        yvals.add(middle-365);  //FIX THIS MESSY, GROSS CODE!!!
-        yvals.add(middle-415);
-        yvals.add(middle-435);
-        yvals.add(middle+155);
-        yvals.add(middle+62);
-        yvals.add(middle+15);
-        yvals.add(middle-30);
-        yvals.add(middle-45);
-        yvals.add(middle-125);
-        yvals.add(middle-170);
-        yvals.add(middle-225);
-        yvals.add(middle-320);
+        yvals.add(middle - 365);  //FIX THIS MESSY, GROSS CODE!!!
+        yvals.add(middle - 415);
+        yvals.add(middle - 435);
+        yvals.add(middle + 155);
+        yvals.add(middle + 62);
+        yvals.add(middle + 15);
+        yvals.add(middle - 30);
+        yvals.add(middle - 45);
+        yvals.add(middle - 125);
+        yvals.add(middle - 170);
+        yvals.add(middle - 225);
+        yvals.add(middle - 320);
 
         arraysBuilt = true;
 
