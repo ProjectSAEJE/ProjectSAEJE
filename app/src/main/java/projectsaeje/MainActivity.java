@@ -17,8 +17,7 @@ import java.util.ArrayList;
 import audio.CaptureThread;
 import graphics.DrawingView;
 import music.controller.AudioHandler;
-import music.model.Note;
-import music.model.Staff;
+import music.model.*;
 
 public class MainActivity extends Activity {
 
