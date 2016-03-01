@@ -1,8 +1,6 @@
 package projectsaeje;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,9 +12,9 @@ import com.example.woodev01.projectsaeje.R;
 
 import java.util.ArrayList;
 
-import audio.CaptureThread;
-import graphics.DrawingView;
-import music.controller.AudioHandler;
+import audio.*;
+import graphics.*;
+import music.controller.*;
 import music.model.*;
 
 public class MainActivity extends Activity {
