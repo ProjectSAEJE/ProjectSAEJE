@@ -14,7 +14,7 @@ import java.util.TimerTask;
  * Created by austinnash on 2/11/16.
  */
 
-public class Metronome {
+public class Metronome extends Thread {
 
     private int bpm;
     private long msPerBeat;
@@ -27,7 +27,6 @@ public class Metronome {
     private Activity activity;
     private boolean loaded = false;
     private int clickNum = 0;
-
 
     public Metronome() {}
 
@@ -46,7 +45,7 @@ public class Metronome {
                 loaded = true;
             }
         });
-        clickSoundID = sPool.load(activity.getApplicationContext(), R.raw.click, 1);
+        clickSoundID = sPool.load(activity.getApplicationContext(), R.raw.tamb_down_441, 1);
     }
 
     public class TimeKeeper extends TimerTask {
@@ -59,23 +58,30 @@ public class Metronome {
         }
     }
 
-    public void start() {
+    @Override
+    public void run() {
         this.timer = new Timer();
         //schedule to call TimeKeepers run() method every msPerBeat milliseconds.
         timer.scheduleAtFixedRate(new TimeKeeper(), 0, msPerBeat);
     }
 
-    public void stop() {
+    public void setRunningFalse() {
         running = false;
+    }
+
+    public int getClickNum() {
+        return clickNum;
     }
 
     private void clickSound() {
         //System.out.println("clickSound() called");
         this.clickNum += 1;
+        /*
         if (loaded) {
             sPool.play(this.clickSoundID, (float) .5, (float) .5, 1, 0, (float) 1.0);
-            System.out.println("*CLICK* " + "#" + clickNum);
+            //System.out.println("*CLICK* " + "#" + clickNum);
         }
+        */
     }
 
     private void broadcastBeatOccurrence() {

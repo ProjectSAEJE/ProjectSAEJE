@@ -195,17 +195,18 @@ public class MainActivity extends Activity {
                         }
                     };
 
-                    mCapture = new CaptureThread(mHandler);
-                    mCapture.setRunning(true);
-                    mCapture.start();
-
                     ArrayList<Integer> timeSig = new ArrayList<Integer>();
 
                     timeSig.add(4);
                     timeSig.add(4);
 
                     Metronome metronome = new Metronome(120, timeSig, true, this);
-                    metronome.start();
+
+                    mCapture = new CaptureThread(mHandler, metronome);
+                    mCapture.setRunning(true);
+                    mCapture.start();
+
+
 
                     isClicked = true;
                 }
