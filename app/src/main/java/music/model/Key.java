@@ -5,7 +5,7 @@ import java.util.Hashtable;
 
 public class Key {
 
-    public static Hashtable<String, Integer> key;
+    public Hashtable<Integer, String> key;
 
     // An Array List of every key in the standard circle of fifths
     private static Hashtable<Integer, String> A = new Hashtable<>();

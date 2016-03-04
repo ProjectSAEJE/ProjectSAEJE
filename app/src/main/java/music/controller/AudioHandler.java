@@ -2,11 +2,14 @@ package music.controller;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
+import android.os.Message;
 
 import com.example.woodev01.projectsaeje.R;
 
 import java.util.ArrayList;
 
+import audio.CaptureThread;
 import music.model.Key;
 import music.model.Note;
 import projectsaeje.MainActivity;
@@ -30,22 +33,20 @@ public class AudioHandler {
     public static ArrayList<Integer> svals = new ArrayList<>();
     public static ArrayList<Integer> yvals = new ArrayList<>();
 
-    public Boolean arraysBuilt = false;
+    public static CaptureThread mCapture;
 
     public AudioHandler (){
 
     }
 
-    public void populateArrays(){
+    public static void populateArrays(){
         int middle = MainActivity.drawView.drawCanvas.getHeight()/2;
 
         quarters.add(R.drawable.ic_quarter_note);
         quarters.add(R.drawable.ic_quarter_note_sharp_space);
         quarters.add(R.drawable.ic_quarter_note_sharp_line);
 
-        svals.add(400);
         svals.add(300);
-        svals.add(350);
 
         yvals.add(middle - 365);  //FIX THIS MESSY, GROSS CODE!!!
         yvals.add(middle - 415);
@@ -60,61 +61,116 @@ public class AudioHandler {
         yvals.add(middle - 225);
         yvals.add(middle - 320);
 
-        arraysBuilt = true;
+    }
+
+    public static void captureNotes(){
+        Handler mHandler;
+
+
+        mHandler = new Handler() {
+            @Override
+            public synchronized void handleMessage(Message m) {
+                m.getData().getFloat("Freq");
+            }
+        };
+
+        mCapture = new CaptureThread(mHandler);
+        mCapture.setRunning(true);
+        mCapture.start();
+    }
+
+    public static void stopCapture(){
+
+        mCapture.setRunning(false);
 
     }
 
+    public static void destroy(){
+        if (mCapture != null) {
+            mCapture.setRunning(false);
+            mCapture = null;
+        }
+    }
+
     public int NoteEvaluator(float freq) {
+        int pianoNoteNumber;
         double logCalcX = Math.log(freq / 440);
         double logCalcY = Math.log(2);
 
-        int pianoNoteNumber = (int) (12 * (logCalcX + 49) / logCalcY);
+        pianoNoteNumber = (int) (12 * (logCalcX + 49) / logCalcY);
         return pianoNoteNumber;
+    }
+
+    public Bitmap noteImageBuilder(int tonalValue,Key theKey, int rhythmicValue){
+
+        ArrayList<Integer> noteType;
+        int noteNumber = tonalValue%12;
+
+        switch (rhythmicValue) {
+            case 0:
+                noteType = wholes;
+            case 1:
+                noteType = halves;
+            case 2:
+                noteType = quarters;
+            case 3:
+                noteType = eighths;
+            case 4:
+                noteType = sixteenths;
+            default:
+                noteType = quarters;
+        }
+
+        String noteName = theKey.key.get(noteNumber);
+        String accidentalIdentifier = noteName.substring(1);
+
+        int noteGet;
+
+        switch (accidentalIdentifier) {
+            case "#":
+                noteGet = 0;
+            case "b":
+                noteGet = 1;
+            default:
+                noteGet = 2;
+        }
+
+
+
+        Bitmap theBitmap = BitmapFactory.decodeResource(MainActivity.getAppContext().getResources(), noteType.get(noteGet));
+        theBitmap = Bitmap.createScaledBitmap(theBitmap,300,300,false);
+
+        return theBitmap;
     }
 
     public void update(float freq) {
 
-        if(firstNote == true)
-            theKey = Key(aNote);
+        Note aNote;
+
+        int notesTone = NoteEvaluator(freq);
+
+        if (firstNote == true)
+            theKey = new Key(notesTone);
             firstNote = false;
 
-        if (demoLoopCounter == 12) {
-            xVal = 0;
-            demoLoopCounter = 0;
-            staff.measures.clear();
-            drawView.startNew();
-        }
 
-        demoLoopCounter += 1;
+        Bitmap notesImage = noteImageBuilder(notesTone, theKey, rhythmicValue);
 
-        xVal += 130;
-        Note newNote = new Note(0, xVal, "quarter", this);
-        int screenNoteNumber = NoteEvaluator(freq)%12;
+        aNote = new Note(notesTone, notesImage);
 
-        try{
+        //    Bitmap b = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_rest);
+        //    newNote.image = Bitmap.createScaledBitmap(b,300,300, false);
+        //    newNote.y = drawView.drawCanvas.getHeight()/2 - 150;
 
-            int sbn = quarters.get(screenNoteNumber); // Screen Bitmap Number
-            int sns = svals.get(screenNoteNumber); // Screen Note Size
-            int sny = yvals.get(screenNoteNumber); // Screen Note Y-value
+        //} finally {
 
-            Bitmap b = BitmapFactory.decodeResource(this.getResources(), sbn);
-            newNote.image = Bitmap.createScaledBitmap(b,sns,sns, false);
-            newNote.y = sny;
+        //    staff.notes.add(newNote);
 
-        } catch(Exception e) {
+        //    drawView.startNew();
 
-            Bitmap b = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_rest);
-            newNote.image = Bitmap.createScaledBitmap(b,300,300, false);
-            newNote.y = drawView.drawCanvas.getHeight()/2 - 150;
+        //   drawView.draw(drawView.drawCanvas);
 
-        } finally {
-
-            staff.notes.add(newNote);
-
-            drawView.startNew();
-            drawView.draw(drawView.drawCanvas);
-
-        }
+        //}
     }
 
 

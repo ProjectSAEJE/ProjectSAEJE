@@ -1,15 +1,17 @@
 package music.model;
 
+import android.graphics.Bitmap;
+
 public class Note {
 
 
-    public float tonalValue; //represents a piano note value 0-87
-    public int rhythmicValue; //represents the rhythmic value 0-4
+    public int tonalValue; //represents a piano note value 0-87
+    public Bitmap scaledBitmap; //Note's image
 
 
-    public Note(float tonalValue,int rhythmicValue) {
+    public Note(int tonalValue, Bitmap scaledBitmap) {
         this.tonalValue = tonalValue;
-        this.rhythmicValue = rhythmicValue;
+        this.scaledBitmap = scaledBitmap;
     }
 }
 
