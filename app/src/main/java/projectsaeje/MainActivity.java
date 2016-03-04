@@ -84,8 +84,7 @@ public class MainActivity extends Activity {
                 if (!isClicked) {
 
                     recordItem = item;
-                    //set record icon to stop icon
-                    item.setIcon(R.drawable.ic_stop);
+                    item.setIcon(R.drawable.ic_stop);   //set record icon to stop icon
                     item.setTitle(R.string.Pause);
 
                     AudioHandler.captureNotes();

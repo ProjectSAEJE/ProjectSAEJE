@@ -66,11 +66,10 @@ public class AudioHandler {
     public static void captureNotes(){
         Handler mHandler;
 
-
         mHandler = new Handler() {
             @Override
             public synchronized void handleMessage(Message m) {
-                m.getData().getFloat("Freq");
+                update(m.getData().getFloat("Freq"));
             }
         };
 
@@ -92,7 +91,7 @@ public class AudioHandler {
         }
     }
 
-    public int NoteEvaluator(float freq) {
+    public static int NoteEvaluator(float freq) {
         int pianoNoteNumber;
         double logCalcX = Math.log(freq / 440);
         double logCalcY = Math.log(2);
@@ -101,7 +100,7 @@ public class AudioHandler {
         return pianoNoteNumber;
     }
 
-    public Bitmap noteImageBuilder(int tonalValue,Key theKey, int rhythmicValue){
+    public static Bitmap noteImageBuilder(int tonalValue,Key theKey, int rhythmicValue){
 
         ArrayList<Integer> noteType;
         int noteNumber = tonalValue%12;
@@ -143,13 +142,13 @@ public class AudioHandler {
         return theBitmap;
     }
 
-    public void update(float freq) {
+    public static void update(float freq) {
 
         Note aNote;
 
         int notesTone = NoteEvaluator(freq);
 
-        if (firstNote == true)
+        if (firstNote)
             theKey = new Key(notesTone);
             firstNote = false;
 
