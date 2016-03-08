@@ -1,13 +1,15 @@
-package music;
+package music.model;
 
 import android.graphics.Bitmap;
 
 import java.util.ArrayList;
 
-import music.Note;
+import graphics.NoteDisplay;
+import graphics.DrawingView;
+import projectsaeje.MainActivity;
 
 public class Measure {
-    private int number; //starts as 1 not 0 per music composition norms
+    private int measureNumber; //starts as 1 not 0 per music composition norms
     private ArrayList<Note> notes;
     private float xPos;
     private float yPos;
@@ -20,10 +22,10 @@ public class Measure {
 
     public Measure() {}
 
-    public Measure(int number, ArrayList<Note> notes) {
-        this.number = number;
+    public Measure(int measureNumber, ArrayList<Note> notes) {
+        this.measureNumber = measureNumber;
         this.notes = notes;
-        xPos = staffImage.getWidth() * (number - 1);
+        xPos = staffImage.getWidth() * (measureNumber - 1);
         yPos = 0;
     }
 

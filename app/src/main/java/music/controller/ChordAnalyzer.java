@@ -1,7 +1,4 @@
-package music;
-
-import java.util.ArrayList;
-import music.Note;
+package music.controller;
 
 public class ChordAnalyzer {
 

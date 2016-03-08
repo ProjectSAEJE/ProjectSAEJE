@@ -8,9 +8,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 
-import music.Note;
-import projectsaeje.MainActivity;
-
 public class DrawingView extends View {
     //drawing and canvas paint
     private Paint canvasPaint;
@@ -39,14 +36,10 @@ public class DrawingView extends View {
     @Override
     public void onDraw(Canvas canvas) {
         canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
-        for (Note aNote : MainActivity.staff.notes) {
-            canvas.drawBitmap(aNote.image, aNote.x, aNote.y, null);
-        }
     }
 
     public void startNew(){
         drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
         invalidate();
     }
-
 }
