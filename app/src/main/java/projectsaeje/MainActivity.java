@@ -88,6 +88,14 @@ public class MainActivity extends Activity {
                     item.setTitle(R.string.Pause);
 
                     AudioHandler.captureNotes();
+                    /*
+                    ArrayList<Integer> timeSig = new ArrayList<Integer>();
+
+                    timeSig.add(4);
+                    timeSig.add(4);
+
+                    Metronome metronome = new Metronome(120, timeSig, true, this);
+                    */
                     isClicked = true;
                 }
                 else {
