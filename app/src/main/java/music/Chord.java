@@ -1,7 +1,7 @@
 package music;
 
 import java.util.ArrayList;
-import music.Note;
+import music.model.Note;
 
 /**
  * Created by jorgja02 on 2/11/16.
@@ -117,3 +117,5 @@ public class Chord {
     }
 
 }
+
+*/

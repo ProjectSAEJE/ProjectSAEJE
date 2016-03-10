@@ -26,17 +26,19 @@ public class Metronome extends Thread {
     private Timer timer;
     private Activity activity;
     private boolean loaded = false;
-    private int clickNum = 0;
+    private int rpBeatNum = 0;
+    private int rhythmicPrecision = 0;
 
     public Metronome() {}
 
-    public Metronome(int bpm, ArrayList<Integer> timeSignature, Boolean subdivide, Activity activity) {
+    public Metronome(int bpm, ArrayList<Integer> timeSignature, Boolean subdivide, Activity activity, int rhythmicPrecision) {
         this.bpm = bpm;
         this.msPerBeat = (long)(((float)(60) / (float)(bpm)) * 1000);   //milliseconds per beat = (seconds per beat) * 1000
         this.timeSignature = timeSignature;
         this.subdivide = subdivide;
         this.running = false;
         this.activity = activity;
+        this.rhythmicPrecision = rhythmicPrecision;
         sPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
         sPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
             @Override
@@ -53,8 +55,7 @@ public class Metronome extends Thread {
         @Override
         public void run() {
             running = true;
-            clickSound();
-            broadcastBeatOccurrence();
+            signalBeatOccurrence();
         }
     }
 
@@ -62,29 +63,35 @@ public class Metronome extends Thread {
     public void run() {
         this.timer = new Timer();
         //schedule to call TimeKeepers run() method every msPerBeat milliseconds.
-        timer.scheduleAtFixedRate(new TimeKeeper(), 0, msPerBeat);
+
+        float rp_vals_per_quarter_note =  ((float) rhythmicPrecision) / ((float) 4);
+        timer.scheduleAtFixedRate(new TimeKeeper(), 0, (long) (msPerBeat / rp_vals_per_quarter_note));
+
     }
 
     public void setRunningFalse() {
         running = false;
     }
 
-    public int getClickNum() {
-        return clickNum;
+    public int getRpBeatNum() {
+        return rpBeatNum;
     }
 
+    /* //Wasn't working...
     private void clickSound() {
         //System.out.println("clickSound() called");
         this.clickNum += 1;
-        /*
+
         if (loaded) {
             sPool.play(this.clickSoundID, (float) .5, (float) .5, 1, 0, (float) 1.0);
             //System.out.println("*CLICK* " + "#" + clickNum);
         }
-        */
-    }
 
-    private void broadcastBeatOccurrence() {
-        //broadcast that a beat has happened to the application
+    }
+    */
+
+    private void signalBeatOccurrence() {
+        //signal that a beat has happened to the application
+        this.rpBeatNum += 1;
     }
 }

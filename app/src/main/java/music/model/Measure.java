@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 
 import java.util.ArrayList;
 
-import graphics.NoteDisplay;
+import graphics.DisplayedNote;
 import graphics.DrawingView;
 import projectsaeje.MainActivity;
 

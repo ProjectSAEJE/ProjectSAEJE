@@ -60,7 +60,6 @@ public class AudioHandler {
         yvals.add(middle - 170);
         yvals.add(middle - 225);
         yvals.add(middle - 320);
-
     }
 
     public static void captureNotes(){
@@ -100,7 +99,7 @@ public class AudioHandler {
         return pianoNoteNumber;
     }
 
-    public static Bitmap noteImageBuilder(int tonalValue,Key theKey, int rhythmicValue){
+    public static Bitmap noteImageBuilder(int tonalValue, Key theKey, int rhythmicValue){
 
         ArrayList<Integer> noteType;
         int noteNumber = tonalValue%12;
