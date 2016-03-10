@@ -52,10 +52,10 @@ public class CaptureThread extends Thread {
         recorder.startRecording();
         metronome.start();
 
-        oldBeat = metronome.getClickNum();
+        oldBeat = metronome.getRpBeatNum();
         while(isRunning) {
 
-            int newBeat = metronome.getClickNum();
+            int newBeat = metronome.getRpBeatNum();
             System.out.println("oldBeat = " + oldBeat + ", newBeat = " + newBeat);
             if (newBeat != oldBeat) { //a new beat has taken place.
                 playAudioTrack();

@@ -13,6 +13,7 @@ import audio.CaptureThread;
 import music.model.Key;
 import music.model.Note;
 import projectsaeje.MainActivity;
+import music.controller.RhythmicInterpreter;
 
 /**
  * Created by woodev01 on 2/28/16.
@@ -34,6 +35,7 @@ public class AudioHandler {
     public static ArrayList<Integer> yvals = new ArrayList<>();
 
     public static CaptureThread mCapture;
+    private static RhythmicInterpreter rhythm_interp;
 
     public AudioHandler (){
 
