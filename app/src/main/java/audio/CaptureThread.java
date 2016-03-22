@@ -1,5 +1,6 @@
 package audio;
 
+import android.graphics.Paint;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioRecord;
@@ -26,8 +27,13 @@ public class CaptureThread extends Thread {
     private int oldBeat = 0;
     private Metronome metronome;
 
+    public CaptureThread(Handler handler) {
+        this.mHandler = handler;
+    }
+
+
     public CaptureThread(Handler handler, Metronome metronome) {
-        mHandler = handler;
+        this.mHandler = handler;
         this.metronome = metronome;
     }
 

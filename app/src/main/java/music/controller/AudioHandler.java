@@ -153,10 +153,15 @@ public class AudioHandler {
             theKey = new Key(notesTone);
             firstNote = false;
 
+        //This section is semantically inadequate, but serves as a temporary debug: We would not be building a new note every time a tone is passed to the RhythmicInterpretter.
+        //Also, the "5.33" type values of a dotted eighth note are lost in the conversion from float to integer.
+        rhythm_interp.update(notesTone);
+        int rhythmicValue = (int) (rhythm_interp.getRhythmicValueOfEndedNote());
+        //
 
         Bitmap notesImage = noteImageBuilder(notesTone, theKey, rhythmicValue);
 
-        aNote = new Note(notesTone, notesImage);
+        aNote = new Note(notesTone, notesImage, rhythmicValue);
 
         //    Bitmap b = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_rest);
         //    newNote.image = Bitmap.createScaledBitmap(b,300,300, false);

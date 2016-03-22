@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
 
     private static Context context;
 
-
+    public static Staff staff;
 
     private Boolean isClicked = false;
     public static DrawingView drawView;
@@ -36,6 +36,8 @@ public class MainActivity extends Activity {
 
         MainActivity.context = getApplicationContext();
         setContentView(R.layout.activity_main);
+
+        this.staff = new Staff();
 
         drawView = (DrawingView)findViewById(R.id.drawing);
 
