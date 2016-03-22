@@ -14,7 +14,7 @@ public class RhythmicInterpreter {
         this.rhythmic_precision = rhythmic_precision;
     }
 
-    public update(int new_tone) {
+    public void update(int new_tone) {
         //If the tone is the same tone as the previous tone, the note is longer and we simply increment rp_segments
         if (new_tone == previously_updated_tone) {
             rp_segments_for_current_tone++;

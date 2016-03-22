@@ -5,6 +5,7 @@ import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
 import java.util.ArrayList;
 
+import music.model.Measure;
 import music.model.Staff;
 import music.model.Note;
 import projectsaeje.MainActivity;
@@ -22,8 +23,10 @@ public class DisplayedStaff extends Drawable {
 
         ArrayList<DisplayedNote> onScreenNotes = new ArrayList<>();
 
-        for(Note aNote : boStaff.measures)
-            onScreenNotes.add(new DisplayedNote(aNote, aBitmap, x, y)); //Converts the Note class to a Displayed Note with it's bitmap, x coor and y coor
+        for (Measure aMeasure : boStaff.measures){
+            for(Note aNote : aMeasure.notes)
+                onScreenNotes.add(new DisplayedNote(aNote, aBitmap, x, y)); //Converts the Note class to a Displayed Note with it's bitmap, x coor and y coor
+        }
 
         for(DisplayedNote aDNote : onScreenNotes)
             aDNote.displayNote(canvas);
