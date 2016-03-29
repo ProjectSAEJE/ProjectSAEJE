@@ -122,11 +122,8 @@ public class MainActivity extends Activity {
                 return true;
 
             case R.id.clear:
-                //Stop recording
-                AudioHandler.stopCapture();
-                recordItem.setTitle(R.string.Record);
-                recordItem.setIcon(R.drawable.ic_play_arrow);
                 isClicked = false;
+                //clear the staff
                 drawView.startNew();
 
                 return true;
