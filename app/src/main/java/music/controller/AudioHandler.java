@@ -14,9 +14,6 @@ import music.model.Key;
 import music.model.Note;
 import projectsaeje.MainActivity;
 
-/**
- * Created by woodev01 on 2/28/16.
- */
 
 public class AudioHandler {
 
@@ -145,6 +142,7 @@ public class AudioHandler {
     public static void update(float freq) {
 
         Note aNote;
+        int rhythmicValue = 4;
 
         int notesTone = NoteEvaluator(freq);
 

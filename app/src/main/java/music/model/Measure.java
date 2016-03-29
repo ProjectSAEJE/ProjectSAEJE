@@ -4,13 +4,9 @@ import android.graphics.Bitmap;
 
 import java.util.ArrayList;
 
-import graphics.NoteDisplay;
-import graphics.DrawingView;
-import projectsaeje.MainActivity;
-
 public class Measure {
-    private int measureNumber; //starts as 1 not 0 per music composition norms
-    private ArrayList<Note> notes;
+    public int measureNumber; //starts as 1 not 0 per music composition norms
+    public ArrayList<Note> notes;
     private float xPos;
     private float yPos;
     private Bitmap staffImage; //Rework the staff object so that the staff image is actually a bitmap object, not simply the background specified in xml?

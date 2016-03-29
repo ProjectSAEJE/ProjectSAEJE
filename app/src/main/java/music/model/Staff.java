@@ -19,7 +19,7 @@ public class Staff {
 
     public Staff() {}
 
-    public Staff(ArrayList<Measure> measures){
+    public Staff(ArrayList<Measure> measures) {
         this.measures = measures;
     }
 
