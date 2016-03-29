@@ -2,6 +2,7 @@ package music.model;
 
 import java.util.ArrayList;
 
+/*
 public class Chord {
 
     public Note root;

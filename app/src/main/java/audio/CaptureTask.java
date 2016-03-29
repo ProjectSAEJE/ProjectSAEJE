@@ -26,6 +26,7 @@ public class CaptureTask extends AsyncTask<Float, Float, Void> {
                 sRate, AudioFormat.CHANNEL_IN_MONO,
                 AudioFormat.ENCODING_PCM_16BIT, bufferSize);
 
+
         //AudioTrack track = new AudioTrack(AudioManager.STREAM_MUSIC, sRate, AudioFormat.CHANNEL_OUT_MONO, AudioFormat.ENCODING_PCM_16BIT, bufferSize, AudioTrack.MODE_STREAM);
 
         // Create storage container for read data.

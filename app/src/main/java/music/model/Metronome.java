@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Created by austinnash on 2/11/16.
+ */
 
 public class Metronome extends Thread {
 

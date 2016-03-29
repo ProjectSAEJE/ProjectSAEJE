@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
 
     private static Context context;
 
-
+    public static Staff staff;
 
     private Boolean isClicked = false;
     public static DrawingView drawView;
@@ -36,6 +36,8 @@ public class MainActivity extends Activity {
 
         MainActivity.context = getApplicationContext();
         setContentView(R.layout.activity_main);
+
+        this.staff = new Staff();
 
         drawView = (DrawingView)findViewById(R.id.drawing);
 
@@ -88,6 +90,14 @@ public class MainActivity extends Activity {
                     item.setTitle(R.string.Pause);
 
                     AudioHandler.captureNotes();
+                    /*
+                    ArrayList<Integer> timeSig = new ArrayList<Integer>();
+
+                    timeSig.add(4);
+                    timeSig.add(4);
+
+                    Metronome metronome = new Metronome(120, timeSig, true, this);
+                    */
                     isClicked = true;
                 }
                 else {

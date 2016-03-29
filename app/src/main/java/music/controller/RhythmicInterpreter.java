@@ -7,7 +7,6 @@ public class RhythmicInterpreter {
     private int rhythmic_precision;
 
 
-
     public RhythmicInterpreter() {}
 
     public RhythmicInterpreter(int rhythmic_precision) {
@@ -28,8 +27,8 @@ public class RhythmicInterpreter {
 
     //returns 16 for 16th note, 5.33 for dotted-eighth note,  4 for quarter note, etc.
 
-    public float getRPSegments() {
-        return ((float) rp_segments_for_current_tone);
+    public float getRhythmicValueOfEndedNote() {
+        return ((float) rhythmic_precision) / ((float) rp_segments_for_current_tone);
     }
 
 }
