@@ -13,7 +13,6 @@ import audio.CaptureThread;
 import music.model.Key;
 import music.model.Note;
 import projectsaeje.MainActivity;
-import music.controller.RhythmicInterpreter;
 
 /**
  * Created by woodev01 on 2/28/16.
@@ -35,7 +34,13 @@ public class AudioHandler {
     public static ArrayList<Integer> yvals = new ArrayList<>();
 
     public static CaptureThread mCapture;
-    private static RhythmicInterpreter rhythm_interp;
+
+    //Variables used for rhythmic interpretation
+    private int previously_updated_tone;
+    private int rp_segments_for_current_tone;
+    private int rhythmic_precision;
+    private int start_time;
+    private int duration_of_note; //delta t
 
     public AudioHandler (){
 
@@ -143,6 +148,29 @@ public class AudioHandler {
         return theBitmap;
     }
 
+    private int updateRhythm(int new_tone) {
+        //If the tone is the same tone as the previous tone, the note is longer and we simply increment rp_segments
+        if (new_tone == previously_updated_tone) {
+            duration_of_note += time_since_last_update;
+        }
+
+        //If the tone is not the same, we change the previously updated tone to the new tone and set rp_segments to 1
+        else if (new_tone != previously_updated_tone) {
+            previously_updated_tone = new_tone;
+            start_time = getTime();
+        }
+    }
+
+    private int numRpSegmentsIn(int msDuration) {
+        //calculate based on msPerBeat and rhythmic precision
+    }
+
+    //returns 16 for 16th note, 5.33 for dotted-eighth note,  4 for quarter note, etc.
+    private float getRhythmicValueOfEndedNoteWithDuration(int msDuration) {
+        rp_segments_for_current_tone = numRpSegmentsIn(msDuration);
+        return ((float) rhythmic_precision) / ((float) rp_segments_for_current_tone);
+    }
+
     public static void update(float freq) {
 
         Note aNote;
@@ -155,9 +183,8 @@ public class AudioHandler {
 
         //This section is semantically inadequate, but serves as a temporary debug: We would not be building a new note every time a tone is passed to the RhythmicInterpretter.
         //Also, the "5.33" type values of a dotted eighth note are lost in the conversion from float to integer.
-        rhythm_interp.update(notesTone);
+        rhythmic_value = updateRhythm(notesTone);
         int rhythmicValue = (int) (rhythm_interp.getRhythmicValueOfEndedNote());
-        //
 
         Bitmap notesImage = noteImageBuilder(notesTone, theKey, rhythmicValue);
 
