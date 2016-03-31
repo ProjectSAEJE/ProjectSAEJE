@@ -2,6 +2,7 @@ package music.controller;
 
 import java.util.*;
 import music.model.*;
+import music.controller.*;
 
 public class ChordBuilder {
 
