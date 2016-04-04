@@ -2,28 +2,17 @@ package projectsaeje;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.os.Handler;
-import android.os.Message;
-
-import android.content.res.Resources;
-import android.content.Context;
+import android.content.Intent;
 
 import com.example.woodev01.projectsaeje.R;
 
-import java.util.ArrayList;
-
-import audio.*;
 import graphics.*;
-import music.controller.*;
 import music.model.*;
 
 public class MainActivity extends Activity {
-
-    private static Context context;
 
     public static Staff staff;
 
@@ -34,20 +23,13 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        MainActivity.context = getApplicationContext();
         setContentView(R.layout.activity_main);
 
         this.staff = new Staff();
 
         drawView = (DrawingView)findViewById(R.id.drawing);
-
-        AudioHandler.populateArrays();
-
     }
 
-    public static Context getAppContext() {
-        return MainActivity.context;
-    }
 
     @Override
     protected void onDestroy() {
@@ -83,31 +65,12 @@ public class MainActivity extends Activity {
 
         switch (item.getItemId()) {
             case R.id.record:
-                if (!isClicked) {
 
-                    recordItem = item;
-                    item.setIcon(R.drawable.ic_stop);   //set record icon to stop icon
-                    item.setTitle(R.string.Pause);
+                item.setIcon(R.drawable.ic_stop);   //set record icon to stop icon
+                item.setTitle(R.string.Pause);
 
-                    AudioHandler.captureNotes();
-                    /*
-                    ArrayList<Integer> timeSig = new ArrayList<Integer>();
-
-                    timeSig.add(4);
-                    timeSig.add(4);
-
-                    Metronome metronome = new Metronome(120, timeSig, true, this);
-                    */
-                    isClicked = true;
-                }
-                else {
-
-                    //changes stop icon back to play icon on the record button
-                    item.setIcon(R.drawable.ic_play_arrow);
-                    item.setTitle(R.string.Resume);
-                    AudioHandler.stopCapture();
-                    isClicked = false;
-                }
+                Intent intent = new Intent(this, AudioHandler.class);
+                startActivity(intent);
 
                 return true;
 

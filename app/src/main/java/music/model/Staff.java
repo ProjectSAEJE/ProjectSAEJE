@@ -2,6 +2,9 @@ package music.model;
 
 import android.app.Activity;
 
+import android.os.Parcelable;
+import android.os.Parcel;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -9,7 +12,7 @@ import java.util.ArrayList;
 import music.model.*;
 
 
-public class Staff {
+public class Staff{
 
     private String fileName;
     private ArrayList<Measure> currentMeasures;
@@ -49,13 +52,4 @@ public class Staff {
     public void addMeasure(Measure newMeasure) {
         measures.add(newMeasure);
     }
-
-//    public void save(){
-//        SaveDialogBuilder builder = new SaveDialogBuilder(this.activity);
-//        fileName = builder.showDialogAndReturnFileName();
-//
-//        for (Note aNote: this.notes) {
-//            aNote.save(fileName);
-//        }
-//    }
 }

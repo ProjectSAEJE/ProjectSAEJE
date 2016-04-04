@@ -1,35 +1,33 @@
-package music.controller;
+package projectsaeje;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.MenuItem;
+
+import android.content.Intent;
 
 import com.example.woodev01.projectsaeje.R;
 
 import java.util.ArrayList;
 
 import audio.CaptureThread;
-import music.model.Key;
-import music.model.Note;
-import projectsaeje.MainActivity;
+import graphics.DrawingView;
 import music.controller.RhythmicInterpreter;
+import music.model.*;
 
 
-public class AudioHandler {
+public class AudioHandler extends Activity {
 
     private static boolean firstNote = true;
 
-    private static Key theKey = null;
+    public static Key theKey = null;
 
-    public static ArrayList<Integer> wholes = new ArrayList<>();
-    public static ArrayList<Integer> halves = new ArrayList<>();
-    public static ArrayList<Integer> quarters = new ArrayList<>();
-    public static ArrayList<Integer> eighths = new ArrayList<>();
-    public static ArrayList<Integer> sixteenths = new ArrayList<>();
-
-    public static ArrayList<Integer> svals = new ArrayList<>();
-    public static ArrayList<Integer> yvals = new ArrayList<>();
+    public static ArrayList<Integer> bitmaps;
+    public static Staff tempStaff;
 
     public static CaptureThread mCapture;
     private static RhythmicInterpreter rhythm_interp;
@@ -38,30 +36,19 @@ public class AudioHandler {
 
     }
 
-    public static void populateArrays(){
-        int middle = MainActivity.drawView.drawCanvas.getHeight()/2;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-        quarters.add(R.drawable.ic_quarter_note);
-        quarters.add(R.drawable.ic_quarter_note_sharp_space);
-        quarters.add(R.drawable.ic_quarter_note_sharp_line);
+        setContentView(R.layout.activity_main);
+        Intent intent = getIntent();
+        tempStaff = MainActivity.staff;
 
-        svals.add(300);
+        populateArrays();
 
-        yvals.add(middle - 365);  //FIX THIS MESSY, GROSS CODE!!!
-        yvals.add(middle - 415);
-        yvals.add(middle - 435);
-        yvals.add(middle + 155);
-        yvals.add(middle + 62);
-        yvals.add(middle + 15);
-        yvals.add(middle - 30);
-        yvals.add(middle - 45);
-        yvals.add(middle - 125);
-        yvals.add(middle - 170);
-        yvals.add(middle - 225);
-        yvals.add(middle - 320);
     }
 
-    public static void captureNotes(){
+    public void captureNotes(){
         Handler mHandler;
 
         mHandler = new Handler() {
@@ -89,7 +76,15 @@ public class AudioHandler {
         }
     }
 
-    public static int NoteEvaluator(float freq) {
+    private static void populateArrays() {
+        bitmaps.add(R.drawable.sixteenth_note_single);
+        bitmaps.add(R.drawable.eighth_note_single);
+        bitmaps.add(R.drawable.quarter_note);
+        bitmaps.add(R.drawable.half_note);
+        bitmaps.add(R.drawable.whole_note);
+    }
+
+    public int NoteEvaluator(float freq) {
         int pianoNoteNumber;
         double logCalcX = Math.log(freq / 440);
         double logCalcY = Math.log(2);
@@ -98,24 +93,24 @@ public class AudioHandler {
         return pianoNoteNumber;
     }
 
-    public static Bitmap noteImageBuilder(int tonalValue, Key theKey, int rhythmicValue){
+    public Bitmap noteImageBuilder(int tonalValue, Key theKey, int rhythmicValue){
 
-        ArrayList<Integer> noteType;
+        int noteType;
         int noteNumber = tonalValue%12;
 
         switch (rhythmicValue) {
             case 0:
-                noteType = wholes;
+                noteType = bitmaps.get(0); //Sixteenths
             case 1:
-                noteType = halves;
-            case 2:
-                noteType = quarters;
+                noteType = bitmaps.get(1); //Eighths
             case 3:
-                noteType = eighths;
-            case 4:
-                noteType = sixteenths;
+                noteType = bitmaps.get(3); //Quarters
+            case 7:
+                noteType = bitmaps.get(7); //Halves
+            case 15:
+                noteType = bitmaps.get(15); //Wholes
             default:
-                noteType = quarters;
+                noteType = bitmaps.get(3); //default quarters
         }
 
         String noteName = theKey.key.get(noteNumber);
@@ -133,14 +128,13 @@ public class AudioHandler {
         }
 
 
-
-        Bitmap theBitmap = BitmapFactory.decodeResource(MainActivity.getAppContext().getResources(), noteType.get(noteGet));
+        Bitmap theBitmap = BitmapFactory.decodeResource(this.getResources(), noteType);
         theBitmap = Bitmap.createScaledBitmap(theBitmap,300,300,false);
 
         return theBitmap;
     }
 
-    public static void update(float freq) {
+    public void update(float freq) {
 
         Note aNote;
         int rhythmicValue = 4;
@@ -161,20 +155,37 @@ public class AudioHandler {
 
         aNote = new Note(notesTone, notesImage, rhythmicValue);
 
-        //    Bitmap b = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_quarter_rest);
-        //    newNote.image = Bitmap.createScaledBitmap(b,300,300, false);
-        //    newNote.y = drawView.drawCanvas.getHeight()/2 - 150;
-
-        //} finally {
-
-        //    staff.notes.add(newNote);
-
-        //    drawView.startNew();
-
-        //   drawView.draw(drawView.drawCanvas);
-
-        //}
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
 
+        switch (item.getItemId()) {
+            case R.id.record:
+
+                //changes stop icon back to play icon on the record button
+                item.setIcon(R.drawable.ic_play_arrow);
+                item.setTitle(R.string.Resume);
+                AudioHandler.stopCapture();
+
+                return true;
+
+            case R.id.open:
+
+                return true;
+
+            case R.id.save:
+
+                return true;
+
+            case R.id.clear:
+                //clear the staff
+
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }
