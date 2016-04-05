@@ -11,8 +11,7 @@ import android.graphics.PorterDuff;
 
 import java.util.ArrayList;
 
-import music.model.Note;
-import music.model.Staff;
+import music.model.*;
 import projectsaeje.MainActivity;
 
 public class DrawingView extends View {
@@ -22,6 +21,8 @@ public class DrawingView extends View {
     public Canvas drawCanvas;
     //canvas bitmap
     private Bitmap canvasBitmap;
+
+    private int x = 50;
 
     public DrawingView(Context context, AttributeSet attrs){
         super(context, attrs);
@@ -42,11 +43,29 @@ public class DrawingView extends View {
     @Override
     public void onDraw(Canvas canvas) {
         canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
+        MainActivity.staff.setCurrentMeasures();
+        for(Measure aMeasure: MainActivity.staff.getCurrentMeasures()) {
+            for(Note aNote: aMeasure.notes) {
+                canvas.drawBitmap(aNote.scaledBitmap, x, getNoteY(aNote.tonalValue), null);
+                x += aNote.rhythmicValue;
+            }
+        };
     }
 
     public void startNew(){
         drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
         invalidate();
+    }
+
+    public void staffUpdatedDrawPlease() {
+        invalidate();
+    }
+
+    private int getNoteY(int tV) {
+
+        int y = (tV * 10);
+
+        return y;
     }
 
     /*public Staff measureChooser(Staff theStaff, int currentMeasure, int swipe) {

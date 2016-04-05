@@ -1,4 +1,4 @@
-package music;
+package music.model;
 
 import android.app.Activity;
 import android.media.AudioManager;
@@ -50,7 +50,7 @@ public class Metronome extends Thread {
                 loaded = true;
             }
         });
-        clickSoundID = sPool.load(activity.getApplicationContext(), R.raw.tamb_down_441, 1);
+        //clickSoundID = sPool.load(activity.getApplicationContext(), R.raw.tamb_down_441, 1);
     }
 
     public class Signal_RP_Occurrence extends TimerTask {

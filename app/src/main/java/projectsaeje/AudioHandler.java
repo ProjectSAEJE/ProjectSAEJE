@@ -14,8 +14,9 @@ import com.example.woodev01.projectsaeje.R;
 
 import java.util.ArrayList;
 
+import graphics.DrawingView;
 import audio.CaptureThread;
-import music.Metronome;
+import music.model.Metronome;
 import music.model.Key;
 import music.model.Note;
 
@@ -28,7 +29,6 @@ public class AudioHandler extends Activity {
 
     public static Key theKey = null;
 
-    public static Staff tempStaff;
     public static Measure tempMeasure;
 
     public static CaptureThread mCapture;
@@ -50,7 +50,6 @@ public class AudioHandler extends Activity {
 
         setContentView(R.layout.activity_main);
 
-        tempStaff = MainActivity.staff;
         tempMeasure = new Measure();
         tempMeasure.setBeats(4);
         tempMeasure.setNumBeats(4);
@@ -149,7 +148,7 @@ public class AudioHandler extends Activity {
     public void update(float freq) {
 
         Note aNote;
-        int rhythmicValue = 4;
+        int rhythmicValue = 3;
         Bitmap notesImage = null;
         Bitmap secondaryNotesImage = null;
         int valueTilMeasureFull = tempMeasure.valueTilMeasureFull();
@@ -160,7 +159,7 @@ public class AudioHandler extends Activity {
             theKey = new Key(notesTone);
             firstNote = false;
 
-        rhythmicValue = updateRhythm(notesTone);
+        //rhythmicValue = updateRhythm(notesTone);
 
         //If a note has recently ended, rhythmic value will be nonzero.
         //In other words, only construct the recently ended note if update has been called with a new tonal value.
@@ -177,17 +176,18 @@ public class AudioHandler extends Activity {
             aNote = new Note(notesTone, notesImage, valueTilMeasureFull);
 
             tempMeasure.addNote(aNote);
-            tempStaff.addMeasure(tempMeasure);
+            MainActivity.staff.addMeasure(tempMeasure);
             tempMeasure.clear();
 
             aNote = new Note(notesTone, secondaryNotesImage, rhythmicValue - valueTilMeasureFull);
             tempMeasure.addNote(aNote);
 
         } else {
-
             aNote = new Note(notesTone, notesImage, rhythmicValue);
             tempMeasure.addNote(aNote);
         }
+
+        MainActivity.drawView.staffUpdatedDrawPlease();
     }
 
     @Override
@@ -201,8 +201,6 @@ public class AudioHandler extends Activity {
                 item.setIcon(R.drawable.ic_play_arrow);
                 item.setTitle(R.string.Resume);
                 stopCapture();
-
-                MainActivity.staff = tempStaff;
 
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);

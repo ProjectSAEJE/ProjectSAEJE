@@ -14,7 +14,7 @@ public class Images {
         populateNoteArraysArrays();
     }
 
-    private static void populateNoteArraysArrays() {                          //Rhythmic Value:
+    private static void populateNoteArraysArrays() {                   //Rhythmic Value:
         noteImages.add(R.drawable.sixteenth_note_single);              //1
         noteImages.add(R.drawable.eighth_note_single);                 //2
         noteImages.add(R.drawable.eighth_note_dotted_single_line);     //3

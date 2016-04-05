@@ -14,9 +14,8 @@ import music.model.*;
 
 public class MainActivity extends Activity {
 
-    public static Staff staff;
+    public static Staff staff = new Staff();
 
-    private Boolean isClicked = false;
     public static DrawingView drawView;
 
     @Override
@@ -24,8 +23,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-
-        //this.staff = new Staff();
 
         drawView = (DrawingView)findViewById(R.id.drawing);
     }
@@ -57,8 +54,6 @@ public class MainActivity extends Activity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    private MenuItem recordItem;
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
@@ -85,7 +80,6 @@ public class MainActivity extends Activity {
                 return true;
 
             case R.id.clear:
-                isClicked = false;
                 //clear the staff
                 drawView.startNew();
 

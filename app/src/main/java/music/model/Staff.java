@@ -32,17 +32,24 @@ public class Staff{
     }
 
     public void moveBackCurrentMeasures() {
-        this.currentMeasures.remove(-1);
+        this.currentMeasures.remove(1);
         this.currentMeasures.add(0, this.measures.get(-2));
     }
 
-    public void setCurrentMeasures() {
+    public void makeStartingCurrentMeasures() {
         this.currentMeasures = this.measures;
 
         ArrayList<Note> blankArray = new ArrayList<>();
-        Measure newMeasure = new Measure(2, blankArray);
+        Measure newMeasure = new Measure(blankArray, 4, 4);
 
         this.currentMeasures.set(1, newMeasure);
+    }
+
+    public void setCurrentMeasures() {
+        ArrayList<Measure> mostRecentMeasures = new ArrayList<>();
+        mostRecentMeasures.add(0, this.measures.get(-2));
+        mostRecentMeasures.add(1, this.measures.get(-1));
+        this.currentMeasures = mostRecentMeasures;
     }
 
     public ArrayList<Measure> getCurrentMeasures() {
