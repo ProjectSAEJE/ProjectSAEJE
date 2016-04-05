@@ -26,7 +26,7 @@ public class Metronome extends Thread {
     private Timer timer;
     private Activity activity;
     private boolean loaded = false;
-    private int rpBeatNum = 0;
+    private int rp_precision_counter = 0;
     private int rhythmicPrecision = 0;
 
     public Metronome() {}
@@ -50,31 +50,34 @@ public class Metronome extends Thread {
         clickSoundID = sPool.load(activity.getApplicationContext(), R.raw.tamb_down_441, 1);
     }
 
-    public class TimeKeeper extends TimerTask {
+    public class Signal_RP_Occurrence extends TimerTask {
 
         @Override
         public void run() {
             running = true;
-            signalBeatOccurrence();
+            ++rp_precision_counter;
         }
+
     }
 
     @Override
     public void run() {
         this.timer = new Timer();
-        //schedule to call TimeKeepers run() method every msPerBeat milliseconds.
+        //schedule to call Signal_RP_Occerence "timer task" to run its run() method every ms_per_rp_precision milliseconds.
 
-        float rp_vals_per_quarter_note =  ((float) rhythmicPrecision) / ((float) 4);
-        timer.scheduleAtFixedRate(new TimeKeeper(), 0, (long) (msPerBeat / rp_vals_per_quarter_note));
+        float rp_vals_per_quarter_note = ((float) rhythmicPrecision) / ((float) 4);
+        long ms_per_rp_precision = (long) (msPerBeat / rp_vals_per_quarter_note);
 
+        //schedule the TimeKeeper task to run every 16th precision
+        timer.scheduleAtFixedRate(new Signal_RP_Occurrence(), 0, ms_per_rp_precision);
     }
 
     public void setRunningFalse() {
         running = false;
     }
 
-    public int getRpBeatNum() {
-        return rpBeatNum;
+    public int get_rp_precision_counter() {
+        return rp_precision_counter;
     }
 
     /* //Wasn't working...
@@ -90,8 +93,4 @@ public class Metronome extends Thread {
     }
     */
 
-    private void signalBeatOccurrence() {
-        //signal that a beat has happened to the application
-        this.rpBeatNum += 1;
-    }
 }
