@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
         MainActivity.context = getApplicationContext();
         setContentView(R.layout.activity_main);
 
-        this.staff = new Staff();
+        //this.staff = new Staff();
 
         drawView = (DrawingView)findViewById(R.id.drawing);
 
