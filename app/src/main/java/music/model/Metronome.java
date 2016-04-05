@@ -27,18 +27,18 @@ public class Metronome extends Thread {
     private Activity activity;
     private boolean loaded = false;
     private int rp_precision_counter = 0;
-    private int rhythmicPrecision = 0;
+    private int rhythmic_preciseness = 0;
 
     public Metronome() {}
 
-    public Metronome(int bpm, ArrayList<Integer> timeSignature, Boolean subdivide, Activity activity, int rhythmicPrecision) {
+    public Metronome(int bpm, ArrayList<Integer> timeSignature, Boolean subdivide, Activity activity, int rhythmic_preciseness) {
         this.bpm = bpm;
         this.msPerBeat = (long)(((float)(60) / (float)(bpm)) * 1000);   //milliseconds per beat = (seconds per beat) * 1000
         this.timeSignature = timeSignature;
         this.subdivide = subdivide;
         this.running = false;
         this.activity = activity;
-        this.rhythmicPrecision = rhythmicPrecision;
+        this.rhythmic_preciseness = rhythmic_preciseness;
         sPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
         sPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
             @Override
@@ -65,7 +65,7 @@ public class Metronome extends Thread {
         this.timer = new Timer();
         //schedule to call Signal_RP_Occerence "timer task" to run its run() method every ms_per_rp_precision milliseconds.
 
-        float rp_vals_per_quarter_note = ((float) rhythmicPrecision) / ((float) 4);
+        float rp_vals_per_quarter_note = ((float) rhythmic_preciseness) / ((float) 4);
         long ms_per_rp_precision = (long) (msPerBeat / rp_vals_per_quarter_note);
 
         //schedule the TimeKeeper task to run every 16th precision
