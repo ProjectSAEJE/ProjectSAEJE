@@ -49,22 +49,7 @@ public class DrawingView extends View {
         invalidate();
     }
 
-    public void displayStaff(Canvas canvas){
-        Staff s = MainActivity.staff;
-        int currentMeasure = (s.measures.get(s.measures.size()-1)).measureNumber;
-        Staff boStaff = measureChooser(s, currentMeasure, 0);
-
-        ArrayList<DisplayedNote> onScreenNotes = new ArrayList<>();
-
-        for(Note aNote : boStaff.measures)
-            onScreenNotes.add(new DisplayedNote(aNote, aBitmap, x, y)); //Converts the Note class to a Displayed Note with it's bitmap, x coor and y coor
-
-        for(DisplayedNote aDNote : onScreenNotes)
-            aDNote.displayNote(canvas);
-
-    };
-
-    public Staff measureChooser(Staff theStaff, int currentMeasure, int swipe) {
+    /*public Staff measureChooser(Staff theStaff, int currentMeasure, int swipe) {
         Staff displayedTwo = new Staff();
 
         if (swipe == 0)
@@ -73,5 +58,5 @@ public class DrawingView extends View {
 
 
         return displayedTwo;
-    }
+    }   */
 }

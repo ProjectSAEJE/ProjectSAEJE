@@ -155,8 +155,6 @@ public class AudioHandler extends Activity {
         Bitmap notesImage = noteImageBuilder(notesTone, theKey, rhythmicValue);
 
         aNote = new Note(notesTone, notesImage, rhythmicValue);
-
-
     }
 
     @Override
