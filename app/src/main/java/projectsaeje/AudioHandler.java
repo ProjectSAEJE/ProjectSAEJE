@@ -187,7 +187,8 @@ public class AudioHandler extends Activity {
             tempMeasure.addNote(aNote);
         }
 
-        MainActivity.drawView.staffUpdatedDrawPlease();
+        MainActivity.drawView.startNew();
+        MainActivity.drawView.draw(MainActivity.drawView.drawCanvas);
     }
 
     @Override
