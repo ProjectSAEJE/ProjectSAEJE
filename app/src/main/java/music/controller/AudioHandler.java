@@ -10,6 +10,7 @@ import com.example.woodev01.projectsaeje.R;
 import java.util.ArrayList;
 
 import audio.CaptureThread;
+import music.Metronome;
 import music.model.Key;
 import music.model.Note;
 import projectsaeje.MainActivity;
@@ -34,10 +35,10 @@ public class AudioHandler {
 
     //Variables used for rhythmic interpretation
     private int previously_updated_tone;
-    private int rp_segments_for_current_tone;
-    private int rhythmic_precision;
-    private int start_time;
-    private int duration_of_note; //delta t
+    private int rhythmic_preciseness;
+    private int starting_precision_of_note;
+    private int length_in_sixteenths_of_ended_note;
+    private Metronome metronome;
 
     public AudioHandler (){
 
@@ -79,6 +80,7 @@ public class AudioHandler {
         mCapture = new CaptureThread(mHandler);
         mCapture.setRunning(true);
         mCapture.start();
+        metronome.start();
     }
 
     public static void stopCapture(){
@@ -146,28 +148,24 @@ public class AudioHandler {
     }
 
     private int updateRhythm(int new_tone) {
-        //If the tone is the same tone as the previous tone, the note is longer and we simply return 0
+        //If the tone is the same tone as the previous tone, the note is still being sung and we simply return 0
         if (new_tone == previously_updated_tone) {
-            return 0;  //return 0 to indicate that the note duration is still being continued/determined
+            return 0;  //return 0 to indicate that the note length is still being continued/determined
         }
 
-        //If the tone is not the same, we change the previously updated tone to the new tone, calculate the duration of the note, and reset the start time
-        else if (new_tone != previously_updated_tone) {
+        //If the tone is not the same, we change the previously updated tone to the new tone, calculate the length of the note, and reset the starting precision
+        else {
             previously_updated_tone = new_tone;
-            duration_of_note = getTime() - start_time; //The note has just ended, so the duration of the note is the time that has passed since the time it began
-            start_time = getTime(); //reset start time for the newest note
-            return duration_of_note; //then return the duration of the note in milliseconds
+            //The note has just ended, so the length of the note is the number of precisions that have passed since the one at which it began
+            length_in_sixteenths_of_ended_note = metronome.get_rp_precision_counter() - starting_precision_of_note;
+            //reset start time for the newest note
+            return length_in_sixteenths_of_ended_note; //then return the length of the note in sixteenth precisions
         }
-    }
-
-    private int numRpSegmentsIn(int msDuration) {
-        //calculate based on msPerBeat and rhythmic precision
     }
 
     //returns 16 for 16th note, 5.33 for dotted-eighth note,  4 for quarter note, etc.
-    private float getRhythmicValueOfEndedNoteWithDuration(int msDuration) {
-        rp_segments_for_current_tone = numRpSegmentsIn(msDuration);
-        return ((float) rhythmic_precision) / ((float) rp_segments_for_current_tone);
+    private float getRhythmicValueOfEndedNoteWithLength(int length) {
+        return ((float) rhythmic_preciseness) / ((float) length);
     }
 
     public static void update(float freq) {
@@ -180,8 +178,6 @@ public class AudioHandler {
         if (firstNote)
             theKey = new Key(notesTone);
             firstNote = false;
-
-        //This section is semantically inadequate, but serves as a temporary debug: We would not be building a new note every time a tone is passed to the RhythmicInterpretter.
 
         int rhythmicValue = updateRhythm(notesTone);
 

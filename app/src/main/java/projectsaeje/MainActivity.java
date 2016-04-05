@@ -100,6 +100,7 @@ public class MainActivity extends Activity {
                     */
                     isClicked = true;
                 }
+
                 else {
 
                     //changes stop icon back to play icon on the record button
