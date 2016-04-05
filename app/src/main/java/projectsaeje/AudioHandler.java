@@ -78,16 +78,22 @@ public class AudioHandler extends Activity {
     }
 
     private static void populateArrays() {
-        bitmaps.add(R.drawable.sixteenth_note_single); //1
-        bitmaps.add(R.drawable.eighth_note_single); //2
-        bitmaps.add(R.drawable.eighth_note_dotted_single_line); //3
-        bitmaps.add(R.drawable.quarter_note); //4
+        bitmaps.add(R.drawable.sixteenth_note_single);              //1
+        bitmaps.add(R.drawable.eighth_note_single);                 //2
+        bitmaps.add(R.drawable.eighth_note_dotted_single_line);     //3
+        bitmaps.add(R.drawable.quarter_note);                       //4
 
-        bitmaps.add(R.drawable.quarter_note_dotted_single_line); //6
-        bitmaps.add(R.drawable.quarter_note_dotted_double_line); //7
-        bitmaps.add(R.drawable.half_note); //8
+        bitmaps.add(R.drawable.quarter_note_dotted_single_line);    //6
+        bitmaps.add(R.drawable.quarter_note_dotted_double_line);    //7
+        bitmaps.add(R.drawable.half_note);                          //8
+        bitmaps.add(R.drawable.half_tied_sixteenth);                //9
+        bitmaps.add(R.drawable.half_tied_eighth);                   //10
+        bitmaps.add(R.drawable.half_tied_dotted_eighth);            //11
+        bitmaps.add(R.drawable.half_note_dotted_single_line);       //12
+        bitmaps.add(R.drawable.dotted_half_tied_sixteenth);         //13
+        bitmaps.add(R.drawable.half_note_dotted_double_line);       //14
 
-        bitmaps.add(R.drawable.whole_note); //16
+        bitmaps.add(R.drawable.whole_note);                         //16
     }
 
     public int NoteEvaluator(float freq) {
@@ -135,7 +141,7 @@ public class AudioHandler extends Activity {
 
 
         Bitmap theBitmap = BitmapFactory.decodeResource(this.getResources(), noteType);
-        theBitmap = Bitmap.createScaledBitmap(theBitmap,300,300,false);
+        theBitmap = Bitmap.createScaledBitmap(theBitmap, 300, 300, false);
 
         return theBitmap;
     }
