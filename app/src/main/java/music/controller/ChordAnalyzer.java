@@ -11,6 +11,10 @@ public class ChordAnalyzer {
 
     public int noteVal = (int)note.tonalValue;
 
-    //stuff TBD
+    int z = Chord.Chord_Dict.size();
+
+    for (int x=1; c<32; x++)){
+        //
+    }
 
 }

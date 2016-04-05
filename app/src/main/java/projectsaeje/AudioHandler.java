@@ -31,6 +31,12 @@ public class AudioHandler extends Activity {
 
     public static CaptureThread mCapture;
     private static RhythmicInterpreter rhythm_interp;
+    
+    private int previously_updated_tone;
+    private int rp_segments_for_current_tone;
+    private int rhythmic_precision;
+    private int start_time;
+    private int duration_of_note; //delta t
 
     public AudioHandler () {
 
@@ -135,7 +141,32 @@ public class AudioHandler extends Activity {
         return theBitmap;
     }
 
-    public void update(float freq) {
+    private int updateRhythm(int new_tone) {
+        //If the tone is the same tone as the previous tone, the note is longer and we simply return 0
+        if (new_tone == previously_updated_tone) {
+            return 0;  //return 0 to indicate that the note duration is still being continued/determined
+        }
+
+        //If the tone is not the same, we change the previously updated tone to the new tone, calculate the duration of the note, and reset the start time
+        else if (new_tone != previously_updated_tone) {
+            previously_updated_tone = new_tone;
+            duration_of_note = getTime() - start_time; //The note has just ended, so the duration of the note is the time that has passed since the time it began
+            start_time = getTime(); //reset start time for the newest note
+            return duration_of_note; //then return the duration of the note in milliseconds
+        }
+    }
+
+    private int numRpSegmentsIn(int msDuration) {
+        //calculate based on msPerBeat and rhythmic precision
+    }
+
+    //returns 16 for 16th note, 5.33 for dotted-eighth note,  4 for quarter note, etc.
+    private float getRhythmicValueOfEndedNoteWithDuration(int msDuration) {
+        rp_segments_for_current_tone = numRpSegmentsIn(msDuration);
+        return ((float) rhythmic_precision) / ((float) rp_segments_for_current_tone);
+    }
+
+    public static void update(float freq) {
 
         Note aNote;
         int rhythmicValue = 4;
@@ -149,11 +180,14 @@ public class AudioHandler extends Activity {
         //This section is semantically inadequate, but serves as a temporary debug: We would not be building a new note every time a tone is passed to the RhythmicInterpretter.
         //Also, the "5.33" type values of a dotted eighth note are lost in the conversion from float to integer.
         rhythm_interp.update(notesTone);
-        //rhythmicValue = (int) (rhythm_interp.getRhythmicValueOfEndedNote());
+        int rhythmicValue = (int) (rhythm_interp.getRhythmicValueOfEndedNote());
         //
 
-        Bitmap notesImage = noteImageBuilder(notesTone, theKey, rhythmicValue);
+        int rhythmicValue = updateRhythm(notesTone);
 
+        //If a note has recently ended, rhythmic value will be nonzero.
+        //In other words, only construct the recently ended note if update has been called with a new tonal value.
+        if (rhythmicValue != 0) {
         aNote = new Note(notesTone, notesImage, rhythmicValue);
     }
 
