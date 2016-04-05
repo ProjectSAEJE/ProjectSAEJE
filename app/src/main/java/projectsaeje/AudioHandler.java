@@ -181,7 +181,7 @@ public class AudioHandler extends Activity {
         int rhythmicValue = 4;
         Bitmap notesImage = null;
         Bitmap secondaryNotesImage = null;
-        int x = tempMeasure.valueTilMeasureFull();
+        int valueTilMeasureFull = tempMeasure.valueTilMeasureFull();
 
         int notesTone = NoteEvaluator(freq);
 
@@ -194,20 +194,22 @@ public class AudioHandler extends Activity {
         //If a note has recently ended, rhythmic value will be nonzero.
         //In other words, only construct the recently ended note if update has been called with a new tonal value.
         if (rhythmicValue != 0) {
-            if (rhythmicValue < x) {
+            if (rhythmicValue < valueTilMeasureFull) {
                 notesImage = noteImageBuilder(notesTone, theKey, rhythmicValue);
             } else {
-                notesImage = noteImageBuilder(notesTone, theKey, x);
-                secondaryNotesImage = noteImageBuilder(notesTone, theKey, rhythmicValue-x);
+                notesImage = noteImageBuilder(notesTone, theKey, valueTilMeasureFull);
+                secondaryNotesImage = noteImageBuilder(notesTone, theKey, rhythmicValue-valueTilMeasureFull);
             }
         }
 
         if(secondaryNotesImage != null) {
-            aNote = new Note(notesTone, notesImage, x);
+            aNote = new Note(notesTone, notesImage, valueTilMeasureFull);
+
             tempMeasure.addNote(aNote);
             tempStaff.addMeasure(tempMeasure);
             tempMeasure.clear();
-            aNote = new Note(notesTone, secondaryNotesImage, rhythmicValue - x);
+
+            aNote = new Note(notesTone, secondaryNotesImage, rhythmicValue - valueTilMeasureFull);
             tempMeasure.addNote(aNote);
 
         } else {
