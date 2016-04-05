@@ -32,7 +32,7 @@ public class AudioHandler extends Activity {
     public static CaptureThread mCapture;
     private static RhythmicInterpreter rhythm_interp;
 
-    public AudioHandler (){
+    public AudioHandler () {
 
     }
 
@@ -46,6 +46,7 @@ public class AudioHandler extends Activity {
 
         populateArrays();
 
+        captureNotes();
     }
 
     public void captureNotes(){
@@ -148,12 +149,13 @@ public class AudioHandler extends Activity {
         //This section is semantically inadequate, but serves as a temporary debug: We would not be building a new note every time a tone is passed to the RhythmicInterpretter.
         //Also, the "5.33" type values of a dotted eighth note are lost in the conversion from float to integer.
         rhythm_interp.update(notesTone);
-        int rhythmicValue = (int) (rhythm_interp.getRhythmicValueOfEndedNote());
+        //rhythmicValue = (int) (rhythm_interp.getRhythmicValueOfEndedNote());
         //
 
         Bitmap notesImage = noteImageBuilder(notesTone, theKey, rhythmicValue);
 
         aNote = new Note(notesTone, notesImage, rhythmicValue);
+
 
     }
 

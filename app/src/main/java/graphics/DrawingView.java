@@ -1,5 +1,6 @@
 package graphics;
 
+import android.util.Base64OutputStream;
 import android.view.View;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -21,7 +22,6 @@ public class DrawingView extends View {
     public Canvas drawCanvas;
     //canvas bitmap
     private Bitmap canvasBitmap;
-
 
     public DrawingView(Context context, AttributeSet attrs){
         super(context, attrs);
@@ -49,7 +49,7 @@ public class DrawingView extends View {
         invalidate();
     }
 
-    /*public void displayStaff(Canvas canvas){
+    public void displayStaff(Canvas canvas){
         Staff s = MainActivity.staff;
         int currentMeasure = (s.measures.get(s.measures.size()-1)).measureNumber;
         Staff boStaff = measureChooser(s, currentMeasure, 0);
@@ -73,5 +73,5 @@ public class DrawingView extends View {
 
 
         return displayedTwo;
-    }*/
+    }
 }
