@@ -28,6 +28,7 @@ public class AudioHandler extends Activity {
 
     public static ArrayList<Integer> bitmaps;
     public static Staff tempStaff;
+    public static Measure tempMeasure;
 
     public static CaptureThread mCapture;
     
@@ -49,6 +50,9 @@ public class AudioHandler extends Activity {
         Intent intent = getIntent();
 
         tempStaff = MainActivity.staff;
+        tempMeasure = new Measure();
+        tempMeasure.setBeats(4);
+        tempMeasure.setNumBeats(4);
 
         populateArrays();
 
@@ -159,12 +163,6 @@ public class AudioHandler extends Activity {
         }
     }
 
-    private int numRpSegmentsIn(int msDuration) {
-        //calculate based on msPerBeat and rhythmic precision
-        return 1;
-
-    }
-
     //returns 16 for 16th note, 5.33 for dotted-eighth note,  4 for quarter note, etc.
     private float getRhythmicValueOfEndedNoteWithDuration(int msDuration) {
         rp_segments_for_current_tone = numRpSegmentsIn(msDuration);
@@ -175,6 +173,9 @@ public class AudioHandler extends Activity {
 
         Note aNote;
         int rhythmicValue = 4;
+        Bitmap notesImage = null;
+        Bitmap secondaryNotesImage = null;
+        int x = tempMeasure.valueTilMeasureFull();
 
         int notesTone = NoteEvaluator(freq);
 
@@ -190,7 +191,26 @@ public class AudioHandler extends Activity {
         //If a note has recently ended, rhythmic value will be nonzero.
         //In other words, only construct the recently ended note if update has been called with a new tonal value.
         if (rhythmicValue != 0) {
+            if (rhythmicValue < x) {
+                notesImage = noteImageBuilder(notesTone, theKey, rhythmicValue);
+            } else {
+                notesImage = noteImageBuilder(notesTone, theKey, x);
+                secondaryNotesImage = noteImageBuilder(notesTone, theKey, rhythmicValue-x);
+            }
+        }
+
+        if(secondaryNotesImage != null) {
+            aNote = new Note(notesTone, notesImage, x);
+            tempMeasure.addNote(aNote);
+            tempStaff.addMeasure(tempMeasure);
+            tempMeasure.clear();
+            aNote = new Note(notesTone, secondaryNotesImage, rhythmicValue - x);
+            tempMeasure.addNote(aNote);
+
+        } else {
+
             aNote = new Note(notesTone, notesImage, rhythmicValue);
+            tempMeasure.addNote(aNote);
         }
     }
 
@@ -204,7 +224,11 @@ public class AudioHandler extends Activity {
                 //changes stop icon back to play icon on the record button
                 item.setIcon(R.drawable.ic_play_arrow);
                 item.setTitle(R.string.Resume);
-                AudioHandler.stopCapture();
+                stopCapture();
+
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("has recieved", true);
+                startActivity(intent);
 
                 return true;
 
