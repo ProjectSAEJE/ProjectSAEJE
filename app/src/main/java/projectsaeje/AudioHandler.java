@@ -18,9 +18,7 @@ import audio.CaptureThread;
 import music.Metronome;
 import music.model.Key;
 import music.model.Note;
-import projectsaeje.MainActivity;
-import graphics.DrawingView;
-import music.controller.RhythmicInterpreter;
+
 import music.model.*;
 
 
@@ -41,7 +39,7 @@ public class AudioHandler extends Activity {
     private int rhythmic_preciseness;
     private int starting_precision_of_note;
     private int length_in_sixteenths_of_ended_note;
-    private Metronome metronome;
+    private Metronome metronome = new Metronome();
 
     public AudioHandler () {
 
@@ -52,7 +50,6 @@ public class AudioHandler extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        Intent intent = getIntent();
 
         tempStaff = MainActivity.staff;
         tempMeasure = new Measure();
@@ -231,8 +228,9 @@ public class AudioHandler extends Activity {
                 item.setTitle(R.string.Resume);
                 stopCapture();
 
+                MainActivity.staff = tempStaff;
+
                 Intent intent = new Intent(this, MainActivity.class);
-                intent.putExtra("has recieved", true);
                 startActivity(intent);
 
                 return true;
