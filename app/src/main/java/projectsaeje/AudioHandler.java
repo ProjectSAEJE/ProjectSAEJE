@@ -77,7 +77,7 @@ public class AudioHandler extends Activity {
         }
     }
 
-    private static void populateArrays() {
+    private static void populateArrays() {                          //Rhythmic Value:
         bitmaps.add(R.drawable.sixteenth_note_single);              //1
         bitmaps.add(R.drawable.eighth_note_single);                 //2
         bitmaps.add(R.drawable.eighth_note_dotted_single_line);     //3
