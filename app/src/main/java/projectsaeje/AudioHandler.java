@@ -28,7 +28,6 @@ public class AudioHandler extends Activity {
 
     public static Key theKey = null;
 
-    public static ArrayList<Integer> bitmaps;
     public static Staff tempStaff;
     public static Measure tempMeasure;
 
@@ -56,7 +55,7 @@ public class AudioHandler extends Activity {
         tempMeasure.setBeats(4);
         tempMeasure.setNumBeats(4);
 
-        populateArrays();
+        Images.populateArrays();
 
         captureNotes();
     }
@@ -88,25 +87,6 @@ public class AudioHandler extends Activity {
         }
     }
 
-    private static void populateArrays() {                          //Rhythmic Value:
-        bitmaps.add(R.drawable.sixteenth_note_single);              //1
-        bitmaps.add(R.drawable.eighth_note_single);                 //2
-        bitmaps.add(R.drawable.eighth_note_dotted_single_line);     //3
-        bitmaps.add(R.drawable.quarter_note);                       //4
-        bitmaps.add(R.drawable.quarter_tied_sixteenth);             //5
-        bitmaps.add(R.drawable.quarter_note_dotted_single_line);    //6
-        bitmaps.add(R.drawable.quarter_note_dotted_double_line);    //7
-        bitmaps.add(R.drawable.half_note);                          //8
-        bitmaps.add(R.drawable.half_tied_sixteenth);                //9
-        bitmaps.add(R.drawable.half_tied_eighth);                   //10
-        bitmaps.add(R.drawable.half_tied_dotted_eighth);            //11
-        bitmaps.add(R.drawable.half_note_dotted_single_line);       //12
-        bitmaps.add(R.drawable.dotted_half_tied_sixteenth);         //13
-        bitmaps.add(R.drawable.half_note_dotted_double_line);       //14
-        bitmaps.add(R.drawable.double_dotted_half_tied_sixteenth);  //15
-        bitmaps.add(R.drawable.whole_note);                         //16
-    }
-
     public int NoteEvaluator(float freq) {
         int pianoNoteNumber;
         double logCalcX = Math.log(freq / 440);
@@ -121,22 +101,10 @@ public class AudioHandler extends Activity {
         int noteType;
         int noteNumber = tonalValue%12;
 
-        switch (rhythmicValue) {
-            case 0:
-                noteType = bitmaps.get(0); //Sixteenths
-            case 1:
-                noteType = bitmaps.get(1); //Eighths
-            case 3:
-                noteType = bitmaps.get(3); //Quarters
-            case 7:
-                noteType = bitmaps.get(7); //Halves
-            case 15:
-                noteType = bitmaps.get(15); //Wholes
-            default:
-                noteType = bitmaps.get(3); //default quarters
-        }
+        noteType = Images.noteImages.get(rhythmicValue);
 
         String noteName = theKey.key.get(noteNumber);
+
         String accidentalIdentifier = noteName.substring(1);
 
         int noteGet;
