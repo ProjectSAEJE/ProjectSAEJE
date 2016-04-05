@@ -30,7 +30,6 @@ public class AudioHandler extends Activity {
     public static Staff tempStaff;
 
     public static CaptureThread mCapture;
-    private static RhythmicInterpreter rhythm_interp;
     
     private int previously_updated_tone;
     private int rp_segments_for_current_tone;
@@ -48,6 +47,7 @@ public class AudioHandler extends Activity {
 
         setContentView(R.layout.activity_main);
         Intent intent = getIntent();
+
         tempStaff = MainActivity.staff;
 
         populateArrays();
@@ -71,9 +71,7 @@ public class AudioHandler extends Activity {
     }
 
     public static void stopCapture(){
-
         mCapture.setRunning(false);
-
     }
 
     public static void destroy(){
@@ -148,7 +146,7 @@ public class AudioHandler extends Activity {
         }
 
         //If the tone is not the same, we change the previously updated tone to the new tone, calculate the duration of the note, and reset the start time
-        else if (new_tone != previously_updated_tone) {
+        else {
             previously_updated_tone = new_tone;
             duration_of_note = getTime() - start_time; //The note has just ended, so the duration of the note is the time that has passed since the time it began
             start_time = getTime(); //reset start time for the newest note
@@ -158,6 +156,8 @@ public class AudioHandler extends Activity {
 
     private int numRpSegmentsIn(int msDuration) {
         //calculate based on msPerBeat and rhythmic precision
+        return 1;
+
     }
 
     //returns 16 for 16th note, 5.33 for dotted-eighth note,  4 for quarter note, etc.
@@ -166,7 +166,7 @@ public class AudioHandler extends Activity {
         return ((float) rhythmic_precision) / ((float) rp_segments_for_current_tone);
     }
 
-    public static void update(float freq) {
+    public void update(float freq) {
 
         Note aNote;
         int rhythmicValue = 4;
@@ -179,16 +179,14 @@ public class AudioHandler extends Activity {
 
         //This section is semantically inadequate, but serves as a temporary debug: We would not be building a new note every time a tone is passed to the RhythmicInterpretter.
         //Also, the "5.33" type values of a dotted eighth note are lost in the conversion from float to integer.
-        rhythm_interp.update(notesTone);
-        int rhythmicValue = (int) (rhythm_interp.getRhythmicValueOfEndedNote());
-        //
 
-        int rhythmicValue = updateRhythm(notesTone);
+        rhythmicValue = updateRhythm(notesTone);
 
         //If a note has recently ended, rhythmic value will be nonzero.
         //In other words, only construct the recently ended note if update has been called with a new tonal value.
         if (rhythmicValue != 0) {
-        aNote = new Note(notesTone, notesImage, rhythmicValue);
+            aNote = new Note(notesTone, notesImage, rhythmicValue);
+        }
     }
 
     @Override
