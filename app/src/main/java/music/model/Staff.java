@@ -29,12 +29,12 @@ public class Staff{
 
     public void moveUpCurrentMeasures() {
         this.currentMeasures.remove(0);
-        this.currentMeasures.add(1, this.measures.get(-1));
+        this.currentMeasures.add(1, this.measures.get(this.measures.size() - 1));
     }
 
     public void moveBackCurrentMeasures() {
         this.currentMeasures.remove(1);
-        this.currentMeasures.add(0, this.measures.get(-2));
+        this.currentMeasures.add(0, this.measures.get(this.measures.size() - 2));
     }
 
     public void makeStartingCurrentMeasures() {

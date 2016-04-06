@@ -20,7 +20,7 @@ public class Measure {
     }
 
     public void addNote(Note note) {
-        notes.add(note);
+        this.notes.add(note);
     }
 
     public void setBeats(int beat){
@@ -32,17 +32,25 @@ public class Measure {
 
     public int valueTilMeasureFull() {
         int acc = 0;
-        int target = (16/beats)*numBeats;
+        int target = (16/this.beats)*this.numBeats;
 
         for(Note item: this.notes) {
             acc += item.rhythmicValue;
         }
 
-        return (target - acc - 1); //The minus 1 converts it from 1-16 to 0-15 to be in line with the RhythmicValue in AudioHandler
+        return ((target - acc) - 1); //The minus 1 converts it from 1-16 to 0-15 to be in line with the RhythmicValue in AudioHandler
     }
 
     public void clear() {
-        this.notes = null;
+        this.notes = new ArrayList<>();
     }
 
+    @Override
+    public String toString() {
+        String acc = "";
+        for(Note item: this.notes) {
+            acc = acc + Integer.toString(item.tonalValue);
+        }
+        return acc;
+    }
 }

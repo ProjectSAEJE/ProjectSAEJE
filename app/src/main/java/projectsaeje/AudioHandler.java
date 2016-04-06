@@ -6,6 +6,9 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import android.content.Intent;
@@ -27,7 +30,7 @@ public class AudioHandler extends Activity {
 
     private static boolean firstNote = true;
     public static Key theKey = null;
-    public static Measure tempMeasure;
+    public Measure tempMeasure;
     public static CaptureThread mCapture;
 
     private Images images;
@@ -49,13 +52,20 @@ public class AudioHandler extends Activity {
 
         setContentView(R.layout.activity_main);
 
-        tempMeasure = new Measure(new ArrayList<Note>(), 4, 4);
+        this.tempMeasure = new Measure(new ArrayList<Note>(), 4, 4);
 
         images = new Images();
 
         images.populateArrays();
 
         captureNotes();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.items, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     public void captureNotes(){
@@ -76,6 +86,7 @@ public class AudioHandler extends Activity {
 
     public static void stopCapture(){
         mCapture.setRunning(false);
+        mCapture.interrupt();
     }
 
     public static void destroy(){
@@ -90,7 +101,7 @@ public class AudioHandler extends Activity {
         double logCalcX = Math.log(freq / 440);
         double logCalcY = Math.log(2);
 
-        pianoNoteNumber = (int) (12 * (logCalcX + 49) / logCalcY);
+        pianoNoteNumber = (int) ((12 * (logCalcX / logCalcY)) + 49);
         return pianoNoteNumber;
     }
 
@@ -186,11 +197,16 @@ public class AudioHandler extends Activity {
             aNote = new Note(notesTone, secondaryNotesImage, rhythmicValue - valueTilMeasureFull);
             tempMeasure.addNote(aNote);
 
+            MainActivity.staff.setCurrentMeasures();
+            MainActivity.drawView.changeX(500);
+
         } else {
             aNote = new Note(notesTone, notesImage, rhythmicValue);
             tempMeasure.addNote(aNote);
         }
 
+
+        Log.d("TESTING", MainActivity.staff.getCurrentMeasures().toString());
         MainActivity.drawView.startNew();
         MainActivity.drawView.draw(MainActivity.drawView.drawCanvas);
     }
@@ -205,7 +221,7 @@ public class AudioHandler extends Activity {
                 //changes stop icon back to play icon on the record button
                 item.setIcon(R.drawable.ic_play_arrow);
                 item.setTitle(R.string.Resume);
-                stopCapture();
+                destroy();
 
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);

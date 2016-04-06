@@ -16,7 +16,7 @@ import music.model.*;
 
 public class MainActivity extends Activity {
 
-    public static Staff staff;
+    public static Staff staff = null;
 
     public static DrawingView drawView;
 
@@ -26,8 +26,10 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.activity_main);
 
-        staff = new Staff(new ArrayList<Measure>());
-        drawView = (DrawingView)findViewById(R.id.drawing);
+        if(staff == null) {
+            staff = new Staff(new ArrayList<Measure>());
+            drawView = (DrawingView)findViewById(R.id.drawing);
+        }
     }
 
 

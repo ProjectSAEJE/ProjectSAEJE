@@ -49,13 +49,17 @@ public class DrawingView extends View {
                 canvas.drawBitmap(aNote.scaledBitmap, x, getNoteY(aNote.tonalValue), null);
                 x += aNote.rhythmicValue;
             }
-            this.invalidate();
         };
+        this.invalidate();
     }
 
     public void startNew(){
         drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
         invalidate();
+    }
+
+    public void changeX(int subtractor) {
+        x -= subtractor;
     }
 
     private int getNoteY(int tV) {
