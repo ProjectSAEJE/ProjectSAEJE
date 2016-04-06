@@ -9,6 +9,9 @@ public class Images {
 
     public static ArrayList<Integer> noteImages;
 
+    public Images() {
+        this.noteImages = new ArrayList<>();
+    }
 
     public static void populateArrays() {
         populateNoteArraysArrays();

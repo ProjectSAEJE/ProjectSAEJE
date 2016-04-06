@@ -20,7 +20,8 @@ public class Staff{
 
     public ArrayList<Measure> measures;
 
-    public Staff() {}
+    public Staff() {
+    }
 
     public Staff(ArrayList<Measure> measures) {
         this.measures = measures;
@@ -42,14 +43,24 @@ public class Staff{
         ArrayList<Note> blankArray = new ArrayList<>();
         Measure newMeasure = new Measure(blankArray, 4, 4);
 
-        this.currentMeasures.set(1, newMeasure);
+        this.currentMeasures.add(newMeasure);
+        this.currentMeasures.add(newMeasure);
     }
 
     public void setCurrentMeasures() {
-        ArrayList<Measure> mostRecentMeasures = new ArrayList<>();
-        mostRecentMeasures.add(0, this.measures.get(-2));
-        mostRecentMeasures.add(1, this.measures.get(-1));
-        this.currentMeasures = mostRecentMeasures;
+        if (this.measures.isEmpty()){
+            makeStartingCurrentMeasures();
+        } else if(this.measures.size() == 1) {
+            ArrayList<Measure> mostRecentMeasures = new ArrayList<>();
+            mostRecentMeasures.add(0, this.measures.get(0));
+            mostRecentMeasures.add(1, new Measure(new ArrayList<Note>(), 4, 4));
+            this.currentMeasures = mostRecentMeasures;
+        } else {
+            ArrayList<Measure> mostRecentMeasures = new ArrayList<>();
+            mostRecentMeasures.add(0, this.measures.get(this.measures.size() - 2));
+            mostRecentMeasures.add(1, this.measures.get(this.measures.size() - 1));
+            this.currentMeasures = mostRecentMeasures;
+        }
     }
 
     public ArrayList<Measure> getCurrentMeasures() {

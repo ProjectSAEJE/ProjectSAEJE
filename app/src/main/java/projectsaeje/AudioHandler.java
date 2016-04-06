@@ -26,12 +26,11 @@ import music.model.*;
 public class AudioHandler extends Activity {
 
     private static boolean firstNote = true;
-
     public static Key theKey = null;
-
     public static Measure tempMeasure;
-
     public static CaptureThread mCapture;
+
+    private Images images;
 
     //Variables used for rhythmic interpretation
     private int previously_updated_tone;
@@ -50,11 +49,11 @@ public class AudioHandler extends Activity {
 
         setContentView(R.layout.activity_main);
 
-        tempMeasure = new Measure();
-        tempMeasure.setBeats(4);
-        tempMeasure.setNumBeats(4);
+        tempMeasure = new Measure(new ArrayList<Note>(), 4, 4);
 
-        Images.populateArrays();
+        images = new Images();
+
+        images.populateArrays();
 
         captureNotes();
     }
@@ -72,7 +71,7 @@ public class AudioHandler extends Activity {
         mCapture = new CaptureThread(mHandler);
         mCapture.setRunning(true);
         mCapture.start();
-        metronome.start();
+        //metronome.start();
     }
 
     public static void stopCapture(){
@@ -95,16 +94,21 @@ public class AudioHandler extends Activity {
         return pianoNoteNumber;
     }
 
-    public Bitmap noteImageBuilder(int tonalValue, Key theKey, int rhythmicValue){
+    public Bitmap noteImageBuilder(int tonalValue, int rhythmicValue){
 
         int noteType;
         int noteNumber = tonalValue%12;
+        String accidentalIdentifier;
 
         noteType = Images.noteImages.get(rhythmicValue);
 
-        String noteName = theKey.key.get(noteNumber);
+        String noteName = theKey.getKey();
 
-        String accidentalIdentifier = noteName.substring(1);
+        if(noteName.length() > 1) {
+            accidentalIdentifier = noteName.substring(1);
+        } else {
+            accidentalIdentifier = "";
+        }
 
         int noteGet;
 
@@ -165,10 +169,10 @@ public class AudioHandler extends Activity {
         //In other words, only construct the recently ended note if update has been called with a new tonal value.
         if (rhythmicValue != 0) {
             if (rhythmicValue < valueTilMeasureFull) {
-                notesImage = noteImageBuilder(notesTone, theKey, rhythmicValue);
+                notesImage = noteImageBuilder(notesTone, rhythmicValue);
             } else {
-                notesImage = noteImageBuilder(notesTone, theKey, valueTilMeasureFull);
-                secondaryNotesImage = noteImageBuilder(notesTone, theKey, rhythmicValue-valueTilMeasureFull);
+                notesImage = noteImageBuilder(notesTone, valueTilMeasureFull);
+                secondaryNotesImage = noteImageBuilder(notesTone, rhythmicValue-valueTilMeasureFull);
             }
         }
 

@@ -9,12 +9,14 @@ import android.content.Intent;
 
 import com.example.woodev01.projectsaeje.R;
 
+import java.util.ArrayList;
+
 import graphics.*;
 import music.model.*;
 
 public class MainActivity extends Activity {
 
-    public static Staff staff = new Staff();
+    public static Staff staff;
 
     public static DrawingView drawView;
 
@@ -24,6 +26,7 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.activity_main);
 
+        staff = new Staff(new ArrayList<Measure>());
         drawView = (DrawingView)findViewById(R.id.drawing);
     }
 

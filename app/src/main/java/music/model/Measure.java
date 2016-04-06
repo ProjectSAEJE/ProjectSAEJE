@@ -34,7 +34,7 @@ public class Measure {
         int acc = 0;
         int target = (16/beats)*numBeats;
 
-        for(Note item: notes) {
+        for(Note item: this.notes) {
             acc += item.rhythmicValue;
         }
 
