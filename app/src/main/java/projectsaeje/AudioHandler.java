@@ -191,14 +191,14 @@ public class AudioHandler extends Activity {
             aNote = new Note(notesTone, notesImage, valueTilMeasureFull);
 
             tempMeasure.addNote(aNote);
-            MainActivity.staff.addMeasure(tempMeasure);
+            MainActivity.staff.addMeasure(new Measure(tempMeasure.notes,4,4));
             tempMeasure.clear();
 
             aNote = new Note(notesTone, secondaryNotesImage, rhythmicValue - valueTilMeasureFull);
             tempMeasure.addNote(aNote);
 
             MainActivity.staff.setCurrentMeasures();
-            MainActivity.drawView.changeX(500);
+            //MainActivity.drawView.changeX(500);
 
         } else {
             aNote = new Note(notesTone, notesImage, rhythmicValue);

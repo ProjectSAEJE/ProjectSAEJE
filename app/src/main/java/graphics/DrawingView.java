@@ -22,7 +22,7 @@ public class DrawingView extends View {
     //canvas bitmap
     private Bitmap canvasBitmap;
 
-    private int x = 50;
+    private static int x = 50;
 
     public DrawingView(Context context, AttributeSet attrs){
         super(context, attrs);
@@ -47,7 +47,8 @@ public class DrawingView extends View {
         for(Measure aMeasure: MainActivity.staff.getCurrentMeasures()) {
             for(Note aNote: aMeasure.notes) {
                 canvas.drawBitmap(aNote.scaledBitmap, x, getNoteY(aNote.tonalValue), null);
-                x += aNote.rhythmicValue;
+                //x += aNote.rhythmicValue;
+                x += 20;
             }
         };
         this.invalidate();

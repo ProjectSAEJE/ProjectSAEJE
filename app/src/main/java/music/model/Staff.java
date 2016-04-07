@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import android.os.Parcelable;
 import android.os.Parcel;
+import android.util.Log;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -28,38 +29,41 @@ public class Staff{
     }
 
     public void moveUpCurrentMeasures() {
-        this.currentMeasures.remove(0);
-        this.currentMeasures.add(1, this.measures.get(this.measures.size() - 1));
+        currentMeasures.remove(0);
+        currentMeasures.add(1, measures.get(measures.size() - 1));
     }
 
     public void moveBackCurrentMeasures() {
-        this.currentMeasures.remove(1);
-        this.currentMeasures.add(0, this.measures.get(this.measures.size() - 2));
+        currentMeasures.remove(1);
+        currentMeasures.add(0, measures.get(measures.size() - 2));
     }
 
     public void makeStartingCurrentMeasures() {
-        this.currentMeasures = this.measures;
+        currentMeasures = measures;
 
         ArrayList<Note> blankArray = new ArrayList<>();
         Measure newMeasure = new Measure(blankArray, 4, 4);
 
-        this.currentMeasures.add(newMeasure);
-        this.currentMeasures.add(newMeasure);
+        currentMeasures.add(newMeasure);
+        currentMeasures.add(newMeasure);
     }
 
     public void setCurrentMeasures() {
         if (this.measures.isEmpty()){
             makeStartingCurrentMeasures();
-        } else if(this.measures.size() == 1) {
+            //Log.d("Testing...", this.measures.toString());
+        } else if(measures.size() == 1) {
             ArrayList<Measure> mostRecentMeasures = new ArrayList<>();
-            mostRecentMeasures.add(0, this.measures.get(0));
+            mostRecentMeasures.add(0, measures.get(0));
             mostRecentMeasures.add(1, new Measure(new ArrayList<Note>(), 4, 4));
-            this.currentMeasures = mostRecentMeasures;
+            currentMeasures = mostRecentMeasures;
+            //Log.d("Testing...1", this.measures.toString());
         } else {
             ArrayList<Measure> mostRecentMeasures = new ArrayList<>();
-            mostRecentMeasures.add(0, this.measures.get(this.measures.size() - 2));
-            mostRecentMeasures.add(1, this.measures.get(this.measures.size() - 1));
-            this.currentMeasures = mostRecentMeasures;
+            mostRecentMeasures.add(0, measures.get(measures.size() - 2));
+            mostRecentMeasures.add(1, measures.get(measures.size() - 1));
+            currentMeasures = mostRecentMeasures;
+            //Log.d("Testing...2", this.measures.toString());
         }
     }
 
