@@ -13,7 +13,7 @@ public class Images {
         noteImages = new ArrayList<>();
     }*/
 
-    public static void populateArrays() {
+    public void populateArrays() {
         populateNoteArraysArrays();
     }
 

@@ -49,7 +49,7 @@ public class Measure {
     public String toString() {
         String acc = "";
         for(Note item: this.notes) {
-            acc = acc + Integer.toString(item.tonalValue);
+            acc = acc + "," + Integer.toString(item.tonalValue);
         }
         return acc;
     }

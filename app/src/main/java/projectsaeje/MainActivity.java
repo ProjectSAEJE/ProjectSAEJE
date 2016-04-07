@@ -86,6 +86,10 @@ public class MainActivity extends Activity {
 
             case R.id.clear:
                 //clear the staff
+
+                staff.measures = new ArrayList<>();
+                staff.makeStartingCurrentMeasures();
+
                 drawView.startNew();
 
                 return true;

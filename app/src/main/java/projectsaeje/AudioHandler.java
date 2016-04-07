@@ -17,7 +17,6 @@ import com.example.woodev01.projectsaeje.R;
 
 import java.util.ArrayList;
 
-import graphics.DrawingView;
 import audio.CaptureThread;
 import music.model.Metronome;
 import music.model.Key;
@@ -64,7 +63,7 @@ public class AudioHandler extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.items, menu);
+        inflater.inflate(R.menu.items2, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -111,7 +110,7 @@ public class AudioHandler extends Activity {
         int noteNumber = tonalValue%12;
         String accidentalIdentifier;
 
-        noteType = Images.noteImages.get(rhythmicValue);
+        noteType = Images.noteImages.get(rhythmicValue - 1);
 
         String noteName = theKey.getKey();
 

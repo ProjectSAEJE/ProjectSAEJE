@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/record"
+        android:title="@string/Record"
+        android:icon="@drawable/ic_stop"
+        android:showAsAction="ifRoom|withText"/>
+
+    <item
+        android:id="@+id/save"
+        android:title="@string/Save"
+        android:icon="@drawable/ic_save"
+        android:showAsAction="ifRoom|withText"/>
+
+    <item
+        android:id="@+id/open"
+        android:title="@string/Open"
+        android:icon="@drawable/ic_open_in_browser"
+        android:showAsAction="ifRoom|withText"/>
+
+    <item
+        android:id="@+id/clear"
+        android:title="@string/Clear"
+        android:icon="@drawable/ic_clear"
+        android:showAsAction="ifRoom|withText"/>
+
+</menu>
