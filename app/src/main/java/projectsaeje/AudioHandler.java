@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 import graphics.DrawingView;
 import audio.CaptureThread;
+import music.ExtraTypes.Tuple2;
 import music.model.Metronome;
 import music.model.Key;
 import music.model.Note;
@@ -37,10 +38,10 @@ public class AudioHandler extends Activity {
 
     //Variables used for rhythmic interpretation
     private int previously_updated_tone;
-    private int rhythmic_preciseness;
+    private int rhythmic_preciseness = 16;
     private int starting_precision_of_note;
     private int length_in_sixteenths_of_ended_note;
-    private Metronome metronome = new Metronome();
+    private Metronome metronome;
 
     public AudioHandler () {
 
@@ -57,6 +58,9 @@ public class AudioHandler extends Activity {
         images = new Images();
 
         images.populateArrays();
+
+        Tuple2<Integer, Integer> timeSigntature = new Tuple2<>(4, 4);
+        metronome = new Metronome(120, timeSigntature, false, this, rhythmic_preciseness);
 
         captureNotes();
     }
@@ -81,7 +85,7 @@ public class AudioHandler extends Activity {
         mCapture = new CaptureThread(mHandler);
         mCapture.setRunning(true);
         mCapture.start();
-        //metronome.start();
+        metronome.start();
     }
 
     public static void stopCapture(){
@@ -111,7 +115,7 @@ public class AudioHandler extends Activity {
         int noteNumber = tonalValue%12;
         String accidentalIdentifier;
 
-        noteType = Images.noteImages.get(rhythmicValue);
+        noteType = Images.noteImages.get(rhythmicValue - 1);
 
         String noteName = theKey.getKey();
 
@@ -151,7 +155,15 @@ public class AudioHandler extends Activity {
             //The note has just ended, so the length of the note is the number of precisions that have passed since the one at which it began
             length_in_sixteenths_of_ended_note = metronome.get_rp_precision_counter() - starting_precision_of_note;
             //reset start time for the newest note
-            return length_in_sixteenths_of_ended_note; //then return the length of the note in sixteenth precisions
+            starting_precision_of_note = metronome.get_rp_precision_counter();
+
+            //temporary ceiling value of 16
+            if (length_in_sixteenths_of_ended_note > 16) {
+                return 16;
+            }
+            else {
+                return length_in_sixteenths_of_ended_note; //then return the length of the note in sixteenth precisions
+            }
         }
     }
 
@@ -163,7 +175,7 @@ public class AudioHandler extends Activity {
     public void update(float freq) {
 
         Note aNote;
-        int rhythmicValue = 3;
+        int rhythmicValue = 0;
         Bitmap notesImage = null;
         Bitmap secondaryNotesImage = null;
         int valueTilMeasureFull = tempMeasure.valueTilMeasureFull();
@@ -174,7 +186,9 @@ public class AudioHandler extends Activity {
             theKey = new Key(notesTone);
             firstNote = false;
 
-        //rhythmicValue = updateRhythm(notesTone);
+        rhythmicValue = updateRhythm(notesTone);
+
+        Log.d("rhythmicValue: ", "" + rhythmicValue);
 
         //If a note has recently ended, rhythmic value will be nonzero.
         //In other words, only construct the recently ended note if update has been called with a new tonal value.
@@ -206,9 +220,11 @@ public class AudioHandler extends Activity {
         }
 
 
-        Log.d("TESTING", MainActivity.staff.getCurrentMeasures().toString());
+        //Log.d("TESTING", MainActivity.staff.getCurrentMeasures().toString());
         MainActivity.drawView.startNew();
         MainActivity.drawView.draw(MainActivity.drawView.drawCanvas);
+
+
     }
 
     @Override
