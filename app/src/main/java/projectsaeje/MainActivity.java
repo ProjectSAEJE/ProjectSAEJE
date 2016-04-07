@@ -9,14 +9,15 @@ import android.content.Intent;
 
 import com.example.woodev01.projectsaeje.R;
 
+import java.util.ArrayList;
+
 import graphics.*;
 import music.model.*;
 
 public class MainActivity extends Activity {
 
-    public static Staff staff;
+    public static Staff staff = null;
 
-    private Boolean isClicked = false;
     public static DrawingView drawView;
 
     @Override
@@ -25,9 +26,10 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.activity_main);
 
-        //this.staff = new Staff();
-
-        drawView = (DrawingView)findViewById(R.id.drawing);
+        if(staff == null) {
+            staff = new Staff(new ArrayList<Measure>());
+            drawView = (DrawingView)findViewById(R.id.drawing);
+        }
     }
 
 
@@ -57,8 +59,6 @@ public class MainActivity extends Activity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    private MenuItem recordItem;
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
@@ -85,7 +85,6 @@ public class MainActivity extends Activity {
                 return true;
 
             case R.id.clear:
-                isClicked = false;
                 //clear the staff
                 drawView.startNew();
 

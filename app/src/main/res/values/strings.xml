@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">ProjectSAEJE</string>
+    <string name="AudioHandler">AudioHandler</string>
     <string name="Metronome">Metronome</string>
     <string name="Clear">Clear</string>
     <string name="Save">Save</string>

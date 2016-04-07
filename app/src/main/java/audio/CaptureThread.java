@@ -18,7 +18,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import music.Metronome;
+import music.model.Metronome;
 
 public class CaptureThread extends Thread {
     private Handler mHandler;
@@ -56,18 +56,18 @@ public class CaptureThread extends Thread {
         byte buffer[] = new byte[bufferSize];
 
         recorder.startRecording();
-        metronome.start();
+        //metronome.start();
 
-        oldBeat = metronome.getRpBeatNum();
+        //oldBeat = metronome.getRpBeatNum();
         while(isRunning) {
 
-            int newBeat = metronome.getRpBeatNum();
-            System.out.println("oldBeat = " + oldBeat + ", newBeat = " + newBeat);
-            if (newBeat != oldBeat) { //a new beat has taken place.
+            //int newBeat = metronome.getRpBeatNum();
+            //System.out.println("oldBeat = " + oldBeat + ", newBeat = " + newBeat);
+            /*if (newBeat != oldBeat) { //a new beat has taken place.
                 playAudioTrack();
                 System.out.println("clicked");
             }
-            oldBeat = (new Integer(newBeat)).intValue();
+            oldBeat = (new Integer(newBeat)).intValue();*/
 
 
             // Read stream data into buffer container.

@@ -6,6 +6,9 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import android.content.Intent;
@@ -14,28 +17,30 @@ import com.example.woodev01.projectsaeje.R;
 
 import java.util.ArrayList;
 
-import audio.CaptureThread;
 import graphics.DrawingView;
-import music.controller.RhythmicInterpreter;
+import audio.CaptureThread;
+import music.model.Metronome;
+import music.model.Key;
+import music.model.Note;
+
 import music.model.*;
 
 
 public class AudioHandler extends Activity {
 
     private static boolean firstNote = true;
-
     public static Key theKey = null;
-
-    public static ArrayList<Integer> bitmaps;
-    public static Staff tempStaff;
-
+    public Measure tempMeasure;
     public static CaptureThread mCapture;
-    
+
+    private Images images;
+
+    //Variables used for rhythmic interpretation
     private int previously_updated_tone;
-    private int rp_segments_for_current_tone;
-    private int rhythmic_precision;
-    private int start_time;
-    private int duration_of_note; //delta t
+    private int rhythmic_preciseness;
+    private int starting_precision_of_note;
+    private int length_in_sixteenths_of_ended_note;
+    private Metronome metronome = new Metronome();
 
     public AudioHandler () {
 
@@ -46,13 +51,21 @@ public class AudioHandler extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        Intent intent = getIntent();
 
-        tempStaff = MainActivity.staff;
+        this.tempMeasure = new Measure(new ArrayList<Note>(), 4, 4);
 
-        populateArrays();
+        images = new Images();
+
+        images.populateArrays();
 
         captureNotes();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.items, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     public void captureNotes(){
@@ -68,10 +81,12 @@ public class AudioHandler extends Activity {
         mCapture = new CaptureThread(mHandler);
         mCapture.setRunning(true);
         mCapture.start();
+        //metronome.start();
     }
 
     public static void stopCapture(){
         mCapture.setRunning(false);
+        mCapture.interrupt();
     }
 
     public static void destroy(){
@@ -81,50 +96,30 @@ public class AudioHandler extends Activity {
         }
     }
 
-    private static void populateArrays() {
-        bitmaps.add(R.drawable.sixteenth_note_single); //1
-        bitmaps.add(R.drawable.eighth_note_single); //2
-        bitmaps.add(R.drawable.eighth_note_dotted_single_line); //3
-        bitmaps.add(R.drawable.quarter_note); //4
-
-        bitmaps.add(R.drawable.quarter_note_dotted_single_line); //6
-        bitmaps.add(R.drawable.quarter_note_dotted_double_line); //7
-        bitmaps.add(R.drawable.half_note); //8
-
-        bitmaps.add(R.drawable.whole_note); //16
-    }
-
     public int NoteEvaluator(float freq) {
         int pianoNoteNumber;
         double logCalcX = Math.log(freq / 440);
         double logCalcY = Math.log(2);
 
-        pianoNoteNumber = (int) (12 * (logCalcX + 49) / logCalcY);
+        pianoNoteNumber = (int) ((12 * (logCalcX / logCalcY)) + 49);
         return pianoNoteNumber;
     }
 
-    public Bitmap noteImageBuilder(int tonalValue, Key theKey, int rhythmicValue){
+    public Bitmap noteImageBuilder(int tonalValue, int rhythmicValue){
 
         int noteType;
         int noteNumber = tonalValue%12;
+        String accidentalIdentifier;
 
-        switch (rhythmicValue) {
-            case 0:
-                noteType = bitmaps.get(0); //Sixteenths
-            case 1:
-                noteType = bitmaps.get(1); //Eighths
-            case 3:
-                noteType = bitmaps.get(3); //Quarters
-            case 7:
-                noteType = bitmaps.get(7); //Halves
-            case 15:
-                noteType = bitmaps.get(15); //Wholes
-            default:
-                noteType = bitmaps.get(3); //default quarters
+        noteType = Images.noteImages.get(rhythmicValue);
+
+        String noteName = theKey.getKey();
+
+        if(noteName.length() > 1) {
+            accidentalIdentifier = noteName.substring(1);
+        } else {
+            accidentalIdentifier = "";
         }
-
-        String noteName = theKey.key.get(noteNumber);
-        String accidentalIdentifier = noteName.substring(1);
 
         int noteGet;
 
@@ -139,42 +134,39 @@ public class AudioHandler extends Activity {
 
 
         Bitmap theBitmap = BitmapFactory.decodeResource(this.getResources(), noteType);
-        theBitmap = Bitmap.createScaledBitmap(theBitmap,300,300,false);
+        theBitmap = Bitmap.createScaledBitmap(theBitmap, 300, 300, false);
 
         return theBitmap;
     }
 
     private int updateRhythm(int new_tone) {
-        //If the tone is the same tone as the previous tone, the note is longer and we simply return 0
+        //If the tone is the same tone as the previous tone, the note is still being sung and we simply return 0
         if (new_tone == previously_updated_tone) {
-            return 0;  //return 0 to indicate that the note duration is still being continued/determined
+            return 0;  //return 0 to indicate that the note length is still being continued/determined
         }
 
-        //If the tone is not the same, we change the previously updated tone to the new tone, calculate the duration of the note, and reset the start time
+        //If the tone is not the same, we change the previously updated tone to the new tone, calculate the length of the note, and reset the starting precision
         else {
             previously_updated_tone = new_tone;
-            duration_of_note = getTime() - start_time; //The note has just ended, so the duration of the note is the time that has passed since the time it began
-            start_time = getTime(); //reset start time for the newest note
-            return duration_of_note; //then return the duration of the note in milliseconds
+            //The note has just ended, so the length of the note is the number of precisions that have passed since the one at which it began
+            length_in_sixteenths_of_ended_note = metronome.get_rp_precision_counter() - starting_precision_of_note;
+            //reset start time for the newest note
+            return length_in_sixteenths_of_ended_note; //then return the length of the note in sixteenth precisions
         }
-    }
-
-    private int numRpSegmentsIn(int msDuration) {
-        //calculate based on msPerBeat and rhythmic precision
-        return 1;
-
     }
 
     //returns 16 for 16th note, 5.33 for dotted-eighth note,  4 for quarter note, etc.
-    private float getRhythmicValueOfEndedNoteWithDuration(int msDuration) {
-        rp_segments_for_current_tone = numRpSegmentsIn(msDuration);
-        return ((float) rhythmic_precision) / ((float) rp_segments_for_current_tone);
+    private float getRhythmicValueOfEndedNoteWithLength(int length) {
+        return ((float) rhythmic_preciseness) / ((float) length);
     }
 
     public void update(float freq) {
 
         Note aNote;
-        int rhythmicValue = 4;
+        int rhythmicValue = 3;
+        Bitmap notesImage = null;
+        Bitmap secondaryNotesImage = null;
+        int valueTilMeasureFull = tempMeasure.valueTilMeasureFull();
 
         int notesTone = NoteEvaluator(freq);
 
@@ -182,16 +174,41 @@ public class AudioHandler extends Activity {
             theKey = new Key(notesTone);
             firstNote = false;
 
-        //This section is semantically inadequate, but serves as a temporary debug: We would not be building a new note every time a tone is passed to the RhythmicInterpretter.
-        //Also, the "5.33" type values of a dotted eighth note are lost in the conversion from float to integer.
-
-        rhythmicValue = updateRhythm(notesTone);
+        //rhythmicValue = updateRhythm(notesTone);
 
         //If a note has recently ended, rhythmic value will be nonzero.
         //In other words, only construct the recently ended note if update has been called with a new tonal value.
         if (rhythmicValue != 0) {
-            aNote = new Note(notesTone, notesImage, rhythmicValue);
+            if (rhythmicValue < valueTilMeasureFull) {
+                notesImage = noteImageBuilder(notesTone, rhythmicValue);
+            } else {
+                notesImage = noteImageBuilder(notesTone, valueTilMeasureFull);
+                secondaryNotesImage = noteImageBuilder(notesTone, rhythmicValue-valueTilMeasureFull);
+            }
         }
+
+        if(secondaryNotesImage != null) {
+            aNote = new Note(notesTone, notesImage, valueTilMeasureFull);
+
+            tempMeasure.addNote(aNote);
+            MainActivity.staff.addMeasure(tempMeasure);
+            tempMeasure.clear();
+
+            aNote = new Note(notesTone, secondaryNotesImage, rhythmicValue - valueTilMeasureFull);
+            tempMeasure.addNote(aNote);
+
+            MainActivity.staff.setCurrentMeasures();
+            MainActivity.drawView.changeX(500);
+
+        } else {
+            aNote = new Note(notesTone, notesImage, rhythmicValue);
+            tempMeasure.addNote(aNote);
+        }
+
+
+        Log.d("TESTING", MainActivity.staff.getCurrentMeasures().toString());
+        MainActivity.drawView.startNew();
+        MainActivity.drawView.draw(MainActivity.drawView.drawCanvas);
     }
 
     @Override
@@ -204,7 +221,10 @@ public class AudioHandler extends Activity {
                 //changes stop icon back to play icon on the record button
                 item.setIcon(R.drawable.ic_play_arrow);
                 item.setTitle(R.string.Resume);
-                AudioHandler.stopCapture();
+                destroy();
+
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
 
                 return true;
 

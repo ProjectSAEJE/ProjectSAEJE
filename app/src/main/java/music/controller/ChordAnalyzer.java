@@ -13,8 +13,8 @@ public class ChordAnalyzer {
 
     int z = Chord.Chord_Dict.size();
 
-    for (int x=1; c<32; x++)){
+    //for (int x=1; c<32; x++)){
         //
-    }
+    //}
 
 }
