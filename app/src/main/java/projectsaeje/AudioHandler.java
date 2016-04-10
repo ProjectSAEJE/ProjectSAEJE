@@ -145,7 +145,7 @@ public class AudioHandler extends Activity {
     private int updateRhythm(int new_tone) {
         //If the tone is the same tone as the previous tone, the note is still being sung and we simply return 0
         if (new_tone == previously_updated_tone) {
-            return 0;  //return 0 to indicate that the note length is still being continued/determined
+            return -1;  //return -1 to indicate that the note length is still being continued/determined
         }
 
         //If the tone is not the same, we change the previously updated tone to the new tone, calculate the length of the note, and reset the starting precision
@@ -166,7 +166,7 @@ public class AudioHandler extends Activity {
         }
     }
 
-    //returns 16 for 16th note, 5.33 for dotted-eighth note,  4 for quarter note, etc.
+
     private float getRhythmicValueOfEndedNoteWithLength(int length) {
         return ((float) rhythmic_preciseness) / ((float) length);
     }
@@ -174,7 +174,7 @@ public class AudioHandler extends Activity {
     public void update(float freq) {
 
         Note aNote;
-        int rhythmicValue = 0;
+        int rhythmicValue = -1;
         Bitmap notesImage = null;
         Bitmap secondaryNotesImage = null;
         int valueTilMeasureFull = tempMeasure.valueTilMeasureFull();
@@ -191,33 +191,34 @@ public class AudioHandler extends Activity {
 
         //If a note has recently ended, rhythmic value will be nonzero.
         //In other words, only construct the recently ended note if update has been called with a new tonal value.
-        if (rhythmicValue != 0) {
+
+        if (rhythmicValue != -1) {
             if (rhythmicValue < valueTilMeasureFull) {
                 notesImage = noteImageBuilder(notesTone, rhythmicValue);
             } else {
                 notesImage = noteImageBuilder(notesTone, valueTilMeasureFull);
-                secondaryNotesImage = noteImageBuilder(notesTone, rhythmicValue-valueTilMeasureFull);
+                secondaryNotesImage = noteImageBuilder(notesTone, rhythmicValue - valueTilMeasureFull);
+            }
+
+
+            if (secondaryNotesImage != null) {
+                aNote = new Note(notesTone, notesImage, valueTilMeasureFull);
+
+                tempMeasure.addNote(aNote);
+                MainActivity.staff.addMeasure(new Measure(tempMeasure.notes, 4, 4));
+                tempMeasure.clear();
+
+                aNote = new Note(notesTone, secondaryNotesImage, rhythmicValue - valueTilMeasureFull);
+                tempMeasure.addNote(aNote);
+
+                MainActivity.staff.setCurrentMeasures();
+                //MainActivity.drawView.changeX(500);
+
+            } else {
+                aNote = new Note(notesTone, notesImage, rhythmicValue);
+                tempMeasure.addNote(aNote);
             }
         }
-
-        if(secondaryNotesImage != null) {
-            aNote = new Note(notesTone, notesImage, valueTilMeasureFull);
-
-            tempMeasure.addNote(aNote);
-            MainActivity.staff.addMeasure(new Measure(tempMeasure.notes,4,4));
-            tempMeasure.clear();
-
-            aNote = new Note(notesTone, secondaryNotesImage, rhythmicValue - valueTilMeasureFull);
-            tempMeasure.addNote(aNote);
-
-            MainActivity.staff.setCurrentMeasures();
-            //MainActivity.drawView.changeX(500);
-
-        } else {
-            aNote = new Note(notesTone, notesImage, rhythmicValue);
-            tempMeasure.addNote(aNote);
-        }
-
 
         //Log.d("TESTING", MainActivity.staff.getCurrentMeasures().toString());
         MainActivity.drawView.startNew();
