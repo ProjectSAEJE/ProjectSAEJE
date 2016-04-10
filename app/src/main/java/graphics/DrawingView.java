@@ -64,6 +64,7 @@ public class DrawingView extends View {
     }
 
     private int newVariable(int x) {
+        int y = x;
         return x;
     }
 
