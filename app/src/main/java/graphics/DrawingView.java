@@ -42,11 +42,12 @@ public class DrawingView extends View {
 
     @Override
     public void onDraw(Canvas canvas) {
+        x = 50;
         canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
         MainActivity.staff.setCurrentMeasures();
         for(Measure aMeasure: MainActivity.staff.getCurrentMeasures()) {
             for(Note aNote: aMeasure.notes) {
-                canvas.drawBitmap(aNote.scaledBitmap, newVariable(x), getNoteY(aNote.tonalValue), null);
+                canvas.drawBitmap(aNote.scaledBitmap, x, getNoteY(aNote.tonalValue), null);
                 //x += aNote.rhythmicValue;
                 x += 20;
             }
@@ -61,10 +62,6 @@ public class DrawingView extends View {
 
     public void changeX(int subtractor) {
         x -= subtractor;
-    }
-
-    private int newVariable(int x) {
-        return x;
     }
 
     private int getNoteY(int tV) {
