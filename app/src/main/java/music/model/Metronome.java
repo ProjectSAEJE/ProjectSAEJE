@@ -3,6 +3,7 @@ package music.model;
 import android.app.Activity;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.util.Log;
 
 import com.example.woodev01.projectsaeje.R;
 
@@ -10,18 +11,18 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import music.ExtraTypes.Tuple2;
+
 /**
  * Created by austinnash on 2/11/16.
  */
 
-//test line for push
-    //another test line
 
 public class Metronome extends Thread {
 
     private int bpm;
     private long msPerBeat;
-    private ArrayList<Integer> timeSignature;
+    private Tuple2<Integer, Integer> timeSignature;
     private Boolean subdivide;
     private Boolean running;
     private SoundPool sPool;
@@ -34,7 +35,7 @@ public class Metronome extends Thread {
 
     public Metronome() {}
 
-    public Metronome(int bpm, ArrayList<Integer> timeSignature, Boolean subdivide, Activity activity, int rhythmic_preciseness) {
+    public Metronome(int bpm, Tuple2<Integer, Integer> timeSignature, Boolean subdivide, Activity activity, int rhythmic_preciseness) {
         this.bpm = bpm;
         this.msPerBeat = (long)(((float)(60) / (float)(bpm)) * 1000);   //milliseconds per beat = (seconds per beat) * 1000
         this.timeSignature = timeSignature;
@@ -51,9 +52,10 @@ public class Metronome extends Thread {
             }
         });
         //clickSoundID = sPool.load(activity.getApplicationContext(), R.raw.tamb_down_441, 1);
+
     }
 
-    public class Signal_RP_Occurrence extends TimerTask {
+    public class TimeKeeper extends TimerTask {
 
         @Override
         public void run() {
@@ -71,8 +73,10 @@ public class Metronome extends Thread {
         float rp_vals_per_quarter_note = ((float) rhythmic_preciseness) / ((float) 4);
         long ms_per_rp_precision = (long) (msPerBeat / rp_vals_per_quarter_note);
 
+        //Log.d("in Metronome::run(), scheduling TimeKeeper for every ", ms_per_rp_precision + "milliseconds");
+
         //schedule the TimeKeeper task to run every 16th precision
-        timer.scheduleAtFixedRate(new Signal_RP_Occurrence(), 0, ms_per_rp_precision);
+        timer.scheduleAtFixedRate(new TimeKeeper(), 0, (long)(ms_per_rp_precision));
     }
 
     public void setRunningFalse() {
