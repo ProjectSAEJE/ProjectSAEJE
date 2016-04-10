@@ -114,7 +114,7 @@ public class AudioHandler extends Activity {
         int noteNumber = tonalValue%12;
         String accidentalIdentifier;
 
-        noteType = Images.noteImages.get(rhythmicValue - 1);
+        noteType = Images.noteImages.get(rhythmicValue);
 
         String noteName = theKey.getKey();
 
