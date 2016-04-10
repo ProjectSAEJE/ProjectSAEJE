@@ -49,7 +49,7 @@ public class DrawingView extends View {
             for(Note aNote: aMeasure.notes) {
                 canvas.drawBitmap(aNote.scaledBitmap, x, getNoteY(aNote.tonalValue), null);
                 //x += aNote.rhythmicValue;
-                x += 20;
+                x += 50;
             }
         };
         this.invalidate();
