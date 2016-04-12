@@ -187,7 +187,7 @@ public class AudioHandler extends Activity {
 
         rhythmicValue = updateRhythm(notesTone);
 
-        Log.d("rhythmicValue: ", "" + rhythmicValue);
+        //Log.d("rhythmicValue: ", "" + rhythmicValue);
 
         //If a note has recently ended, rhythmic value will be nonzero.
         //In other words, only construct the recently ended note if update has been called with a new tonal value.

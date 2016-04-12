@@ -52,7 +52,8 @@ public class DrawingView extends View {
         MainActivity.staff.setCurrentMeasures();
         for(Measure aMeasure: MainActivity.staff.getCurrentMeasures()) {
             for(Note aNote: aMeasure.notes) {
-                canvas.drawBitmap(aNote.scaledBitmap, x, getNoteY(aNote.tonalValue), null);
+                int y = set_y(getNoteY(aNote.tonalValue));
+                canvas.drawBitmap(aNote.scaledBitmap, x, y, null);
                 x += aNote.rhythmicValue * 80;
                 //x += 50;
             }
@@ -65,8 +66,37 @@ public class DrawingView extends View {
         invalidate();
     }
 
-    public void changeX(int subtractor) {
-        x -= subtractor;
+    private int set_y(int tonal_value) { // yes, this currently draws all the notes on the middle line(or it should)
+        int height = drawCanvas.getHeight();
+
+        switch(tonal_value%12) {
+            case 0:
+                return height/2;
+            case 1:
+                return height/2;
+            case 2:
+                return height/2;
+            case 3:
+                return height/2;
+            case 4:
+                return height/2;
+            case 5:
+                return height/2;
+            case 6:
+                return height/2;
+            case 7:
+                return height/2;
+            case 8:
+                return height/2;
+            case 9:
+                return height/2;
+            case 10:
+                return height/2;
+            case 11:
+                return height/2;
+            default:
+                return height/2;
+        }
     }
 
     private int getNoteY(int tV) {
