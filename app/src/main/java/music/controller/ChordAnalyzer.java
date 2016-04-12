@@ -8,7 +8,7 @@ public class ChordAnalyzer {
     public Note note;
     public Chord chord;
 
-    public int noteVal = (int) note.tonalValue;
+    public int noteVal = (int) note.getTonalValue();
 
     int z = Chord.Chord_Dict.size();
 

@@ -17,6 +17,8 @@ import music.model.*;
 public class MainActivity extends Activity {
 
     public static Staff staff = null;
+    private static int beatNum = 4;
+    private static int beats = 4;
 
     public static DrawingView drawView;
 
@@ -40,12 +42,18 @@ public class MainActivity extends Activity {
         AudioHandler.destroy();
     }
 
-    /*@Override
+    public int getBeatNum() {
+        return beatNum;
+    }
+
+    public int getBeats() {
+        return beats;
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
-
-        mCapture.setRunning(false);
-    }*/
+    }
 
     @Override
     protected void onResume() {

@@ -35,7 +35,7 @@ public class Measure {
         int target = (16/this.beats)*this.numBeats;
 
         for(Note item: this.notes) {
-            acc += item.rhythmicValue;
+            acc += item.getRhythmicValue();
         }
 
         return ((target - acc) - 1); //The minus 1 converts it from 1-16 to 0-15 to be in line with the RhythmicValue in AudioHandler
@@ -49,7 +49,7 @@ public class Measure {
     public String toString() {
         String acc = "";
         for(Note item: this.notes) {
-            acc = acc + "," + Integer.toString(item.tonalValue);
+            acc = acc + "," + Integer.toString(item.getTonalValue());
         }
         return acc;
     }

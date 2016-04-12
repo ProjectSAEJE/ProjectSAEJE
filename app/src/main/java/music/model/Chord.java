@@ -7,7 +7,7 @@ import music.model.Note;
 public class Chord {
 
     public Note note;// = new Note(nv,rv);
-    public int rootVal = (int)note.tonalValue; //casts float as an int
+    public int rootVal = (int)note.getTonalValue(); //casts float as an int
     public static ArrayList<ArrayList<Integer>> Chord_Dict = new ArrayList<ArrayList<Integer>>();
 
     public ArrayList<Integer>Mtriad = new ArrayList<Integer>();
