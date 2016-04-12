@@ -1,6 +1,5 @@
 package graphics;
 
-import android.util.Base64OutputStream;
 import android.util.Log;
 import android.view.View;
 import android.content.Context;
@@ -10,9 +9,8 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 
-import java.util.ArrayList;
-
-import music.model.*;
+import music.model.Notation.MusicalSymbols.Note;
+import music.model.Notation.Measure;
 import projectsaeje.MainActivity;
 
 public class DrawingView extends View {
@@ -52,8 +50,8 @@ public class DrawingView extends View {
         MainActivity.staff.setCurrentMeasures();
         for(Measure aMeasure: MainActivity.staff.getCurrentMeasures()) {
             for(Note aNote: aMeasure.notes) {
-                canvas.drawBitmap(aNote.scaledBitmap, x, getNoteY(aNote.tonalValue), null);
-                x += aNote.rhythmicValue * 80;
+                canvas.drawBitmap(aNote.getScaledBitmap(), x, getNoteY(aNote.getTonalValue()), null);
+                x += aNote.getRhythmicValue() * 80;
                 //x += 50;
             }
         };

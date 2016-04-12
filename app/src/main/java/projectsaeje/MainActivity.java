@@ -12,7 +12,8 @@ import com.example.woodev01.projectsaeje.R;
 import java.util.ArrayList;
 
 import graphics.*;
-import music.model.*;
+import music.model.Notation.Measure;
+import music.model.Notation.Staff;
 
 public class MainActivity extends Activity {
 

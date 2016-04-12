@@ -1,6 +1,6 @@
 package music.model;
 import java.util.*;
-import music.model.Note;
+import music.model.Notation.MusicalSymbols.Note;
 /**
  * Created by jorgja02 on 2/11/16.
  */

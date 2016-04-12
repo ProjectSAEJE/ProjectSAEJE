@@ -1,7 +1,7 @@
 package music.controller;
 
-import java.util.*;
 import music.model.*;
+import music.model.Notation.MusicalSymbols.Note;
 
 public class ChordAnalyzer {
 

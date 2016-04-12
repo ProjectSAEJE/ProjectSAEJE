@@ -1,19 +1,13 @@
-package music.model;
+package music.model.Notation;
 
 import android.app.Activity;
 
-import android.os.Parcelable;
-import android.os.Parcel;
-import android.util.Log;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import music.model.Notation.MusicalSymbols.*;
 
-import music.model.*;
 
-
-public class Staff{
+public class Staff extends Notation {
 
     private String fileName;
     private ArrayList<Measure> currentMeasures;
