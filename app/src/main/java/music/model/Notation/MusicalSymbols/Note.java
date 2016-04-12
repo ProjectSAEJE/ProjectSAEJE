@@ -12,6 +12,11 @@ public class Note extends MusicalSymbol {
         this.tonalValue = tonalValue;
     }
 
+    public Note(int tonalValue, Bitmap scaledBitmap, int rhythmicValue, String name) {
+        super(scaledBitmap, rhythmicValue, name);
+        this.tonalValue = tonalValue;
+    }
+
     public int getTonalValue() {
         return this.tonalValue;
     }

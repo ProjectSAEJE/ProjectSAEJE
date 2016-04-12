@@ -35,7 +35,7 @@ public class Staff extends Notation {
     public void makeStartingCurrentMeasures() {
         currentMeasures = measures;
 
-        ArrayList<Note> blankArray = new ArrayList<>();
+        ArrayList<Notation> blankArray = new ArrayList<>();
         Measure newMeasure = new Measure(blankArray, 4, 4);
 
         currentMeasures.add(newMeasure);
@@ -49,7 +49,7 @@ public class Staff extends Notation {
         } else if(measures.size() == 1) {
             ArrayList<Measure> mostRecentMeasures = new ArrayList<>();
             mostRecentMeasures.add(0, measures.get(0));
-            mostRecentMeasures.add(1, new Measure(new ArrayList<Note>(), 4, 4));
+            mostRecentMeasures.add(1, new Measure(new ArrayList<Notation>(), 4, 4));
             currentMeasures = mostRecentMeasures;
             //Log.d("Testing...1", this.measures.toString());
         } else {

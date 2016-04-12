@@ -7,6 +7,10 @@ public class Rest extends MusicalSymbol {
 
     public Rest(Bitmap scaledBitmap, int rhythmicValue) {
         super(scaledBitmap, rhythmicValue);
-        this.getName();
+    }
+
+    public Rest(Bitmap scaledBitmap, int rhythmicValue, String name) {
+        super(scaledBitmap, rhythmicValue, name);
+
     }
 }
