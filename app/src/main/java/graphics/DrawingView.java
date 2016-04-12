@@ -1,6 +1,7 @@
 package graphics;
 
 import android.util.Base64OutputStream;
+import android.util.Log;
 import android.view.View;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -38,6 +39,10 @@ public class DrawingView extends View {
         super.onSizeChanged(w, h, oldw, oldh);
         canvasBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         drawCanvas = new Canvas(canvasBitmap);
+        int height = drawCanvas.getHeight();
+        int width = drawCanvas.getWidth();
+        Log.d("Height is: ", Integer.toString(height));
+        Log.d("Width is: ", Integer.toString(width));
     }
 
     @Override
@@ -47,9 +52,9 @@ public class DrawingView extends View {
         MainActivity.staff.setCurrentMeasures();
         for(Measure aMeasure: MainActivity.staff.getCurrentMeasures()) {
             for(Note aNote: aMeasure.notes) {
-                canvas.drawBitmap(aNote.getScaledBitmap(), x, getNoteY(aNote.getTonalValue()), null);
-                //x += aNote.rhythmicValue;
-                x += 50;
+                canvas.drawBitmap(aNote.scaledBitmap, x, getNoteY(aNote.tonalValue), null);
+                x += aNote.rhythmicValue * 80;
+                //x += 50;
             }
         };
         this.invalidate();
