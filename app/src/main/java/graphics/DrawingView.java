@@ -22,6 +22,7 @@ public class DrawingView extends View {
     public Canvas drawCanvas;
     //canvas bitmap
     private Bitmap canvasBitmap;
+    public Boolean is_drawing_beat_signifier = false;
 
     private static int x = 50;
 
@@ -56,7 +57,12 @@ public class DrawingView extends View {
                 x += aNote.rhythmicValue * 80;
                 //x += 50;
             }
-        };
+        }
+
+        if (is_drawing_beat_signifier) {
+            drawBeatSignifier(canvas);
+        }
+
         this.invalidate();
     }
 
@@ -86,4 +92,12 @@ public class DrawingView extends View {
 
         return displayedTwo;
     }   */
+
+    public void drawBeatSignifier(Canvas canvas) {
+        int x = 500;
+        int y = 500;
+        int radius = 1000;
+        Paint paint = new Paint();
+        canvas.drawCircle(x, y, radius, paint);
+    }
 }

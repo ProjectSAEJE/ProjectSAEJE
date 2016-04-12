@@ -59,7 +59,7 @@ public class AudioHandler extends Activity {
         images.populateArrays();
 
         Tuple2<Integer, Integer> timeSigntature = new Tuple2<>(4, 4);
-        metronome = new Metronome(90, timeSigntature, false, this, rhythmic_preciseness);
+        metronome = new Metronome(90, timeSigntature, false, this, rhythmic_preciseness, MainActivity.drawView.drawCanvas);
 
         captureNotes();
     }
@@ -187,7 +187,7 @@ public class AudioHandler extends Activity {
 
         rhythmicValue = updateRhythm(notesTone);
 
-        Log.d("rhythmicValue: ", "" + rhythmicValue);
+        //Log.d("rhythmicValue: ", "" + rhythmicValue);
 
         //If a note has recently ended, rhythmic value will be nonzero.
         //In other words, only construct the recently ended note if update has been called with a new tonal value.
@@ -222,7 +222,16 @@ public class AudioHandler extends Activity {
 
         //Log.d("TESTING", MainActivity.staff.getCurrentMeasures().toString());
         MainActivity.drawView.startNew();
-        MainActivity.drawView.draw(MainActivity.drawView.drawCanvas);
+
+        if (metronome.is_time_to_draw_beat_signifier) {
+            MainActivity.drawView.is_drawing_beat_signifier = true;
+            MainActivity.drawView.draw(MainActivity.drawView.drawCanvas);
+            metronome.is_time_to_draw_beat_signifier = false;
+        }
+        else {
+            MainActivity.drawView.is_drawing_beat_signifier = false;
+            MainActivity.drawView.draw(MainActivity.drawView.drawCanvas);
+        }
 
 
     }
