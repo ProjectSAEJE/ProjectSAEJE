@@ -18,12 +18,11 @@ import com.example.woodev01.projectsaeje.R;
 import java.util.ArrayList;
 
 import audio.CaptureThread;
-import music.ExtraTypes.Tuple2;
-import music.model.Metronome;
-import music.model.Key;
-import music.model.Note;
-
+import music.ExtraTypes.*;
 import music.model.*;
+import music.model.Notation.MusicalSymbols.*;
+import music.model.PureDataTypes.*;
+import music.model.Notation.*;
 
 
 public class AudioHandler extends Activity {
@@ -33,7 +32,6 @@ public class AudioHandler extends Activity {
     public Measure tempMeasure;
     public static CaptureThread mCapture;
 
-    private Images images;
 
     //Variables used for rhythmic interpretation
     private int previously_updated_tone;
@@ -52,14 +50,14 @@ public class AudioHandler extends Activity {
 
         setContentView(R.layout.activity_main);
 
-        this.tempMeasure = new Measure(new ArrayList<Note>(), 4, 4);
+        this.tempMeasure = new Measure(new ArrayList<Notation>(), 4, 4);
 
-        images = new Images();
+        Images images = new Images();
 
         images.populateArrays();
 
         Tuple2<Integer, Integer> timeSigntature = new Tuple2<>(4, 4);
-        metronome = new Metronome(120, timeSigntature, false, this, rhythmic_preciseness);
+        metronome = new Metronome(90, timeSigntature, false, this, rhythmic_preciseness);
 
         captureNotes();
     }
@@ -108,7 +106,7 @@ public class AudioHandler extends Activity {
         return pianoNoteNumber;
     }
 
-    public Bitmap noteImageBuilder(int tonalValue, int rhythmicValue){
+    public Bitmap noteImageChooser(int tonalValue, int rhythmicValue){
 
         int noteType;
         int noteNumber = tonalValue%12;
@@ -194,10 +192,10 @@ public class AudioHandler extends Activity {
 
         if (rhythmicValue != -1) {
             if (rhythmicValue < valueTilMeasureFull) {
-                notesImage = noteImageBuilder(notesTone, rhythmicValue);
+                notesImage = noteImageChooser(notesTone, rhythmicValue);
             } else {
-                notesImage = noteImageBuilder(notesTone, valueTilMeasureFull);
-                secondaryNotesImage = noteImageBuilder(notesTone, rhythmicValue - valueTilMeasureFull);
+                notesImage = noteImageChooser(notesTone, valueTilMeasureFull);
+                secondaryNotesImage = noteImageChooser(notesTone, rhythmicValue - valueTilMeasureFull);
             }
 
 
@@ -205,7 +203,7 @@ public class AudioHandler extends Activity {
                 aNote = new Note(notesTone, notesImage, valueTilMeasureFull);
 
                 tempMeasure.addNote(aNote);
-                MainActivity.staff.addMeasure(new Measure(tempMeasure.notes, 4, 4));
+                MainActivity.staff.addMeasure(new Measure(tempMeasure.getElements(), 4, 4));
                 tempMeasure.clear();
 
                 aNote = new Note(notesTone, secondaryNotesImage, rhythmicValue - valueTilMeasureFull);

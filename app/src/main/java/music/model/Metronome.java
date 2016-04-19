@@ -32,6 +32,7 @@ public class Metronome extends Thread {
     private boolean loaded = false;
     private int rp_precision_counter = 0;
     private int rhythmic_preciseness = 0;
+    private int beatNum = 0;
 
     public Metronome() {}
 
@@ -61,6 +62,11 @@ public class Metronome extends Thread {
         public void run() {
             running = true;
             ++rp_precision_counter;
+
+            //If the rp counter modded by the lower numeral of the time signature is 0, then a beat has occurred.
+            if ((rp_precision_counter % timeSignature._1) == 0) {
+                signalBeatOccurrence();
+            }
         }
 
     }
@@ -85,6 +91,12 @@ public class Metronome extends Thread {
 
     public int get_rp_precision_counter() {
         return rp_precision_counter;
+    }
+
+    public void signalBeatOccurrence() {
+        //draw something on the canvas to signal a beat occurrence
+        this.beatNum++;
+        Log.d("Beat #", "" + this.beatNum);
     }
 
     /* //Wasn't working...
