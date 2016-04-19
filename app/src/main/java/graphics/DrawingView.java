@@ -1,5 +1,6 @@
 package graphics;
 
+import android.graphics.BitmapFactory;
 import android.util.Base64OutputStream;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
+
+import com.example.woodev01.projectsaeje.R;
 
 import java.util.ArrayList;
 
@@ -52,7 +55,7 @@ public class DrawingView extends View {
         MainActivity.staff.setCurrentMeasures();
         for(Measure aMeasure: MainActivity.staff.getCurrentMeasures()) {
             for(Note aNote: aMeasure.notes) {
-                canvas.drawBitmap(aNote.scaledBitmap, x, getNoteY(aNote.tonalValue), null);
+                canvas.drawBitmap(aNote.scaledBitmap, x, getNoteY(aNote), null);
                 x += aNote.rhythmicValue * 80;
                 //x += 50;
             }
@@ -69,11 +72,56 @@ public class DrawingView extends View {
         x -= subtractor;
     }
 
-    private int getNoteY(int tV) {
+    private int getNoteY(Note tN) {
 
-        int y = (tV * 10);
-
+        int y;
+        int height = drawCanvas.getHeight();
+        y = (height/2) - 231;
         return y;
+        /*
+        switch(tV%12) {
+            case 0:
+                y = (height/2)-270;
+                return y;
+            case 1:
+                y = (height/2)-270;
+                return y;
+            case 2:
+                y = (height/2)-270;
+                return y;
+            case 3:
+                y = (height/2)-270;
+                return y;
+            case 4:
+                y = (height/2)-270;
+                return y;
+            case 5:
+                y = (height/2)-270;
+                return y;
+            case 6:
+                y = (height/2)-270;
+                return y;
+            case 7:
+                y = (height/2)-270;
+                return y;
+            case 8:
+                y = (height/2)-270;
+                return y;
+            case 9:
+                y = (height/2)-270;
+                return y;
+            case 10:
+                y = (height/2)-270;
+                return y;
+            case 11:
+                y = (height/2)-270;
+                return y;
+            default:
+                y = (height/2)-270;
+                return y;
+
+        }
+        */
     }
 
     /*public Staff measureChooser(Staff theStaff, int currentMeasure, int swipe) {
