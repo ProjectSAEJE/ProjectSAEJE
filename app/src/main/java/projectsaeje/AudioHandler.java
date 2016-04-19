@@ -232,8 +232,6 @@ public class AudioHandler extends Activity {
             MainActivity.drawView.is_drawing_beat_signifier = false;
             MainActivity.drawView.draw(MainActivity.drawView.drawCanvas);
         }
-
-
     }
 
     @Override
