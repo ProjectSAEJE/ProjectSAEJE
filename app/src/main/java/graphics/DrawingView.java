@@ -76,8 +76,9 @@ public class DrawingView extends View {
 
         int y;
         int height = drawCanvas.getHeight();
-        y = (height/2) - 231;
+        y = (height/2) - 362;
         return y;
+
         /*
         switch(tV%12) {
             case 0:
