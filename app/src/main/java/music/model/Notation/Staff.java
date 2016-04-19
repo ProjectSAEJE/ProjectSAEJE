@@ -1,19 +1,13 @@
-package music.model;
+package music.model.Notation;
 
 import android.app.Activity;
 
-import android.os.Parcelable;
-import android.os.Parcel;
-import android.util.Log;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import music.model.Notation.MusicalSymbols.*;
 
-import music.model.*;
 
-
-public class Staff{
+public class Staff extends Notation {
 
     private String fileName;
     private ArrayList<Measure> currentMeasures;
@@ -41,7 +35,7 @@ public class Staff{
     public void makeStartingCurrentMeasures() {
         currentMeasures = measures;
 
-        ArrayList<Note> blankArray = new ArrayList<>();
+        ArrayList<Notation> blankArray = new ArrayList<>();
         Measure newMeasure = new Measure(blankArray, 4, 4);
 
         currentMeasures.add(newMeasure);
@@ -55,7 +49,7 @@ public class Staff{
         } else if(measures.size() == 1) {
             ArrayList<Measure> mostRecentMeasures = new ArrayList<>();
             mostRecentMeasures.add(0, measures.get(0));
-            mostRecentMeasures.add(1, new Measure(new ArrayList<Note>(), 4, 4));
+            mostRecentMeasures.add(1, new Measure(new ArrayList<Notation>(), 4, 4));
             currentMeasures = mostRecentMeasures;
             //Log.d("Testing...1", this.measures.toString());
         } else {

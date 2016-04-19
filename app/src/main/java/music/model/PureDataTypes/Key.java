@@ -1,4 +1,4 @@
-package music.model;
+package music.model.PureDataTypes;
 
 import java.util.ArrayList;
 import java.util.Hashtable;

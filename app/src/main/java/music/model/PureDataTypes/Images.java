@@ -1,4 +1,4 @@
-package music.model;
+package music.model.PureDataTypes;
 
 
 import com.example.woodev01.projectsaeje.R;
