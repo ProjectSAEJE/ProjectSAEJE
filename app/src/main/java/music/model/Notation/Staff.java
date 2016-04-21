@@ -16,6 +16,7 @@ public class Staff extends Notation {
     public ArrayList<Measure> measures;
 
     public Staff() {
+        super(new ArrayList<Notation>());
     }
 
     public Staff(ArrayList<Measure> measures) {

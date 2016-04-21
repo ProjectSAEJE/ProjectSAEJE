@@ -7,7 +7,7 @@ public abstract class Notation {
     private ArrayList<Notation> elements;
 
     public Notation() {
-        elements = new ArrayList<>();
+        //elements = new ArrayList<>();
     }
 
     public Notation(ArrayList<Notation> elements){
