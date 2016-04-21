@@ -10,8 +10,10 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 
 import music.model.Notation.MusicalSymbols.Note;
+import music.model.Notation.*;
 import music.model.Notation.Measure;
 import projectsaeje.MainActivity;
+
 
 public class DrawingView extends View {
     //drawing and canvas paint
@@ -49,7 +51,8 @@ public class DrawingView extends View {
         canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
         MainActivity.staff.setCurrentMeasures();
         for(Measure aMeasure: MainActivity.staff.getCurrentMeasures()) {
-            for(Note aNote: aMeasure.notes) {
+            for(Notation aNotation: aMeasure.getElements()) {
+                Note aNote = (Note)(aNotation);
                 canvas.drawBitmap(aNote.getScaledBitmap(), x, getNoteY(aNote.getTonalValue()), null);
                 x += aNote.getRhythmicValue() * 80;
                 //x += 50;

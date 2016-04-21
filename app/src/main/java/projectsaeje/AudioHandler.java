@@ -164,7 +164,6 @@ public class AudioHandler extends Activity {
         }
     }
 
-
     private float getRhythmicValueOfEndedNoteWithLength(int length) {
         return ((float) rhythmic_preciseness) / ((float) length);
     }
