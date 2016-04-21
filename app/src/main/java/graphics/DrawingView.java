@@ -59,7 +59,7 @@ public class DrawingView extends View {
         for(Measure aMeasure: MainActivity.staff.getCurrentMeasures()) {
             for(Notation aNotation: aMeasure.getElements()) {
                 Note aNote = (Note)(aNotation);
-                canvas.drawBitmap(aNote.getScaledBitmap(), x, getNoteY(aNote.getTonalValue()), null);
+                canvas.drawBitmap(aNote.getScaledBitmap(), x, getNoteY(aNote), null);
                 x += aNote.getRhythmicValue() * 80;
                 //x += 50;
             }
