@@ -106,10 +106,10 @@ public class MainActivity extends Activity {
             case R.id.metronome:
                 //pull up menu for the metronome
 
-                show_metronome_menu();
+                //show_metronome_menu();
 
-                bpm = get_user_bpm_input();
-                is_on = get_user_is_on_input();
+                //bpm = get_user_bpm_input();
+                //is_on = get_user_is_on_input();
 
 
 
