@@ -110,6 +110,7 @@ public class MainActivity extends Activity {
 
                 //bpm = get_user_bpm_input();
                 //is_on = get_user_is_on_input();
+                //
 
 
 
