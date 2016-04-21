@@ -21,6 +21,7 @@ import audio.CaptureThread;
 import music.ExtraTypes.*;
 import music.model.*;
 import music.model.Notation.MusicalSymbols.*;
+import music.model.Note;
 import music.model.PureDataTypes.*;
 import music.model.Notation.*;
 
@@ -259,7 +260,6 @@ public class AudioHandler extends Activity {
 
             case R.id.clear:
                 //clear the staff
-
                 return true;
 
             default:

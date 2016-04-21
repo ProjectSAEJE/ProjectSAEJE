@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 
 public class Note extends MusicalSymbol {
 
-
     private int tonalValue; //represents a piano note value 0-87
 
     public Note(int tonalValue, Bitmap scaledBitmap, int rhythmicValue) {
@@ -20,5 +19,6 @@ public class Note extends MusicalSymbol {
     public int getTonalValue() {
         return this.tonalValue;
     }
+
 }
 
