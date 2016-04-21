@@ -27,7 +27,7 @@ public class Measure extends Notation {
     public void setBeats(int beat){
         this.beats = beat;
     }
-    public void setNumBeats(int numBeats) {
+    public void setNumBeats(int numBeats){
         this.numBeats = numBeats;
     }
 

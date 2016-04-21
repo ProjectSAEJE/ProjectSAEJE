@@ -32,7 +32,9 @@ public class Key {
     public static ArrayList<ArrayList> possibleKeys = new ArrayList<>();
 
 
-    public Key(int root) {
+
+
+    public Key(int root){
         deriveKeys();
         ArrayList<NoteTuple> newKey = autoKeys.get(Math.abs(root%12));
         NoteTuple newNoteTuple = newKey.get(0);

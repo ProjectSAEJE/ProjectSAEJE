@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import music.model.Notation.MusicalSymbols.*;
 
-/*
 
 public class Staff extends Notation {
 
@@ -71,5 +70,3 @@ public class Staff extends Notation {
         measures.add(newMeasure);
     }
 }
-
-*/
