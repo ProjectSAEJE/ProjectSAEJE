@@ -250,7 +250,14 @@ public class AudioHandler extends Activity {
                 return true;
 
             case R.id.clear:
-                //clear the staff
+                MainActivity.staff.clear();
+                destroy();
+                MainActivity.drawView.startNew();
+                MainActivity.drawView.draw(MainActivity.drawView.drawCanvas);
+
+
+                intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
 
                 return true;
 
