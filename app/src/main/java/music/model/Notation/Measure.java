@@ -10,7 +10,9 @@ public class Measure extends Notation {
     private int numBeats;     //total number of beats per measure   3 \_  3/8 time
     private int beats;        //note value that gets the beat       8 /
 
-    public Measure() {}
+    public Measure() {
+        super(new ArrayList<Notation>());
+    }
 
     public Measure(ArrayList<Notation> notes, int numBeats, int beats) {
         super(notes);

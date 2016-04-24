@@ -10,30 +10,30 @@ import music.model.Notation.MusicalSymbols.*;
 public class Staff extends Notation {
 
     private String fileName;
-    private ArrayList<Measure> currentMeasures;
+    private ArrayList<Notation> currentMeasures;
     public Activity activity;
 
-    public ArrayList<Measure> measures;
 
     public Staff() {
+        super(new ArrayList<Notation>());
     }
 
-    public Staff(ArrayList<Measure> measures) {
-        this.measures = measures;
+    public Staff(ArrayList<Notation> measures) {
+        super(measures);
     }
 
     public void moveUpCurrentMeasures() {
         currentMeasures.remove(0);
-        currentMeasures.add(1, measures.get(measures.size() - 1));
+        currentMeasures.add(1, this.getElements().get(this.getNumElements() - 1));
     }
 
     public void moveBackCurrentMeasures() {
         currentMeasures.remove(1);
-        currentMeasures.add(0, measures.get(measures.size() - 2));
+        currentMeasures.add(0, this.getElements().get(this.getNumElements() - 2));
     }
 
     public void makeStartingCurrentMeasures() {
-        currentMeasures = measures;
+        currentMeasures = this.getElements();
 
         ArrayList<Notation> blankArray = new ArrayList<>();
         Measure newMeasure = new Measure(blankArray, 4, 4);
@@ -43,26 +43,19 @@ public class Staff extends Notation {
     }
 
     public void setCurrentMeasures() {
-
-        if (this.measures.isEmpty()){
+        if (this.getElements().isEmpty()){
             makeStartingCurrentMeasures();
-
             //Log.d("Testing...", this.measures.toString());
-
-        } else if(measures.size() == 1) {
-
-            ArrayList<Measure> mostRecentMeasures = new ArrayList<>();
-            mostRecentMeasures.add(0, measures.get(0));
+        } else if(getElements().size() == 1) {
+            ArrayList<Notation> mostRecentMeasures = new ArrayList<>();
+            mostRecentMeasures.add(0, this.getElements().get(0));
             mostRecentMeasures.add(1, new Measure(new ArrayList<Notation>(), 4, 4));
             currentMeasures = mostRecentMeasures;
-
             //Log.d("Testing...1", this.measures.toString());
-
         } else {
-
-            ArrayList<Measure> mostRecentMeasures = new ArrayList<>();
-            mostRecentMeasures.add(0, measures.get(measures.size() - 2));
-            mostRecentMeasures.add(1, measures.get(measures.size() - 1));
+            ArrayList<Notation> mostRecentMeasures = new ArrayList<>();
+            mostRecentMeasures.add(0, getElements().get(getElements().size() - 2));
+            mostRecentMeasures.add(1, getElements().get(getElements().size() - 1));
             currentMeasures = mostRecentMeasures;
 
             if(measures.size() > 2) {
@@ -72,15 +65,21 @@ public class Staff extends Notation {
                 }
             }
             //Log.d("Testing...2", this.measures.toString());
-
         }
     }
 
-    public ArrayList<Measure> getCurrentMeasures() {
+    public ArrayList<Notation> getCurrentMeasures() {
         return this.currentMeasures;
     }
 
     public void addMeasure(Measure newMeasure) {
-        measures.add(newMeasure);
+        getElements().add(newMeasure);
+    }
+
+    @Override
+    public void clear(){
+        super.clear();
+        //this.setElements(new ArrayList<Notation>());
+        setCurrentMeasures();
     }
 }

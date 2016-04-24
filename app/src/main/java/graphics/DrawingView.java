@@ -53,14 +53,18 @@ public class DrawingView extends View {
 
     @Override
     public void onDraw(Canvas canvas) {
+
         x = 50;
         canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
         MainActivity.staff.setCurrentMeasures();
-        for(Measure aMeasure: MainActivity.staff.getCurrentMeasures()) {
-            for(Notation aNotation: aMeasure.getElements()) {
+
+        for(Notation aMeasure: MainActivity.staff.getCurrentMeasures()) {
+            Measure myMeasure = (Measure)(aMeasure);
+
+            for(Notation aNotation: myMeasure.getElements()) {
                 Note aNote = (Note)(aNotation);
-                canvas.drawBitmap(aNote.getScaledBitmap(), x, getNoteY(aNote), null);
-                x += aNote.getRhythmicValue() * 80;
+                canvas.drawBitmap(aNote.getScaledBitmap(), (int)(x), (int)(getNoteY(aNote)), null);
+                x += (aNote.getRhythmicValue()+1) * 80;
                 //x += 50;
             }
         };
@@ -80,11 +84,10 @@ public class DrawingView extends View {
 
         int y;
         int height = drawCanvas.getHeight();
-        y = (height/2) - 362;
+        y = (height/2) - 61;
         return y;
-
-        /*
-        switch(tV%12) {
+/*
+        switch(tN.getTonalValue()%12) {
             case 0:
                 y = (height/2)-270;
                 return y;
@@ -126,7 +129,7 @@ public class DrawingView extends View {
                 return y;
 
         }
-        */
+*/
     }
 
     /*public Staff measureChooser(Staff theStaff, int currentMeasure, int swipe) {

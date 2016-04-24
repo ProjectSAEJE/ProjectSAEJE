@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import graphics.*;
 import music.model.Notation.Measure;
+import music.model.Notation.Notation;
 import music.model.Notation.Staff;
 
 public class MainActivity extends Activity {
@@ -30,7 +31,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         if(staff == null) {
-            staff = new Staff(new ArrayList<Measure>());
+            staff = new Staff();
             drawView = (DrawingView)findViewById(R.id.drawing);
         }
     }
@@ -96,12 +97,22 @@ public class MainActivity extends Activity {
             case R.id.clear:
                 //clear the staff
 
-                staff.measures = new ArrayList<>();
+                staff.setElements(new ArrayList<Notation>());
                 staff.makeStartingCurrentMeasures();
 
                 drawView.startNew();
 
                 return true;
+
+            //case R.id.metronome:
+                //pull up menu for the metronome
+
+                //show_metronome_menu();
+
+                //bpm = get_user_bpm_input();
+                //is_on = get_user_is_on_input();
+                //
+
 
             default:
                 return super.onOptionsItemSelected(item);

@@ -7,7 +7,7 @@ public abstract class Notation {
     private ArrayList<Notation> elements;
 
     public Notation() {
-        elements = new ArrayList<>();
+        //elements = new ArrayList<>();
     }
 
     public Notation(ArrayList<Notation> elements){
@@ -18,10 +18,16 @@ public abstract class Notation {
         return this.elements;
     }
 
-    public void clear() { this.elements = new ArrayList<>(); }
+    public void clear() {
+
+        this.elements = new ArrayList<>();
+    }
 
     public int getNumElements() {
         return elements.size();
     }
 
+    public void setElements(ArrayList<Notation> elements) {
+        this.elements = elements;
+    }
 }
