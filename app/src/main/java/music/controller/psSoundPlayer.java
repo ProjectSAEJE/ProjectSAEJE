@@ -24,6 +24,14 @@ public class psSoundPlayer {
 
     public psSoundPlayer(Context context) {
         this.context = context;
+
+        mHandler = new Handler() {
+            @Override
+            public synchronized void handleMessage(Message m) {
+                OutputTonalValueAtPosition(m.getData().getInt("Current_Beat_Precision"));
+            }
+        };
+
     }
 
     public void delete() {
@@ -35,13 +43,6 @@ public class psSoundPlayer {
         m_player = m_player.create(context, /*e.g. R.raw.sound_file_1 */ resource);
         m_player.start(); // no need to call prepare(); create() does that for you
     }
-
-    mHandler = new Handler() {
-        @Override
-        public synchronized void handleMessage(Message m) {
-            OutputTonalValueAtPosition(m.getData().getInt("Current_Beat_Precision"));
-        }
-    };
 
     public void addToPlaybackQueue(MusicalSymbol symbol) {
         //
@@ -63,13 +64,13 @@ public class psSoundPlayer {
     }
 
     public int getResourceIDForTonalValue(int a_tonal_value) {
-        int ID = null;
+        int ID = 0;
         //find the ID
         return ID;
     }
 
     public void OutputTonalValueAtPosition(int pos) {
-        int tonal_value = playback_queue[pos];
+        int tonal_value = this.playback_queue[pos];
         int resource_id = getResourceIDForTonalValue(tonal_value);
         playSound(resource_id);
     }
