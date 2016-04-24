@@ -134,7 +134,8 @@ public class AudioHandler extends Activity {
         }
 
         int height = MainActivity.drawView.drawCanvas.getHeight();
-        int noteSize = (int)(height*0.26042);
+        int noteSize = (int)(height*0.26042); // Scales the note to fit the staff
+
 
 
         Bitmap theBitmap = BitmapFactory.decodeResource(this.getResources(), noteType);
