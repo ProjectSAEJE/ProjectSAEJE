@@ -43,21 +43,36 @@ public class Staff extends Notation {
     }
 
     public void setCurrentMeasures() {
+
         if (this.measures.isEmpty()){
             makeStartingCurrentMeasures();
+
             //Log.d("Testing...", this.measures.toString());
+
         } else if(measures.size() == 1) {
+
             ArrayList<Measure> mostRecentMeasures = new ArrayList<>();
             mostRecentMeasures.add(0, measures.get(0));
             mostRecentMeasures.add(1, new Measure(new ArrayList<Notation>(), 4, 4));
             currentMeasures = mostRecentMeasures;
+
             //Log.d("Testing...1", this.measures.toString());
+
         } else {
+
             ArrayList<Measure> mostRecentMeasures = new ArrayList<>();
             mostRecentMeasures.add(0, measures.get(measures.size() - 2));
             mostRecentMeasures.add(1, measures.get(measures.size() - 1));
             currentMeasures = mostRecentMeasures;
+
+            if(measures.size() > 2) {
+                for(Notation element: measures.get(measures.size() - 3).getElements()) {
+                    Note aNote = (Note)(element);
+                    aNote.setScaledBitmapToNull();
+                }
+            }
             //Log.d("Testing...2", this.measures.toString());
+
         }
     }
 

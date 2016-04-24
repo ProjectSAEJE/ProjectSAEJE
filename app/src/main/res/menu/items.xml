@@ -2,10 +2,17 @@
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/playback"
+        android:title="@string/Playback"
+        android:icon="@drawable/ic_play_arrow"
+        android:showAsAction="ifRoom|withText"/>
+
     <item
         android:id="@+id/record"
         android:title="@string/Record"
-        android:icon="@drawable/ic_play_arrow"
+        android:icon="@drawable/record_button"
         android:showAsAction="ifRoom|withText"/>
 
     <item

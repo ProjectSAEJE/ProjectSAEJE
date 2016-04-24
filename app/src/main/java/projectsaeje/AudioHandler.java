@@ -106,7 +106,7 @@ public class AudioHandler extends Activity {
         return pianoNoteNumber;
     }
 
-    public Bitmap noteImageChooser(int tonalValue, int rhythmicValue){
+    public Bitmap noteImageChooser(int tonalValue, int rhythmicValue) {
 
         int noteType;
         int noteNumber = tonalValue%12;
@@ -167,6 +167,11 @@ public class AudioHandler extends Activity {
     private float getRhythmicValueOfEndedNoteWithLength(int length) {
         return ((float) rhythmic_preciseness) / ((float) length);
     }
+
+    public void rebuildNote(Note aNote) {
+        aNote.setScaledBitmap(noteImageChooser(aNote.getTonalValue(), aNote.getTonalValue()));
+    }
+
 
     public void update(float freq) {
 
@@ -229,11 +234,8 @@ public class AudioHandler extends Activity {
         super.onOptionsItemSelected(item);
 
         switch (item.getItemId()) {
-            case R.id.record:
+            case R.id.pause:
 
-                //changes stop icon back to play icon on the record button
-                item.setIcon(R.drawable.ic_play_arrow);
-                item.setTitle(R.string.Resume);
                 destroy();
 
                 Intent intent = new Intent(this, MainActivity.class);
