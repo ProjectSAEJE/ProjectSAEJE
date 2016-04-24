@@ -5,6 +5,7 @@ import android.app.Activity;
 import java.util.ArrayList;
 
 import music.model.Notation.MusicalSymbols.*;
+import projectsaeje.AudioHandler;
 
 
 public class Staff extends Notation {
@@ -23,13 +24,31 @@ public class Staff extends Notation {
     }
 
     public void moveUpCurrentMeasures() {
+        for(Notation element: currentMeasures.get(0).getElements()) {
+            Note aNote = (Note) element;
+            aNote.setScaledBitmapToNull();
+        }
         currentMeasures.remove(0);
-        currentMeasures.add(1, this.getElements().get(this.getNumElements() - 1));
+        Measure aMeasure = (Measure) this.getElements().get(this.getNumElements() - 1);
+        for(Notation element: aMeasure.getElements()) {
+            Note aNote = (Note) element;
+            new AudioHandler().rebuildNote(aNote);
+        }
+        currentMeasures.add(1, aMeasure);
     }
 
     public void moveBackCurrentMeasures() {
+        for(Notation element: currentMeasures.get(1).getElements()) {
+            Note aNote = (Note) element;
+            aNote.setScaledBitmapToNull();
+        }
         currentMeasures.remove(1);
-        currentMeasures.add(0, this.getElements().get(this.getNumElements() - 2));
+        Measure aMeasure = (Measure) this.getElements().get(this.getNumElements() - 2);
+        for(Notation element: aMeasure.getElements()) {
+            Note aNote = (Note) element;
+            new AudioHandler().rebuildNote(aNote);
+        }
+        currentMeasures.add(0, aMeasure);
     }
 
     public void makeStartingCurrentMeasures() {
@@ -57,6 +76,13 @@ public class Staff extends Notation {
             mostRecentMeasures.add(0, getElements().get(getElements().size() - 2));
             mostRecentMeasures.add(1, getElements().get(getElements().size() - 1));
             currentMeasures = mostRecentMeasures;
+
+            if(getElements().size() > 2) {
+                for(Notation element: getElements().get(getElements().size() - 3).getElements()) {
+                    Note aNote = (Note)(element);
+                    aNote.setScaledBitmapToNull();
+                }
+            }
             //Log.d("Testing...2", this.measures.toString());
         }
     }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="Playback">Playback</string>
     <string name="app_name">ProjectSAEJE</string>
     <string name="AudioHandler">AudioHandler</string>
     <string name="Metronome">Metronome</string>
