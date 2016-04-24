@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import graphics.*;
 import music.model.Notation.Measure;
+import music.model.Notation.MusicalSymbols.Note;
 import music.model.Notation.Notation;
 import music.model.Notation.Staff;
 

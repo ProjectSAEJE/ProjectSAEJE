@@ -172,7 +172,6 @@ public class AudioHandler extends Activity {
         aNote.setScaledBitmap(noteImageChooser(aNote.getTonalValue(), aNote.getTonalValue()));
     }
 
-
     public void update(float freq) {
 
         Note aNote;
