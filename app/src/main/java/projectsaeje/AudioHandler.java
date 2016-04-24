@@ -133,9 +133,12 @@ public class AudioHandler extends Activity {
                 noteGet = 2;
         }
 
+        int height = MainActivity.drawView.drawCanvas.getHeight();
+        int noteSize = (int)(height*0.26042);
+
 
         Bitmap theBitmap = BitmapFactory.decodeResource(this.getResources(), noteType);
-        theBitmap = Bitmap.createScaledBitmap(theBitmap, 300, 300, false);
+        theBitmap = Bitmap.createScaledBitmap(theBitmap, noteSize, noteSize, false);
 
         return theBitmap;
     }
