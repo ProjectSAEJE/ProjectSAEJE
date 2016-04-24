@@ -70,7 +70,7 @@ public class Staff extends Notation {
     }
 
     @Override
-    public void clear(){
+    public void clear() {
         super.clear();
         //this.setElements(new ArrayList<Notation>());
         setCurrentMeasures();

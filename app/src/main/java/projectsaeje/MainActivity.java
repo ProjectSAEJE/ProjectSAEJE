@@ -13,14 +13,18 @@ import java.util.ArrayList;
 
 import graphics.*;
 import music.model.Notation.Measure;
+import music.model.Notation.MusicalSymbols.MusicalSymbol;
+import music.model.Notation.MusicalSymbols.Note;
 import music.model.Notation.Notation;
 import music.model.Notation.Staff;
+import music.controller.psSoundPlayer;
 
 public class MainActivity extends Activity {
 
     public static Staff staff = null;
     private static int beatNum = 4;
     private static int beats = 4;
+    private static psSoundPlayer s_player;
 
     public static DrawingView drawView;
 
@@ -111,8 +115,17 @@ public class MainActivity extends Activity {
 
                 //bpm = get_user_bpm_input();
                 //is_on = get_user_is_on_input();
-                //
 
+            //case R.id.playback_notes:
+                //Play back all notes in the composition
+                for (Notation a_measure_notation : staff.getElements()) {
+                    for (Notation a_musical_symbol_notation : a_measure_notation.getElements()) {
+                        MusicalSymbol a_musical_symbol = (MusicalSymbol) a_musical_symbol_notation;
+                        s_player.addToPlaybackQueue(a_musical_symbol);
+                    }
+                }
+
+                s_player.playBackComposition();
 
             default:
                 return super.onOptionsItemSelected(item);
