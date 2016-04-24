@@ -58,8 +58,8 @@ public class Staff extends Notation {
             mostRecentMeasures.add(1, getElements().get(getElements().size() - 1));
             currentMeasures = mostRecentMeasures;
 
-            if(measures.size() > 2) {
-                for(Notation element: measures.get(measures.size() - 3).getElements()) {
+            if(getElements().size() > 2) {
+                for(Notation element: getElements().get(getElements().size() - 3).getElements()) {
                     Note aNote = (Note)(element);
                     aNote.setScaledBitmapToNull();
                 }
