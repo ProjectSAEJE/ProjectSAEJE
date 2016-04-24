@@ -3,7 +3,7 @@ package music.model.Notation.MusicalSymbols;
 import android.graphics.Bitmap;
 import music.model.Notation.*;
 
-public abstract class MusicalSymbol extends Notation {
+public class MusicalSymbol extends Notation {
 
     private Bitmap scaledBitmap;
     private int rhythmicValue;

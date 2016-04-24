@@ -118,14 +118,16 @@ public class MainActivity extends Activity {
 
             //case R.id.playback_notes:
                 //Play back all notes in the composition
+                /*
                 for (Notation a_measure_notation : staff.getElements()) {
-                    for (Notation a_musical_symbol_notation : a_measure_notation.getElements()) {
+                    for (Notation a_musical_symbol_notation : (a_measure_notation.getElements())) {
                         MusicalSymbol a_musical_symbol = (MusicalSymbol) a_musical_symbol_notation;
                         s_player.addToPlaybackQueue(a_musical_symbol);
                     }
                 }
 
                 s_player.playBackComposition();
+                */
 
             default:
                 return super.onOptionsItemSelected(item);

@@ -19,7 +19,7 @@ public class psSoundPlayer {
 
     private Context context;
     private MediaPlayer m_player;
-    private ArrayList<int> playback_queue;
+    private ArrayList<Integer> playback_queue;
     private Handler mHandler;
 
     public psSoundPlayer(Context context) {
@@ -70,7 +70,7 @@ public class psSoundPlayer {
     }
 
     public void OutputTonalValueAtPosition(int pos) {
-        int tonal_value = this.playback_queue[pos];
+        int tonal_value = this.playback_queue.get(pos);
         int resource_id = getResourceIDForTonalValue(tonal_value);
         playSound(resource_id);
     }
