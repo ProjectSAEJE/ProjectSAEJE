@@ -29,7 +29,7 @@ public class DrawingView extends View {
     //canvas bitmap
     private Bitmap canvasBitmap;
 
-    private static int x = 50;
+    private static double x = 0;
 
     public DrawingView(Context context, AttributeSet attrs){
         super(context, attrs);
@@ -53,8 +53,8 @@ public class DrawingView extends View {
 
     @Override
     public void onDraw(Canvas canvas) {
-
-        x = 50;
+        int width = drawCanvas.getWidth();
+        x = 0;
         canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
         MainActivity.staff.setCurrentMeasures();
 
@@ -63,8 +63,9 @@ public class DrawingView extends View {
 
             for(Notation aNotation: myMeasure.getElements()) {
                 Note aNote = (Note)(aNotation);
+                x += (aNote.getRhythmicValue()+1) * (width*0.03125);
                 canvas.drawBitmap(aNote.getScaledBitmap(), (int)(x), (int)(getNoteY(aNote)), null);
-                x += (aNote.getRhythmicValue()+1) * 80;
+
                 //x += 50;
             }
         };
