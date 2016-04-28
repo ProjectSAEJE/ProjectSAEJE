@@ -23,7 +23,7 @@ import projectsaeje.MainActivity;
  */
 
 
-public class Metronome {
+public class Metronome extends Thread {
 
     private int bpm;
     private long msPerBeat;
