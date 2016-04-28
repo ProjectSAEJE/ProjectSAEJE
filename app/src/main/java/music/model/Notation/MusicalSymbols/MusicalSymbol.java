@@ -42,9 +42,9 @@ public class MusicalSymbol extends Notation {
     public String getName() { return this.name; }
     public void setName(String newName) { this.name = newName; }
 
-    public int getTonalValue() {
-        return this.tonalValue;
-    }
+    public int getTonalValue() { return this.tonalValue; }
+
+    public void setTonalValue(int newVal) { this.tonalValue = newVal; }
 
     public void setScaledBitmapToNull() {
         this.scaledBitmap = null;

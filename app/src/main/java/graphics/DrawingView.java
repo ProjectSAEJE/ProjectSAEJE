@@ -3,6 +3,7 @@ package graphics;
 import android.graphics.BitmapFactory;
 import android.util.Base64OutputStream;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -76,6 +77,48 @@ public class DrawingView extends View {
         drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
         invalidate();
     }
+
+    public boolean onTouchEvent(MotionEvent event) {
+
+        Note clickedNote = null;
+        int y = 0;
+
+        switch(event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+
+                int x = (int) event.getX();
+                double sixteenthWidth = drawCanvas.getWidth() * .03125;
+                int notePosition = (int)(x / sixteenthWidth);
+
+
+                for(Notation element: MainActivity.staff.getCurrentMeasures()) {
+                    Measure aMeasure = (Measure) element;
+                    if (aMeasure.getNumElements() <= notePosition){
+                        clickedNote = (Note) aMeasure.getElements().get(notePosition);
+                    } else {
+                        notePosition = notePosition - aMeasure.getNumElements();
+                    }
+                }
+
+            case MotionEvent.ACTION_MOVE:
+
+                if (clickedNote != null) {
+                    y = (int) event.getY();
+                }
+
+            case MotionEvent.ACTION_UP:
+
+                if (clickedNote != null) {
+                    y = Math.abs(y - (int) event.getY());
+                    y = (int) (y/5);
+                    clickedNote.setTonalValue(y);
+                }
+
+        }
+
+        return true;
+    }
+
 
     public void changeX(int subtractor) {
         x -= subtractor;
