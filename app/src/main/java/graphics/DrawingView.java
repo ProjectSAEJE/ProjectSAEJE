@@ -87,13 +87,14 @@ public class DrawingView extends View {
             case MotionEvent.ACTION_DOWN:
 
                 int x = (int) event.getX();
+                y = (int) event.getY();
                 double sixteenthWidth = drawCanvas.getWidth() * .03125;
                 int notePosition = (int)(x / sixteenthWidth);
 
 
                 for(Notation element: MainActivity.staff.getCurrentMeasures()) {
                     Measure aMeasure = (Measure) element;
-                    if (aMeasure.getNumElements() <= notePosition){
+                    if (aMeasure.getNumElements() > notePosition){
                         clickedNote = (Note) aMeasure.getElements().get(notePosition);
                     } else {
                         notePosition = notePosition - aMeasure.getNumElements();
@@ -102,20 +103,21 @@ public class DrawingView extends View {
 
             case MotionEvent.ACTION_MOVE:
 
-                if (clickedNote != null) {
-                    y = (int) event.getY();
-                }
+
 
             case MotionEvent.ACTION_UP:
 
                 if (clickedNote != null) {
-                    y = Math.abs(y - (int) event.getY());
+                    y = y - (int) event.getY();
                     y = (int) (y/5);
+                    Log.d("Y is: ", "" + y);
+                    y = clickedNote.getTonalValue() + y;
                     clickedNote.setTonalValue(y);
+                    this.draw(this.drawCanvas);
+                    this.startNew();
                 }
 
         }
-
         return true;
     }
 
