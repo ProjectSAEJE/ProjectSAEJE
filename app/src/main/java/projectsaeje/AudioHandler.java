@@ -102,6 +102,7 @@ public class AudioHandler extends Activity {
         double logCalcY = Math.log(2);
 
         pianoNoteNumber = (int) ((12 * (logCalcX / logCalcY)) + 49);
+        //Log.d("Tonal value: ", " " + pianoNoteNumber);
         return pianoNoteNumber;
     }
 
@@ -133,10 +134,11 @@ public class AudioHandler extends Activity {
         }
 
         int height = MainActivity.drawView.drawCanvas.getHeight();
-        int noteSize = (int)(height*0.26042); // Scales the note to fit the staff
+        int noteHeight = (int)(height*0.26042);// Scales the note to fit the staff
+        int noteWidth  = (int)(height*0.39063);// Ditto
 
         Bitmap theBitmap = BitmapFactory.decodeResource(this.getResources(), noteType);
-        theBitmap = Bitmap.createScaledBitmap(theBitmap, noteSize, noteSize, false);
+        theBitmap = Bitmap.createScaledBitmap(theBitmap, noteWidth, noteHeight, false);
 
         return theBitmap;
     }

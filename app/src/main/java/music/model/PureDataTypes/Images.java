@@ -8,6 +8,8 @@ import java.util.ArrayList;
 public class Images {
 
     public static ArrayList<Integer> noteImages = new ArrayList<>();
+    public static ArrayList<Integer> flatImages = new ArrayList<>();
+    public static ArrayList<Integer> sharpImages = new ArrayList<>();
 
     /*public Images() {
         noteImages = new ArrayList<>();
@@ -15,6 +17,8 @@ public class Images {
 
     public void populateArrays() {
         populateNoteArraysArrays();
+        populateFlatsArray();
+        populateSharpsArray();
     }
 
     private static void populateNoteArraysArrays() {                   //Rhythmic Value:
@@ -35,4 +39,13 @@ public class Images {
         noteImages.add(R.drawable.double_dotted_half_tied_sixteenth);  //15
         noteImages.add(R.drawable.whole_note);                         //16
     }
+
+    private static void populateFlatsArray() {
+
+    }
+
+    private static void populateSharpsArray() {
+
+    }
+
 }
