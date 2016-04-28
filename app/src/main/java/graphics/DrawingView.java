@@ -1,6 +1,7 @@
 package graphics;
 
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.util.Base64OutputStream;
 import android.util.Log;
 import android.view.View;
@@ -31,9 +32,12 @@ public class DrawingView extends View {
 
     private static double x = 0;
 
+    public boolean is_drawing_beat_signifier;
+
     public DrawingView(Context context, AttributeSet attrs){
         super(context, attrs);
         setupDrawing();
+        this.is_drawing_beat_signifier = true;
     }
 
     private void setupDrawing() {
@@ -69,6 +73,15 @@ public class DrawingView extends View {
                 //x += 50;
             }
         };
+
+        //Log.d("is_drawing_...: ", "" + this.is_drawing_beat_signifier);
+
+        if (this.is_drawing_beat_signifier) {
+            Paint the_paint = new Paint();
+            the_paint.setColor(Color.BLACK);
+            canvas.drawCircle(100, 100, 50, the_paint);
+        }
+
         this.invalidate();
     }
 

@@ -57,9 +57,7 @@ public class AudioHandler extends Activity {
         images.populateArrays();
 
         Tuple2<Integer, Integer> timeSigntature = new Tuple2<>(4, 4);
-        Log.d("print from directly before creating metronome", " ");
-        metronome = new Metronome(90, timeSigntature, false, this, rhythmic_preciseness, MainActivity.drawView.drawCanvas);
-        Log.d("print from directly after creating metronome", " ");
+        metronome = new Metronome(90, timeSigntature, false, this, rhythmic_preciseness, MainActivity.drawView);
         captureNotes();
     }
 
@@ -136,8 +134,6 @@ public class AudioHandler extends Activity {
 
         int height = MainActivity.drawView.drawCanvas.getHeight();
         int noteSize = (int)(height*0.26042); // Scales the note to fit the staff
-
-
 
         Bitmap theBitmap = BitmapFactory.decodeResource(this.getResources(), noteType);
         theBitmap = Bitmap.createScaledBitmap(theBitmap, noteSize, noteSize, false);
@@ -226,7 +222,7 @@ public class AudioHandler extends Activity {
             }
         }
 
-        Log.d("TESTING", MainActivity.staff.getCurrentMeasures().toString());
+        //Log.d("TESTING", MainActivity.staff.getCurrentMeasures().toString());
         MainActivity.drawView.startNew();
         MainActivity.drawView.draw(MainActivity.drawView.drawCanvas);
 
@@ -271,7 +267,6 @@ public class AudioHandler extends Activity {
                 destroy();
                 MainActivity.drawView.startNew();
                 MainActivity.drawView.draw(MainActivity.drawView.drawCanvas);
-
 
                 intent = new Intent(this, MainActivity.class);
                 startActivity(intent);

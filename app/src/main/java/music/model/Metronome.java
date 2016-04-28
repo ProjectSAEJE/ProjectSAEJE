@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import graphics.DrawingView;
 import music.ExtraTypes.Tuple2;
 import projectsaeje.MainActivity;
 
@@ -39,12 +40,12 @@ public class Metronome extends Thread {
     private int rhythmic_preciseness = 0;
     private int beatNum = 0;
     private boolean is_playing_back;
-    private Canvas canvas;
+    private DrawingView d_view;
     public boolean is_time_to_draw_beat_signifier = false;
 
     public Metronome() {}
 
-    public Metronome(int bpm, Tuple2<Integer, Integer> timeSignature, Boolean subdivide, Activity activity, int rhythmic_preciseness, Canvas canvas) {
+    public Metronome(int bpm, Tuple2<Integer, Integer> timeSignature, Boolean subdivide, Activity activity, int rhythmic_preciseness, DrawingView d_view) {
         this.bpm = bpm;
         this.msPerBeat = (long)(((float)(60) / (float)(bpm)) * 1000);   //milliseconds per beat = (seconds per beat) * 1000
         this.timeSignature = timeSignature;
@@ -52,7 +53,7 @@ public class Metronome extends Thread {
         this.running = false;
         this.activity = activity;
         this.rhythmic_preciseness = rhythmic_preciseness;
-        this.canvas = canvas;
+        this.d_view = d_view;
         sPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
         sPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
             @Override
@@ -62,7 +63,6 @@ public class Metronome extends Thread {
             }
         });
         //clickSoundID = sPool.load(activity.getApplicationContext(), R.raw.tamb_down_441, 1);
-
     }
 
     public class TimeKeeper extends TimerTask {
@@ -72,10 +72,18 @@ public class Metronome extends Thread {
             running = true;
             ++rp_precision_counter;
 
+            //Begin by assuming that is not time to draw the beat signifier
+            //Log.d("setting d_view.is_drawing_... to false", " ");
+            MainActivity.drawView.is_drawing_beat_signifier = false;
+
             //If the rp counter modded by the lower numeral of the time signature is 0,
             // then a beat has occurred.
             if ((rp_precision_counter % timeSignature._1) == 0) {
+                Log.d(" ", "signaled beat occurence");
                 signalBeatOccurrence();
+            }
+            else {
+                Log.d(" ", "did not signal beat occurence");
             }
 
             if ((is_playing_back)) {
@@ -93,7 +101,6 @@ public class Metronome extends Thread {
                 */
             }
         }
-
     }
 
     @Override
@@ -139,6 +146,6 @@ public class Metronome extends Thread {
     */
 
     public void drawBeatSignifier() {
-        this.is_time_to_draw_beat_signifier = true;
+        MainActivity.drawView.is_drawing_beat_signifier = true;
     }
 }
