@@ -5,6 +5,8 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
 
 import com.example.woodev01.projectsaeje.R;
@@ -36,6 +38,7 @@ public class Metronome extends Thread {
     private int rp_precision_counter = 0;
     private int rhythmic_preciseness = 0;
     private int beatNum = 0;
+    private boolean is_playing_back;
     private Canvas canvas;
     public boolean is_time_to_draw_beat_signifier = false;
 
@@ -69,9 +72,25 @@ public class Metronome extends Thread {
             running = true;
             ++rp_precision_counter;
 
-            //If the rp counter modded by the lower numeral of the time signature is 0, then a beat has occurred.
+            //If the rp counter modded by the lower numeral of the time signature is 0,
+            // then a beat has occurred.
             if ((rp_precision_counter % timeSignature._1) == 0) {
                 signalBeatOccurrence();
+            }
+
+            if ((is_playing_back)) {
+                /*
+                // Get current rp_precision_counter
+                float current_rp_precision_num = rp_precision_counter;
+
+                // Send it to psSoundPlayer to have it output the sound at that position in the composition.
+                Message msg = mHandler.obtainMessage();
+                Bundle b = new Bundle();
+                b.putInt("Current_Beat_Precision", current_rp_precision_num);
+                msg.setData(b);
+                mHandler.sendMessage(msg);
+                ;
+                */
             }
         }
 
@@ -115,6 +134,7 @@ public class Metronome extends Thread {
             sPool.play(this.clickSoundID, (float) .5, (float) .5, 1, 0, (float) 1.0);
             //System.out.println("*CLICK* " + "#" + clickNum);
         }
+
     }
     */
 

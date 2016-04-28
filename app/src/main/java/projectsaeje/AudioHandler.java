@@ -107,7 +107,7 @@ public class AudioHandler extends Activity {
         return pianoNoteNumber;
     }
 
-    public Bitmap noteImageChooser(int tonalValue, int rhythmicValue){
+    public Bitmap noteImageChooser(int tonalValue, int rhythmicValue) {
 
         int noteType;
         int noteNumber = tonalValue%12;
@@ -133,6 +133,10 @@ public class AudioHandler extends Activity {
             default:
                 noteGet = 2;
         }
+
+        int height = MainActivity.drawView.drawCanvas.getHeight();
+        int noteSize = (int)(height*0.26042); // Scales the note to fit the staff
+
 
 
         Bitmap theBitmap = BitmapFactory.decodeResource(this.getResources(), noteType);
@@ -165,9 +169,12 @@ public class AudioHandler extends Activity {
         }
     }
 
-
     private float getRhythmicValueOfEndedNoteWithLength(int length) {
         return ((float) rhythmic_preciseness) / ((float) length);
+    }
+
+    public void rebuildNote(Note aNote) {
+        aNote.setScaledBitmap(noteImageChooser(aNote.getTonalValue(), aNote.getTonalValue()));
     }
 
     public void update(float freq) {
@@ -221,6 +228,7 @@ public class AudioHandler extends Activity {
 
         //Log.d("TESTING", MainActivity.staff.getCurrentMeasures().toString());
         MainActivity.drawView.startNew();
+        MainActivity.drawView.draw(MainActivity.drawView.drawCanvas);
 
         if (metronome.is_time_to_draw_beat_signifier) {
             MainActivity.drawView.is_drawing_beat_signifier = true;
@@ -238,11 +246,8 @@ public class AudioHandler extends Activity {
         super.onOptionsItemSelected(item);
 
         switch (item.getItemId()) {
-            case R.id.record:
+            case R.id.pause:
 
-                //changes stop icon back to play icon on the record button
-                item.setIcon(R.drawable.ic_play_arrow);
-                item.setTitle(R.string.Resume);
                 destroy();
 
                 Intent intent = new Intent(this, MainActivity.class);
@@ -259,8 +264,25 @@ public class AudioHandler extends Activity {
                 return true;
 
             case R.id.clear:
-                //clear the staff
+                MainActivity.staff.clear();
+                destroy();
+                MainActivity.drawView.startNew();
+                MainActivity.drawView.draw(MainActivity.drawView.drawCanvas);
+
+
+                intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+
                 return true;
+
+            //case R.id.metronome:
+                //pull up menu for the metronome
+
+                //show_metronome_menu();
+
+                //bpm = get_user_bpm_input();
+                //is_on = get_user_is_on_input();
+                //
 
             default:
                 return super.onOptionsItemSelected(item);
