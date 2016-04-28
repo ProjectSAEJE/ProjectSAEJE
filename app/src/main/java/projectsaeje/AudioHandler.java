@@ -21,7 +21,6 @@ import audio.CaptureThread;
 import music.ExtraTypes.*;
 import music.model.*;
 import music.model.Notation.MusicalSymbols.*;
-import music.model.Note;
 import music.model.PureDataTypes.*;
 import music.model.Notation.*;
 
@@ -58,8 +57,9 @@ public class AudioHandler extends Activity {
         images.populateArrays();
 
         Tuple2<Integer, Integer> timeSigntature = new Tuple2<>(4, 4);
+        Log.d("print from directly before creating metronome", " ");
         metronome = new Metronome(90, timeSigntature, false, this, rhythmic_preciseness, MainActivity.drawView.drawCanvas);
-
+        Log.d("print from directly after creating metronome", " ");
         captureNotes();
     }
 
@@ -226,19 +226,22 @@ public class AudioHandler extends Activity {
             }
         }
 
-        //Log.d("TESTING", MainActivity.staff.getCurrentMeasures().toString());
+        Log.d("TESTING", MainActivity.staff.getCurrentMeasures().toString());
         MainActivity.drawView.startNew();
         MainActivity.drawView.draw(MainActivity.drawView.drawCanvas);
 
+        /*
         if (metronome.is_time_to_draw_beat_signifier) {
             MainActivity.drawView.is_drawing_beat_signifier = true;
             MainActivity.drawView.draw(MainActivity.drawView.drawCanvas);
             metronome.is_time_to_draw_beat_signifier = false;
         }
+
         else {
             MainActivity.drawView.is_drawing_beat_signifier = false;
             MainActivity.drawView.draw(MainActivity.drawView.drawCanvas);
         }
+        */
     }
 
     @Override

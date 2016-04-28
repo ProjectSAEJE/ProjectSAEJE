@@ -23,7 +23,7 @@ import projectsaeje.MainActivity;
  */
 
 
-public class Metronome extends Thread {
+public class Metronome {
 
     private int bpm;
     private long msPerBeat;
@@ -121,7 +121,7 @@ public class Metronome extends Thread {
     public void signalBeatOccurrence() {
         //draw something on the canvas to signal a beat occurrence
         this.beatNum++;
-        //Log.d("Beat #", "" + this.beatNum);
+        Log.d("Beat #", "" + this.beatNum);
         drawBeatSignifier();
     }
 
