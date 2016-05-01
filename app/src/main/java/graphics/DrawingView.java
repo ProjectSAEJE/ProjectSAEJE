@@ -49,14 +49,14 @@ public class DrawingView extends View {
         super(context, attrs);
         setupDrawing();
         this.num_times_drawn_since_beat_occurred = 0;
-        this.num_times_beat_signifier_will_be_drawn = 4;
-        this.beat_signifier_circle_x = 100;
+        this.num_times_beat_signifier_will_be_drawn = 6;
+        this.beat_signifier_circle_x = 120;
         this.beat_signifier_circle_y = 150;
-        this.beat_signifier_text_x = this.beat_signifier_circle_x - 30;
-        this.beat_signifier_text_y = this.beat_signifier_circle_y + 30;
+        this.beat_signifier_text_x = this.beat_signifier_circle_x - 40;
+        this.beat_signifier_text_y = this.beat_signifier_circle_y + 40;
         the_text_paint = new Paint();
         the_text_paint.setColor(Color.BLACK);
-        the_text_paint.setTextSize(100);
+        the_text_paint.setTextSize(140);
 
         the_circle_paint = new Paint();
         the_circle_paint.setColor(Color.GREEN);
@@ -120,12 +120,22 @@ public class DrawingView extends View {
         if (this.num_times_drawn_since_beat_occurred < this.num_times_beat_signifier_will_be_drawn) {
             //Log.d("", "adding one to: " + this.num_times_drawn_since_beat_occurred);
             this.num_times_drawn_since_beat_occurred += 1;
-            //Log.d("", "Drawing circle b/c this.is_drawing = " + this.a_beat_just_occurred + " and num_X_has_been = " + this.num_times_drawn_since_beat_occurred);
-            canvas.drawCircle(this.beat_signifier_circle_x, this.beat_signifier_circle_y, 70, this.the_circle_paint);
+
             String text_to_display = "" + (this.beat_num_from_metronome % this.time_signature_top_num_from_metronome);
             if (text_to_display.equals("0")) {
                 text_to_display = "" + this.time_signature_top_num_from_metronome;
             }
+            if(text_to_display.equals("1")) {
+                the_circle_paint.setColor(Color.rgb(255, 180, 100));
+            }
+            else {
+                the_circle_paint.setColor(Color.rgb(50, 255, 255));
+            }
+
+            //Log.d("", "Drawing circle b/c this.is_drawing = " + this.a_beat_just_occurred + " and num_X_has_been = " + this.num_times_drawn_since_beat_occurred);
+            the_circle_paint.setAlpha((int) ((255) / this.num_times_drawn_since_beat_occurred));
+            the_text_paint.setAlpha((int) ((255) / this.num_times_drawn_since_beat_occurred));
+            canvas.drawCircle(this.beat_signifier_circle_x, this.beat_signifier_circle_y, 100, this.the_circle_paint);
             canvas.drawText(text_to_display, this.beat_signifier_text_x, this.beat_signifier_text_y, this.the_text_paint);
             //Log.d("", "Drawing circle #: " + this.num_times_drawn_since_beat_occurred + " at: (" + this.beat_signifier_circle_x + ", " + this.beat_signifier_circle_y + ")" + " for beat #: " + this.beat_num_from_metronome);
         }
