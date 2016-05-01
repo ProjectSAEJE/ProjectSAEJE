@@ -63,6 +63,7 @@ public class Metronome extends Thread {
             }
         });
         //clickSoundID = sPool.load(activity.getApplicationContext(), R.raw.tamb_down_441, 1);
+        MainActivity.drawView.time_signature_top_num_from_metronome = timeSignature._0;
     }
 
     public class TimeKeeper extends TimerTask {
@@ -83,7 +84,7 @@ public class Metronome extends Thread {
             }
             else {
                 //Log.d(" ", "did not signal beat occurence");
-                //MainActivity.drawView.a_beat_just_occurred = false;
+                MainActivity.drawView.a_beat_just_occurred = false;
                 ;
             }
 
@@ -129,8 +130,9 @@ public class Metronome extends Thread {
     public void signalBeatOccurrence() {
         //draw something on the canvas to signal a beat occurrence
         this.beatNum++;
-        Log.d("Beat #", "" + this.beatNum);
+        //Log.d("Beat #", "" + this.beatNum);
         MainActivity.drawView.a_beat_just_occurred = true;
+        MainActivity.drawView.beat_num_from_metronome = beatNum;
     }
 
     /* //Wasn't working...

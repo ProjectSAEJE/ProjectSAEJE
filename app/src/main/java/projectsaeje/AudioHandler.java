@@ -56,8 +56,8 @@ public class AudioHandler extends Activity {
 
         images.populateArrays();
 
-        Tuple2<Integer, Integer> timeSigntature = new Tuple2<>(4, 4);
-        metronome = new Metronome(30, timeSigntature, false, this, rhythmic_preciseness, MainActivity.drawView);
+        Tuple2<Integer, Integer> timeSigntature = new Tuple2<>(3, 4);
+        metronome = new Metronome(90, timeSigntature, false, this, rhythmic_preciseness, MainActivity.drawView);
         captureNotes();
     }
 
