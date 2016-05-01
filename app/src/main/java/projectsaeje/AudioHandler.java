@@ -57,7 +57,7 @@ public class AudioHandler extends Activity {
         images.populateArrays();
 
         Tuple2<Integer, Integer> timeSigntature = new Tuple2<>(4, 4);
-        metronome = new Metronome(90, timeSigntature, false, this, rhythmic_preciseness, MainActivity.drawView);
+        metronome = new Metronome(30, timeSigntature, false, this, rhythmic_preciseness, MainActivity.drawView);
         captureNotes();
     }
 
@@ -230,13 +230,13 @@ public class AudioHandler extends Activity {
 
         /*
         if (metronome.is_time_to_draw_beat_signifier) {
-            MainActivity.drawView.is_drawing_beat_signifier = true;
+            MainActivity.drawView.a_beat_just_occurred = true;
             MainActivity.drawView.draw(MainActivity.drawView.drawCanvas);
             metronome.is_time_to_draw_beat_signifier = false;
         }
 
         else {
-            MainActivity.drawView.is_drawing_beat_signifier = false;
+            MainActivity.drawView.a_beat_just_occurred = false;
             MainActivity.drawView.draw(MainActivity.drawView.drawCanvas);
         }
         */

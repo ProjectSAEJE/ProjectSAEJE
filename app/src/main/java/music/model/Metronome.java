@@ -74,16 +74,17 @@ public class Metronome extends Thread {
 
             //Begin by assuming that is not time to draw the beat signifier
             //Log.d("setting d_view.is_drawing_... to false", " ");
-            MainActivity.drawView.is_drawing_beat_signifier = false;
 
             //If the rp counter modded by the lower numeral of the time signature is 0,
             // then a beat has occurred.
             if ((rp_precision_counter % timeSignature._1) == 0) {
-                Log.d(" ", "signaled beat occurence");
+                //Log.d(" ", "signaled beat occurence");
                 signalBeatOccurrence();
             }
             else {
-                Log.d(" ", "did not signal beat occurence");
+                //Log.d(" ", "did not signal beat occurence");
+                //MainActivity.drawView.a_beat_just_occurred = false;
+                ;
             }
 
             if ((is_playing_back)) {
@@ -129,7 +130,7 @@ public class Metronome extends Thread {
         //draw something on the canvas to signal a beat occurrence
         this.beatNum++;
         Log.d("Beat #", "" + this.beatNum);
-        drawBeatSignifier();
+        MainActivity.drawView.a_beat_just_occurred = true;
     }
 
     /* //Wasn't working...
@@ -145,7 +146,4 @@ public class Metronome extends Thread {
     }
     */
 
-    public void drawBeatSignifier() {
-        MainActivity.drawView.is_drawing_beat_signifier = true;
-    }
 }
