@@ -63,9 +63,7 @@ public class DrawingView extends View {
 
     }
 
-    private void setupDrawing() {
-        canvasPaint = new Paint(Paint.DITHER_FLAG);
-    }
+    private void setupDrawing() { canvasPaint = new Paint(Paint.DITHER_FLAG); }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {

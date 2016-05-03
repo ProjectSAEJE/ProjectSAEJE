@@ -51,6 +51,7 @@ public class AudioHandler extends Activity {
         setContentView(R.layout.activity_main);
 
         this.tempMeasure = new Measure(new ArrayList<Notation>(), 4, 4);
+        MainActivity.staff.addMeasure(tempMeasure);
 
         Images images = new Images();
 
@@ -209,7 +210,7 @@ public class AudioHandler extends Activity {
                 aNote = new Note(notesTone, notesImage, valueTilMeasureFull);
 
                 tempMeasure.addNote(aNote);
-                MainActivity.staff.addMeasure(new Measure(tempMeasure.getElements(), 4, 4));
+                MainActivity.staff.addMeasure((MainActivity.staff.getNumElements() - 1), new Measure(tempMeasure.getElements(), 4, 4));
                 tempMeasure.clear();
 
                 aNote = new Note(notesTone, secondaryNotesImage, rhythmicValue - valueTilMeasureFull);

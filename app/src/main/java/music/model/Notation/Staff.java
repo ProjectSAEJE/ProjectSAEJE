@@ -94,6 +94,7 @@ public class Staff extends Notation {
     public void addMeasure(Measure newMeasure) {
         getElements().add(newMeasure);
     }
+    public void addMeasure(int placement, Measure newMeasure) { getElements().add(placement, newMeasure); }
 
     @Override
     public void clear() {
