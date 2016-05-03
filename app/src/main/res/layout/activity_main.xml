@@ -10,7 +10,7 @@
         android:background="@drawable/staff_full" />
 
     <EditText
-        android:id="@+id/textview"
+        android:id="@+id/EditText"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:hint="@string/Standard_bpm"

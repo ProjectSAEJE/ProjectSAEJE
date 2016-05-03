@@ -9,11 +9,10 @@
         android:layout_height="fill_parent"
         android:background="@drawable/staff_full" />
 
-    <EditText
-        android:id="@+id/EditText"
+    <TextView
+        android:id="@+id/TextView"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:text="@string/Standard_bpm"
         android:layout_alignParentTop="true"
         android:layout_marginTop="20dp"
         android:layout_marginStart="40dp"
