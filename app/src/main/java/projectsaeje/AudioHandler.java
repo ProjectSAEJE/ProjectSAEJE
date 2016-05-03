@@ -209,7 +209,7 @@ public class AudioHandler extends Activity {
                 aNote = new Note(notesTone, notesImage, rhythmicValue - Math.abs(valueTilMeasureFull));
 
                 tempMeasure.addNote(aNote);
-                MainActivity.staff.addMeasure((MainActivity.staff.getNumElements() - 1), new Measure(tempMeasure.getElements(), 4, 4));
+                MainActivity.staff.addMeasure((MainActivity.staff.getNumElements() - 2), new Measure(tempMeasure.getElements(), 4, 4));
                 tempMeasure.clear();
 
                 aNote = new Note(notesTone, secondaryNotesImage, Math.abs(valueTilMeasureFull));
