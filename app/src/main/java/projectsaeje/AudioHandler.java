@@ -197,22 +197,21 @@ public class AudioHandler extends Activity {
         //In other words, only construct the recently ended note if update has been called with a new tonal value.
 
         if (rhythmicValue != -1) {
-            if (rhythmicValue < valueTilMeasureFull) {
+            if (rhythmicValue <= valueTilMeasureFull) {
                 notesImage = noteImageChooser(notesTone, rhythmicValue);
             } else {
-                notesImage = noteImageChooser(notesTone, valueTilMeasureFull);
-                secondaryNotesImage = noteImageChooser(notesTone, rhythmicValue - valueTilMeasureFull);
+                notesImage = noteImageChooser(notesTone, rhythmicValue - Math.abs(valueTilMeasureFull));
+                secondaryNotesImage = noteImageChooser(notesTone, Math.abs(valueTilMeasureFull));
             }
 
-
             if (secondaryNotesImage != null) {
-                aNote = new Note(notesTone, notesImage, valueTilMeasureFull);
+                aNote = new Note(notesTone, notesImage, rhythmicValue - Math.abs(valueTilMeasureFull));
 
                 tempMeasure.addNote(aNote);
                 MainActivity.staff.addMeasure(new Measure(tempMeasure.getElements(), 4, 4));
                 tempMeasure.clear();
 
-                aNote = new Note(notesTone, secondaryNotesImage, rhythmicValue - valueTilMeasureFull);
+                aNote = new Note(notesTone, secondaryNotesImage, Math.abs(valueTilMeasureFull));
                 tempMeasure.addNote(aNote);
 
                 MainActivity.staff.setCurrentMeasures();

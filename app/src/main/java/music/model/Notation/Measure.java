@@ -33,14 +33,14 @@ public class Measure extends Notation {
 
     public int valueTilMeasureFull() {
         int acc = 0;
-        int target = (16/(this.beats+1)) * this.numBeats;
+        int target = (16/this.beats) * this.numBeats;
 
         for(Notation item: this.getElements()) {
             MusicalSymbol nItem = (MusicalSymbol)(item);
-            acc += nItem.getRhythmicValue();
+            acc += nItem.getRhythmicValue() + 1;
         }
 
-        return ((target - acc) - 1); //The minus 1 converts it from 1-16 to 0-15 to be in line with the RhythmicValue in AudioHandler
+        return (target - acc); //The minus 1 converts it from 1-16 to 0-15 to be in line with the RhythmicValue in AudioHandler
     }
 
     @Override
