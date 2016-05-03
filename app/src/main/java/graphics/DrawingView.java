@@ -49,11 +49,11 @@ public class DrawingView extends View {
         super(context, attrs);
         setupDrawing();
         this.num_times_drawn_since_beat_occurred = 0;
-        this.num_times_beat_signifier_will_be_drawn = 6;
-        this.beat_signifier_circle_x = 120;
-        this.beat_signifier_circle_y = 150;
-        this.beat_signifier_text_x = this.beat_signifier_circle_x - 40;
-        this.beat_signifier_text_y = this.beat_signifier_circle_y + 40;
+        num_times_beat_signifier_will_be_drawn = 6;
+        beat_signifier_circle_x = 120;
+        beat_signifier_circle_y = 150;
+        beat_signifier_text_x = beat_signifier_circle_x - 40;
+        beat_signifier_text_y = beat_signifier_circle_y + 40;
         the_text_paint = new Paint();
         the_text_paint.setColor(Color.BLACK);
         the_text_paint.setTextSize(140);
@@ -106,7 +106,7 @@ public class DrawingView extends View {
         //boolean is_drawing_beat_signifier = false;
 
         //Log.d("", "a_beat_just_occurred: " + this.a_beat_just_occurred);
-        if (this.a_beat_just_occurred) {
+        if (a_beat_just_occurred) {
             this.num_times_drawn_since_beat_occurred = 0;
         }
 
@@ -117,13 +117,13 @@ public class DrawingView extends View {
         }
         */
 
-        if (this.num_times_drawn_since_beat_occurred < this.num_times_beat_signifier_will_be_drawn) {
+        if (this.num_times_drawn_since_beat_occurred < num_times_beat_signifier_will_be_drawn) {
             //Log.d("", "adding one to: " + this.num_times_drawn_since_beat_occurred);
             this.num_times_drawn_since_beat_occurred += 1;
 
-            String text_to_display = "" + (this.beat_num_from_metronome % this.time_signature_top_num_from_metronome);
+            String text_to_display = "" + (beat_num_from_metronome % time_signature_top_num_from_metronome);
             if (text_to_display.equals("0")) {
-                text_to_display = "" + this.time_signature_top_num_from_metronome;
+                text_to_display = "" + time_signature_top_num_from_metronome;
             }
             if(text_to_display.equals("1")) {
                 the_circle_paint.setColor(Color.rgb(255, 180, 100));
@@ -133,10 +133,10 @@ public class DrawingView extends View {
             }
 
             //Log.d("", "Drawing circle b/c this.is_drawing = " + this.a_beat_just_occurred + " and num_X_has_been = " + this.num_times_drawn_since_beat_occurred);
-            the_circle_paint.setAlpha((int) ((255) / this.num_times_drawn_since_beat_occurred));
-            the_text_paint.setAlpha((int) ((255) / this.num_times_drawn_since_beat_occurred));
-            canvas.drawCircle(this.beat_signifier_circle_x, this.beat_signifier_circle_y, 100, this.the_circle_paint);
-            canvas.drawText(text_to_display, this.beat_signifier_text_x, this.beat_signifier_text_y, this.the_text_paint);
+            the_circle_paint.setAlpha((int) ((255) / num_times_drawn_since_beat_occurred));
+            the_text_paint.setAlpha((int) ((255) / num_times_drawn_since_beat_occurred));
+            canvas.drawCircle(beat_signifier_circle_x, beat_signifier_circle_y, 100, the_circle_paint);
+            canvas.drawText(text_to_display, beat_signifier_text_x, beat_signifier_text_y, this.the_text_paint);
             //Log.d("", "Drawing circle #: " + this.num_times_drawn_since_beat_occurred + " at: (" + this.beat_signifier_circle_x + ", " + this.beat_signifier_circle_y + ")" + " for beat #: " + this.beat_num_from_metronome);
         }
 

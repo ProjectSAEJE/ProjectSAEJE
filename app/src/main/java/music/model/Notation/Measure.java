@@ -33,7 +33,7 @@ public class Measure extends Notation {
 
     public int valueTilMeasureFull() {
         int acc = 0;
-        int target = (16/this.beats)*this.numBeats;
+        int target = (16/(this.beats+1)) * this.numBeats;
 
         for(Notation item: this.getElements()) {
             MusicalSymbol nItem = (MusicalSymbol)(item);
