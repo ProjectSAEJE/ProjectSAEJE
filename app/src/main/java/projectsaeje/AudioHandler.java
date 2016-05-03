@@ -253,6 +253,7 @@ public class AudioHandler extends Activity {
 
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
+                metronome.pause();
 
                 return true;
 

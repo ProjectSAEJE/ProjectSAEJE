@@ -245,9 +245,7 @@ public class DrawingView extends View {
             default:
                 y = 100000;
                 return y;
-
         }
-
     }
 
     /*public Staff measureChooser(Staff theStaff, int currentMeasure, int swipe) {
@@ -256,7 +254,6 @@ public class DrawingView extends View {
         if (swipe == 0)
             displayedTwo.measures.add(theStaff.measures.get(currentMeasure - 1));
         displayedTwo.measures.add(theStaff.measures.get(currentMeasure - 2));
-
 
         return displayedTwo;
     }   */

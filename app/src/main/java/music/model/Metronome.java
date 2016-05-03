@@ -135,6 +135,10 @@ public class Metronome extends Thread {
         MainActivity.drawView.beat_num_from_metronome = beatNum;
     }
 
+    public void pause() {
+        timer.cancel();
+    }
+
     /* //Wasn't working...
     private void clickSound() {
         //System.out.println("clickSound() called");
