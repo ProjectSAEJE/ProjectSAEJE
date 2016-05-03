@@ -17,6 +17,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="20dp"
         android:layout_marginStart="40dp"
-        android:background="@color/background_material_dark" />
+        android:background="@color/background_material_dark"
+        android:inputType="number"
+        android:imeOptions="actionSend"
+        />
 
 </RelativeLayout>

@@ -2,10 +2,14 @@ package projectsaeje;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.content.Intent;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.woodev01.projectsaeje.R;
 
@@ -25,6 +29,8 @@ public class MainActivity extends Activity {
     private static int beatNum = 4;
     private static int beats = 4;
     private static psSoundPlayer s_player;
+    public static int bpm;
+    private EditText editText;
 
     public static DrawingView drawView;
 
@@ -34,9 +40,15 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.activity_main);
 
+        this.editText = (EditText) findViewById(R.id.EditText);
+
+
         if(staff == null) {
             staff = new Staff();
             drawView = (DrawingView)findViewById(R.id.drawing);
+        }
+        else {
+            editText.setText(bpm);
         }
     }
 
@@ -69,12 +81,34 @@ public class MainActivity extends Activity {
         return super.onCreateOptionsMenu(menu);
     }
 
+
+
+
+    /*
+    editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            boolean handled = false;
+            if (actionId == EditorInfo.IME_ACTION_SEND) {
+                sendMessage();
+                handled = true;
+            }
+            return handled;
+        }
+    });
+    */
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
 
         switch (item.getItemId()) {
             case R.id.record:
+                int bpm_int = Integer.parseInt("" + editText.getText());
+                bpm = bpm_int;
+
+                //Log.d("", "bpm_int: " + bpm_int);
+                //String bpm_string = "" + editText.getText();
 
                 item.setIcon(R.drawable.ic_stop);   //set record icon to stop icon
                 item.setTitle(R.string.Pause);

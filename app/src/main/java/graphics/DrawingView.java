@@ -50,7 +50,7 @@ public class DrawingView extends View {
         setupDrawing();
         this.num_times_drawn_since_beat_occurred = 0;
         num_times_beat_signifier_will_be_drawn = 6;
-        beat_signifier_circle_x = 120;
+        beat_signifier_circle_x = 140;
         beat_signifier_circle_y = 150;
         beat_signifier_text_x = beat_signifier_circle_x - 40;
         beat_signifier_text_y = beat_signifier_circle_y + 40;

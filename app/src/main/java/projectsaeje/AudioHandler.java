@@ -12,6 +12,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import android.content.Intent;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.woodev01.projectsaeje.R;
 
@@ -48,7 +51,10 @@ public class AudioHandler extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.audiohandler);
+
+        TextView textView = (TextView) findViewById(R.id.TextView);
+        textView.setText("" + MainActivity.bpm);
 
         this.tempMeasure = new Measure(new ArrayList<Notation>(), 4, 4);
         MainActivity.staff.addMeasure(tempMeasure);
@@ -58,7 +64,7 @@ public class AudioHandler extends Activity {
         images.populateArrays();
 
         Tuple2<Integer, Integer> timeSigntature = new Tuple2<>(4, 4);
-        metronome = new Metronome(90, timeSigntature, false, this, rhythmic_preciseness, MainActivity.drawView);
+        metronome = new Metronome(60, timeSigntature, false, this, rhythmic_preciseness, MainActivity.drawView);
         captureNotes();
     }
 
@@ -155,6 +161,11 @@ public class AudioHandler extends Activity {
             previously_updated_tone = new_tone;
             //The note has just ended, so the length of the note is the number of precisions that have passed since the one at which it began
             length_in_sixteenths_of_ended_note = metronome.get_rp_precision_counter() - starting_precision_of_note;
+
+            if (length_in_sixteenths_of_ended_note == 0) {
+                return -1;
+            }
+
             //reset start time for the newest note
             starting_precision_of_note = metronome.get_rp_precision_counter();
 
@@ -241,6 +252,8 @@ public class AudioHandler extends Activity {
         }
         */
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
