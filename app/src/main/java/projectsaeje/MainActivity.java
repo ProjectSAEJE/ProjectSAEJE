@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
 
 
     public void onEventListener() {
-        ;
+
     }
 
 
@@ -54,23 +54,15 @@ public class MainActivity extends Activity {
         AudioHandler.destroy();
     }
 
-    public int getBeatNum() {
-        return beatNum;
-    }
+    public int getBeatNum() { return beatNum; }
 
-    public int getBeats() {
-        return beats;
-    }
+    public int getBeats() { return beats; }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-    }
+    protected void onPause() { super.onPause(); }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-    }
+    protected void onResume() { super.onResume(); }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
