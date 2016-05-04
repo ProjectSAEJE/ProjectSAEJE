@@ -49,11 +49,11 @@ public class DrawingView extends View {
         super(context, attrs);
         setupDrawing();
         this.num_times_drawn_since_beat_occurred = 0;
-        num_times_beat_signifier_will_be_drawn = 6;
-        beat_signifier_circle_x = 140;
+        num_times_beat_signifier_will_be_drawn = 7;
+        beat_signifier_circle_x = 340;
         beat_signifier_circle_y = 150;
-        beat_signifier_text_x = beat_signifier_circle_x - 40;
-        beat_signifier_text_y = beat_signifier_circle_y + 40;
+        beat_signifier_text_x = beat_signifier_circle_x + 45;
+        beat_signifier_text_y = beat_signifier_circle_y + 45;
         the_text_paint = new Paint();
         the_text_paint.setColor(Color.BLACK);
         the_text_paint.setTextSize(140);
@@ -124,7 +124,7 @@ public class DrawingView extends View {
                 text_to_display = "" + time_signature_top_num_from_metronome;
             }
             if(text_to_display.equals("1")) {
-                the_circle_paint.setColor(Color.rgb(255, 180, 100));
+                the_circle_paint.setColor(Color.rgb(255, 220, 120));
             }
             else {
                 the_circle_paint.setColor(Color.rgb(50, 255, 255));
@@ -133,8 +133,8 @@ public class DrawingView extends View {
             //Log.d("", "Drawing circle b/c this.is_drawing = " + this.a_beat_just_occurred + " and num_X_has_been = " + this.num_times_drawn_since_beat_occurred);
             the_circle_paint.setAlpha((int) ((255) / num_times_drawn_since_beat_occurred));
             the_text_paint.setAlpha((int) ((255) / num_times_drawn_since_beat_occurred));
-            canvas.drawCircle(beat_signifier_circle_x, beat_signifier_circle_y, 100, the_circle_paint);
-            canvas.drawText(text_to_display, beat_signifier_text_x, beat_signifier_text_y, this.the_text_paint);
+            canvas.drawCircle(width - beat_signifier_circle_x, beat_signifier_circle_y, 90, the_circle_paint);
+            canvas.drawText(text_to_display, width - beat_signifier_text_x, beat_signifier_text_y, this.the_text_paint);
             //Log.d("", "Drawing circle #: " + this.num_times_drawn_since_beat_occurred + " at: (" + this.beat_signifier_circle_x + ", " + this.beat_signifier_circle_y + ")" + " for beat #: " + this.beat_num_from_metronome);
         }
 
