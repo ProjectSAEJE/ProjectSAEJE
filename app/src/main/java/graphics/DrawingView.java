@@ -79,7 +79,7 @@ public class DrawingView extends View {
     @Override
     public void onDraw(Canvas canvas) {
         int width = drawCanvas.getWidth();
-        x = 0;
+        x = (width*0.03125);
         canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
         MainActivity.staff.setCurrentMeasures();
 
@@ -88,9 +88,9 @@ public class DrawingView extends View {
 
             for(Notation aNotation: myMeasure.getElements()) {
                 Note aNote = (Note)(aNotation);
-                x += (aNote.getRhythmicValue() + 1) * (width*0.03125);
-                canvas.drawBitmap(aNote.getScaledBitmap(), (int)(x), (int)(getNoteY(aNote)), null);
 
+                canvas.drawBitmap(aNote.getScaledBitmap(), (int)(x), (int)(getNoteY(aNote)), null);
+                x += (aNote.getRhythmicValue() + 1) * (width*0.03125);
                 //x += 50;
             }
         };
@@ -241,7 +241,7 @@ public class DrawingView extends View {
                 y = (height*0.29948);
                 return y;
             default:
-                y = 100000;
+                y = (height*0.41059);
                 return y;
         }
     }

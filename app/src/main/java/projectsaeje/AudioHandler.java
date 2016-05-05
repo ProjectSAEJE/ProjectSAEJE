@@ -43,6 +43,9 @@ public class AudioHandler extends Activity {
     private int length_in_sixteenths_of_ended_note;
     private Metronome metronome;
 
+    //Variables used for tonal interpretation
+    private static ArrayList<Integer> accidentals;
+
     public AudioHandler () {
 
     }
@@ -62,6 +65,13 @@ public class AudioHandler extends Activity {
         Images images = new Images();
 
         images.populateArrays();
+
+        accidentals = new ArrayList<>();
+        accidentals.add(1);
+        accidentals.add(3);
+        accidentals.add(6);
+        accidentals.add(8);
+        accidentals.add(10);
 
         Tuple2<Integer, Integer> timeSigntature = new Tuple2<>(4, 4);
         metronome = new Metronome(MainActivity.bpm, timeSigntature, false, this, rhythmic_preciseness, MainActivity.drawView);
@@ -115,13 +125,18 @@ public class AudioHandler extends Activity {
 
     public Bitmap noteImageChooser(int tonalValue, int rhythmicValue) {
 
+
+
         int noteType;
         int noteNumber = tonalValue%12;
+
         String accidentalIdentifier;
 
         noteType = Images.noteImages.get(rhythmicValue);
 
         String noteName = theKey.getKey();
+
+        //Log.d("Key is: ", noteName);
 
         if(noteName.length() > 1) {
             accidentalIdentifier = noteName.substring(1);
@@ -129,17 +144,26 @@ public class AudioHandler extends Activity {
             accidentalIdentifier = "";
         }
 
-        int noteGet;
-
-        switch (accidentalIdentifier) {
-            case "#":
-                noteGet = 0;
-            case "b":
-                noteGet = 1;
-            default:
-                noteGet = 2;
+        if (accidentals.contains(noteNumber)) {
+            noteType = Images.flatImages.get(rhythmicValue);
         }
 
+        if (noteNumber < 0) {
+            noteType = Images.restImages.get(rhythmicValue);
+        }
+
+/*
+        switch (accidentalIdentifier) {
+            case "#":
+                Log.d("Note is a: ", "Sharp");
+                noteType = Images.sharpImages.get(rhythmicValue);
+            case "b":
+                Log.d("Note is a: ", "Flat");
+                noteType = Images.flatImages.get(rhythmicValue);
+            default:
+                Log.d("Note is a:", "Natural");
+        }
+*/
         int height = MainActivity.drawView.drawCanvas.getHeight();
         int noteHeight = (int)(height*0.26042);// Scales the note to fit the staff
         int noteWidth  = (int)(height*0.39063);// Ditto
