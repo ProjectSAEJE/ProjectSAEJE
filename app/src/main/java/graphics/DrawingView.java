@@ -254,9 +254,11 @@ public class DrawingView extends View {
                 y = (height*0.22222);
                 return y;
             case 7:  // E Flat
+                //y = (height*0.44705);
                 y = (height*0.18576);
                 return y;
             case 8:  // E
+                //y = (height*0.44705);
                 y = (height*0.18576);
                 return y;
             case 9:  // F
@@ -272,52 +274,7 @@ public class DrawingView extends View {
                 y = (height*0.35877);
                 return y;
         }
-
-        /*
-        switch(tN.getTonalValue()%12) {
-            case 0: // C
-                y = (height*0.26128);
-                return y;
-            case 1: // D Flat
-                y = (height*0.22222);
-                return y;
-            case 2: // D
-                y = (height*0.22222);
-                return y;
-            case 3: // E Flat
-                //y = (height*0.44705);
-                y = (height*0.18576);
-                return y;
-            case 4: // E
-                //y = (height*0.44705);
-                y = (height*0.18576);
-                return y;
-            case 5: // F
-                y = (height*0.41059);
-                return y;
-            case 6: // G Flat
-                y = (height*0.37240);
-                return y;
-            case 7: // G
-                y = (height*0.37240);
-                return y;
-            case 8: // A Flat
-                y = (height*0.33594);
-                return y;
-            case 9: // A
-                y = (height*0.33594);
-                return y;
-            case 10: // B Flat
-                y = (height*0.29948);
-                return y;
-            case 11: // B
-                y = (height*0.29948);
-                return y;
-            default:
-                y = (height*0.41059);
-                return y;
-        }
-         */
+        
     }
 
     /*public Staff measureChooser(Staff theStaff, int currentMeasure, int swipe) {
