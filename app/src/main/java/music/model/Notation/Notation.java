@@ -18,10 +18,7 @@ public abstract class Notation {
         return this.elements;
     }
 
-    public void clear() {
-
-        this.elements = new ArrayList<>();
-    }
+    public void clear() { this.elements = new ArrayList<>(); }
 
     public int getNumElements() {
         return elements.size();

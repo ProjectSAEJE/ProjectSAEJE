@@ -37,7 +37,7 @@ public class Measure extends Notation {
 
         for(Notation item: this.getElements()) {
             MusicalSymbol nItem = (MusicalSymbol)(item);
-            acc += nItem.getRhythmicValue() + 1;
+            acc += nItem.getRhythmicValue();
         }
 
         return (target - acc); //The minus 1 converts it from 1-16 to 0-15 to be in line with the RhythmicValue in AudioHandler
@@ -48,8 +48,8 @@ public class Measure extends Notation {
         String acc = "";
         for(Notation item: this.getElements()) {
             MusicalSymbol nItem = (MusicalSymbol)(item);
-            acc = acc + "," + nItem.getName();
+            acc = acc + "," + nItem.getTonalValue();
         }
-        return acc;
+        return "[" + acc + "]";
     }
 }

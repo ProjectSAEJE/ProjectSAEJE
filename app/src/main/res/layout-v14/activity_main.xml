@@ -13,11 +13,10 @@
         android:id="@+id/EditText"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:text="@string/Standard_bpm"
         android:layout_alignParentTop="true"
         android:layout_marginTop="20dp"
         android:layout_marginStart="40dp"
-        android:background="@color/background_material_dark"
+        android:textColor="@color/primary_material_dark"
         android:inputType="number"
         android:imeOptions="actionSend"
         />

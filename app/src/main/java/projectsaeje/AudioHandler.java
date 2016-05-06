@@ -1,6 +1,7 @@
 package projectsaeje;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -32,7 +33,7 @@ public class AudioHandler extends Activity {
 
     private static boolean firstNote = true;
     public static Key theKey = null;
-    public Measure tempMeasure;
+    private Measure tempMeasure;
     public static CaptureThread mCapture;
 
 
@@ -44,7 +45,7 @@ public class AudioHandler extends Activity {
     private Metronome metronome;
 
     //Variables used for tonal interpretation
-    private static ArrayList<Integer> accidentals;
+    public static ArrayList<Integer> accidentals;
 
     public AudioHandler () {
 
@@ -60,7 +61,7 @@ public class AudioHandler extends Activity {
         textView.setText("" + MainActivity.bpm);
 
         this.tempMeasure = new Measure(new ArrayList<Notation>(), 4, 4);
-        MainActivity.staff.addMeasure(tempMeasure);
+        MainActivity.staff.addMeasure(this.tempMeasure);
 
         Images images = new Images();
 
@@ -125,14 +126,12 @@ public class AudioHandler extends Activity {
 
     public Bitmap noteImageChooser(int tonalValue, int rhythmicValue) {
 
-
-
         int noteType;
         int noteNumber = tonalValue%12;
 
         String accidentalIdentifier;
 
-        noteType = Images.noteImages.get(rhythmicValue);
+        noteType = Images.noteImages.get(rhythmicValue - 1);
 
         String noteName = theKey.getKey();
 
@@ -145,11 +144,11 @@ public class AudioHandler extends Activity {
         }
 
         if (accidentals.contains(noteNumber)) {
-            noteType = Images.flatImages.get(rhythmicValue);
+            noteType = Images.flatImages.get(rhythmicValue - 1);
         }
 
         if (noteNumber < 0) {
-            noteType = Images.restImages.get(rhythmicValue);
+            noteType = Images.restImages.get(rhythmicValue - 1);
         }
 
 /*
@@ -169,6 +168,55 @@ public class AudioHandler extends Activity {
         int noteWidth  = (int)(height*0.39063);// Ditto
 
         Bitmap theBitmap = BitmapFactory.decodeResource(this.getResources(), noteType);
+        theBitmap = Bitmap.createScaledBitmap(theBitmap, noteWidth, noteHeight, false);
+
+        return theBitmap;
+    }
+
+    public Bitmap noteImageChooser(int tonalValue, int rhythmicValue, Context context) {
+
+        int noteType;
+        int noteNumber = tonalValue%12;
+
+        String accidentalIdentifier;
+
+        noteType = Images.noteImages.get(rhythmicValue - 1);
+
+        String noteName = theKey.getKey();
+
+        //Log.d("Key is: ", noteName);
+
+        if(noteName.length() > 1) {
+            accidentalIdentifier = noteName.substring(1);
+        } else {
+            accidentalIdentifier = "";
+        }
+
+        if (accidentals.contains(noteNumber)) {
+            noteType = Images.flatImages.get(rhythmicValue - 1);
+        }
+
+        if (noteNumber < 0) {
+            noteType = Images.restImages.get(rhythmicValue - 1);
+        }
+
+/*
+        switch (accidentalIdentifier) {
+            case "#":
+                Log.d("Note is a: ", "Sharp");
+                noteType = Images.sharpImages.get(rhythmicValue);
+            case "b":
+                Log.d("Note is a: ", "Flat");
+                noteType = Images.flatImages.get(rhythmicValue);
+            default:
+                Log.d("Note is a:", "Natural");
+        }
+*/
+        int height = MainActivity.drawView.drawCanvas.getHeight();
+        int noteHeight = (int)(height*0.26042);// Scales the note to fit the staff
+        int noteWidth  = (int)(height*0.39063);// Ditto
+
+        Bitmap theBitmap = BitmapFactory.decodeResource(context.getResources(), noteType);
         theBitmap = Bitmap.createScaledBitmap(theBitmap, noteWidth, noteHeight, false);
 
         return theBitmap;
@@ -207,8 +255,8 @@ public class AudioHandler extends Activity {
         return ((float) rhythmic_preciseness) / ((float) length);
     }
 
-    public void rebuildNote(Note aNote) {
-        aNote.setScaledBitmap(noteImageChooser(aNote.getTonalValue(), aNote.getTonalValue()));
+    public void rebuildNote(MusicalSymbol aNote, Context context) {
+        aNote.setScaledBitmap(noteImageChooser(aNote.getTonalValue(), aNote.getRhythmicValue(), context));
     }
 
     public void update(float freq) {
@@ -217,7 +265,7 @@ public class AudioHandler extends Activity {
         int rhythmicValue = -1;
         Bitmap notesImage = null;
         Bitmap secondaryNotesImage = null;
-        int valueTilMeasureFull = tempMeasure.valueTilMeasureFull();
+        int valueTilMeasureFull = this.tempMeasure.valueTilMeasureFull();
 
         int notesTone = NoteEvaluator(freq);
 
@@ -228,6 +276,7 @@ public class AudioHandler extends Activity {
         rhythmicValue = updateRhythm(notesTone);
 
         //Log.d("rhythmicValue: ", "" + rhythmicValue);
+        //Log.d("Value:", "" + valueTilMeasureFull);
 
         //If a note has recently ended, rhythmic value will be nonzero.
         //In other words, only construct the recently ended note if update has been called with a new tonal value.
@@ -235,46 +284,46 @@ public class AudioHandler extends Activity {
         if (rhythmicValue != -1) {
             if (rhythmicValue <= valueTilMeasureFull) {
                 notesImage = noteImageChooser(notesTone, rhythmicValue);
+                //Log.d("This", "One");
             } else {
-                notesImage = noteImageChooser(notesTone, rhythmicValue - Math.abs(valueTilMeasureFull));
-                secondaryNotesImage = noteImageChooser(notesTone, Math.abs(valueTilMeasureFull));
+                if(valueTilMeasureFull != 0) {
+                    notesImage = noteImageChooser(notesTone, Math.abs(valueTilMeasureFull));
+                }
+                secondaryNotesImage = noteImageChooser(notesTone, rhythmicValue - Math.abs(valueTilMeasureFull));
+                //Log.d("Or", "That One");
             }
 
             if (secondaryNotesImage != null) {
-                aNote = new Note(notesTone, notesImage, rhythmicValue - Math.abs(valueTilMeasureFull));
+                if (notesImage != null) {
+                    aNote = new Note(notesTone, notesImage, Math.abs(valueTilMeasureFull));
+                    this.tempMeasure.addNote(aNote);
+                }
 
-                tempMeasure.addNote(aNote);
-                MainActivity.staff.addMeasure((MainActivity.staff.getNumElements() - 2), new Measure(tempMeasure.getElements(), 4, 4));
-                tempMeasure.clear();
+                if (MainActivity.staff.getNumElements() < 2) {
+                    MainActivity.staff.addMeasure(0, new Measure(this.tempMeasure.getElements(), 4, 4));
+                } else {
+                    MainActivity.staff.addMeasure((MainActivity.staff.getNumElements() - 1), new Measure(this.tempMeasure.getElements(), 4, 4));
+                }
 
-                aNote = new Note(notesTone, secondaryNotesImage, Math.abs(valueTilMeasureFull));
-                tempMeasure.addNote(aNote);
+                this.tempMeasure.clear();
+
+                aNote = new Note(notesTone, secondaryNotesImage, rhythmicValue - Math.abs(valueTilMeasureFull));
+                this.tempMeasure.addNote(aNote);
 
                 MainActivity.staff.setCurrentMeasures();
                 //MainActivity.drawView.changeX(500);
 
             } else {
                 aNote = new Note(notesTone, notesImage, rhythmicValue);
-                tempMeasure.addNote(aNote);
+                this.tempMeasure.addNote(aNote);
             }
         }
 
+        //Log.d("Testing the measures", "" + MainActivity.staff.getElements());
         //Log.d("TESTING", MainActivity.staff.getCurrentMeasures().toString());
         MainActivity.drawView.startNew();
         MainActivity.drawView.draw(MainActivity.drawView.drawCanvas);
 
-        /*
-        if (metronome.is_time_to_draw_beat_signifier) {
-            MainActivity.drawView.a_beat_just_occurred = true;
-            MainActivity.drawView.draw(MainActivity.drawView.drawCanvas);
-            metronome.is_time_to_draw_beat_signifier = false;
-        }
-
-        else {
-            MainActivity.drawView.a_beat_just_occurred = false;
-            MainActivity.drawView.draw(MainActivity.drawView.drawCanvas);
-        }
-        */
     }
 
 

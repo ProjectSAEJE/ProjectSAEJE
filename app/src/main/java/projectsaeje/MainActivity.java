@@ -1,6 +1,8 @@
 package projectsaeje;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -22,15 +24,16 @@ import music.model.Notation.MusicalSymbols.Note;
 import music.model.Notation.Notation;
 import music.model.Notation.Staff;
 import music.controller.psSoundPlayer;
+import music.model.PureDataTypes.Images;
 
 public class MainActivity extends Activity {
 
     public static Staff staff = null;
-    private static int beatNum = 4;
-    private static int beats = 4;
+    public static int beatNum = 4;
+    public static int beats = 4;
     private static psSoundPlayer s_player;
-    public static int bpm;
-    private EditText editText;
+    public static int bpm = 120;
+    private static EditText editText;
 
     public static DrawingView drawView;
 
@@ -40,21 +43,13 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.activity_main);
 
-        this.editText = (EditText) findViewById(R.id.EditText);
-
+        editText = (EditText) findViewById(R.id.EditText);
+        editText.setText("" + bpm);
 
         if(staff == null) {
             staff = new Staff();
             drawView = (DrawingView)findViewById(R.id.drawing);
         }
-        else {
-            editText.setText(bpm);
-        }
-    }
-
-
-    public void onEventListener() {
-
     }
 
     @Override
@@ -67,6 +62,57 @@ public class MainActivity extends Activity {
     public int getBeatNum() { return beatNum; }
 
     public int getBeats() { return beats; }
+
+    public Bitmap noteImageChooser(int tonalValue, int rhythmicValue) {
+
+        int noteType;
+        int noteNumber = tonalValue%12;
+
+        String accidentalIdentifier;
+
+        noteType = Images.noteImages.get(rhythmicValue - 1);
+
+        String noteName = AudioHandler.theKey.getKey();
+
+        //Log.d("Key is: ", noteName);
+
+        if(noteName.length() > 1) {
+            accidentalIdentifier = noteName.substring(1);
+        } else {
+            accidentalIdentifier = "";
+        }
+
+        if (AudioHandler.accidentals.contains(noteNumber)) {
+            noteType = Images.flatImages.get(rhythmicValue - 1);
+        }
+
+        if (noteNumber < 0) {
+            noteType = Images.restImages.get(rhythmicValue - 1);
+        }
+
+/*
+        switch (accidentalIdentifier) {
+            case "#":
+                Log.d("Note is a: ", "Sharp");
+                noteType = Images.sharpImages.get(rhythmicValue);
+            case "b":
+                Log.d("Note is a: ", "Flat");
+                noteType = Images.flatImages.get(rhythmicValue);
+            default:
+                Log.d("Note is a:", "Natural");
+        }
+*/
+        int height = MainActivity.drawView.drawCanvas.getHeight();
+        int noteHeight = (int)(height*0.26042);// Scales the note to fit the staff
+        int noteWidth  = (int)(height*0.39063);// Ditto
+
+        Bitmap theBitmap = BitmapFactory.decodeResource(this.getResources(), noteType);
+        theBitmap = Bitmap.createScaledBitmap(theBitmap, noteWidth, noteHeight, false);
+
+        return theBitmap;
+    }
+
+
 
     @Override
     protected void onPause() { super.onPause(); }
@@ -81,31 +127,13 @@ public class MainActivity extends Activity {
         return super.onCreateOptionsMenu(menu);
     }
 
-
-
-
-    /*
-    editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-        @Override
-        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-            boolean handled = false;
-            if (actionId == EditorInfo.IME_ACTION_SEND) {
-                sendMessage();
-                handled = true;
-            }
-            return handled;
-        }
-    });
-    */
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
 
         switch (item.getItemId()) {
             case R.id.record:
-                int bpm_int = Integer.parseInt("" + editText.getText());
-                bpm = bpm_int;
+                bpm = Integer.parseInt("" + editText.getText());
 
                 //Log.d("", "bpm_int: " + bpm_int);
                 //String bpm_string = "" + editText.getText();
@@ -130,21 +158,13 @@ public class MainActivity extends Activity {
 
             case R.id.clear:
                 //clear the staff
-
+                staff.clear();
                 staff.setElements(new ArrayList<Notation>());
-                staff.makeStartingCurrentMeasures();
 
                 drawView.startNew();
+                MainActivity.drawView.draw(MainActivity.drawView.drawCanvas);
 
                 return true;
-
-            //case R.id.metronome:
-                //pull up menu for the metronome
-
-                //show_metronome_menu();
-
-                //bpm = get_user_bpm_input();
-                //is_on = get_user_is_on_input();
 
             //case R.id.playback_notes:
                 //Play back all notes in the composition

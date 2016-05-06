@@ -13,6 +13,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 
+import music.model.Notation.MusicalSymbols.MusicalSymbol;
 import music.model.Notation.MusicalSymbols.Note;
 import music.model.Notation.*;
 import music.model.Notation.Measure;
@@ -37,6 +38,7 @@ public class DrawingView extends View {
     public static int time_signature_top_num_from_metronome = 4;
     private Paint the_circle_paint;
     private Paint the_text_paint;
+    public static boolean isDrawingViewSet = false;
     private static int beat_signifier_circle_x;
     private static int beat_signifier_circle_y;
     private static int beat_signifier_text_x;
@@ -72,8 +74,8 @@ public class DrawingView extends View {
         drawCanvas = new Canvas(canvasBitmap);
         int height = drawCanvas.getHeight();
         int width = drawCanvas.getWidth();
-        Log.d("Height is: ", Integer.toString(height));
-        Log.d("Width is: ", Integer.toString(width));
+        //Log.d("Height is: ", Integer.toString(height));
+        //Log.d("Width is: ", Integer.toString(width));
     }
 
     @Override
@@ -81,16 +83,19 @@ public class DrawingView extends View {
         int width = drawCanvas.getWidth();
         x = (width*0.03125);
         canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
-        MainActivity.staff.setCurrentMeasures();
+
+        if(!isDrawingViewSet){
+            MainActivity.staff.setCurrentMeasures();
+            isDrawingViewSet = true;
+        }
 
         for(Notation aMeasure: MainActivity.staff.getCurrentMeasures()) {
             Measure myMeasure = (Measure)(aMeasure);
 
             for(Notation aNotation: myMeasure.getElements()) {
-                Note aNote = (Note)(aNotation);
-
+                MusicalSymbol aNote = (MusicalSymbol)(aNotation);
                 canvas.drawBitmap(aNote.getScaledBitmap(), (int)(x), (int)(getNoteY(aNote)), null);
-                x += (aNote.getRhythmicValue() + 1) * (width*0.03125);
+                x += (aNote.getRhythmicValue()) * (width*0.03125);
                 //x += 50;
             }
         };
@@ -148,34 +153,58 @@ public class DrawingView extends View {
         invalidate();
     }
 
-    public boolean onTouchEvent(MotionEvent event) {
+    Note clickedNote = null;
+    int y = 0;
+    int posX = 0;
 
-        Note clickedNote = null;
-        int y = 0;
+    public boolean onTouchEvent(MotionEvent event) {
 
         switch(event.getAction()) {
             case MotionEvent.ACTION_DOWN:
 
-                int x = (int) event.getX();
+                posX = (int) event.getX();
                 y = (int) event.getY();
                 double sixteenthWidth = drawCanvas.getWidth() * .03125;
-                int notePosition = (int)(x / sixteenthWidth);
-
+                int notePosition = (int)(event.getX() / sixteenthWidth);
+                Log.d("Note Pos", "" + notePosition);
 
                 for(Notation element: MainActivity.staff.getCurrentMeasures()) {
                     Measure aMeasure = (Measure) element;
-                    if (aMeasure.getNumElements() > notePosition){
-                        clickedNote = (Note) aMeasure.getElements().get(notePosition);
+                    int itr = 0;
+                    if (MainActivity.beatNum * MainActivity.beats > notePosition){
+                        for(Notation myElement: aMeasure.getElements()) {
+                            itr+=1;
+                            Note myNote = (Note)myElement;
+                            notePosition -= myNote.getRhythmicValue();
+                            Log.d("Note Pos 2", ""+notePosition);
+                            if(notePosition <= 0){
+                                Log.d("Note Number", "" + itr);
+                                clickedNote = myNote;
+                                return true;
+                            }
+                        }
                     } else {
-                        notePosition = notePosition - aMeasure.getNumElements();
+                        notePosition -= MainActivity.beatNum * MainActivity.beats;
                     }
                 }
 
+                return true;
+
             case MotionEvent.ACTION_MOVE:
 
+                return true;
 
 
             case MotionEvent.ACTION_UP:
+
+                if (posX - (int) event.getX() > 50){
+                    MainActivity.staff.moveUpCurrentMeasures(getContext());
+                    return true;
+                }
+                if (posX - (int) event.getX() < -50) {
+                    MainActivity.staff.moveBackCurrentMeasures(getContext());
+                    return true;
+                }
 
                 if (clickedNote != null) {
                     y = y - (int) event.getY();
@@ -186,6 +215,7 @@ public class DrawingView extends View {
                     this.draw(this.drawCanvas);
                     this.startNew();
                 }
+                return true;
 
         }
         return true;
@@ -196,7 +226,7 @@ public class DrawingView extends View {
         x -= subtractor;
     }
 
-    private double getNoteY(Note tN) {
+    private double getNoteY(MusicalSymbol tN) {
 
         double y;
         double height = drawCanvas.getHeight();
