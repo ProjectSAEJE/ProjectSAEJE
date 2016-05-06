@@ -274,7 +274,7 @@ public class DrawingView extends View {
                 y = (height*0.35877);
                 return y;
         }
-        
+
     }
 
     /*public Staff measureChooser(Staff theStaff, int currentMeasure, int swipe) {

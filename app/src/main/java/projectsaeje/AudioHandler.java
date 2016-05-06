@@ -68,10 +68,10 @@ public class AudioHandler extends Activity {
         images.populateArrays();
 
         accidentals = new ArrayList<>();
-        accidentals.add(1);
-        accidentals.add(3);
-        accidentals.add(6);
-        accidentals.add(8);
+        accidentals.add(0);
+        accidentals.add(2);
+        accidentals.add(5);
+        accidentals.add(7);
         accidentals.add(10);
 
         Tuple2<Integer, Integer> timeSigntature = new Tuple2<>(4, 4);
