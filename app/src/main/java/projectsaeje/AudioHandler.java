@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -36,7 +37,6 @@ public class AudioHandler extends Activity {
     private Measure tempMeasure;
     public static CaptureThread mCapture;
 
-
     //Variables used for rhythmic interpretation
     private int previously_updated_tone;
     private int rhythmic_preciseness = 16;
@@ -58,7 +58,8 @@ public class AudioHandler extends Activity {
         setContentView(R.layout.audiohandler);
 
         TextView textView = (TextView) findViewById(R.id.TextView);
-        textView.setText("" + MainActivity.bpm);
+        textView.setTextColor(Color.BLACK);
+        textView.setText("BPM: " + MainActivity.bpm);
 
         this.tempMeasure = new Measure(new ArrayList<Notation>(), 4, 4);
         MainActivity.staff.addMeasure(this.tempMeasure);

@@ -138,7 +138,7 @@ public class DrawingView extends View {
             //Log.d("", "Drawing circle b/c this.is_drawing = " + this.a_beat_just_occurred + " and num_X_has_been = " + this.num_times_drawn_since_beat_occurred);
             the_circle_paint.setAlpha((int) ((255) / num_times_drawn_since_beat_occurred));
             the_text_paint.setAlpha((int) ((255) / num_times_drawn_since_beat_occurred));
-            canvas.drawCircle(width - beat_signifier_circle_x, beat_signifier_circle_y, 90, the_circle_paint);
+            canvas.drawCircle(width - beat_signifier_circle_x, beat_signifier_circle_y, 70, the_circle_paint);
             canvas.drawText(text_to_display, width - beat_signifier_text_x, beat_signifier_text_y, this.the_text_paint);
             //Log.d("", "Drawing circle #: " + this.num_times_drawn_since_beat_occurred + " at: (" + this.beat_signifier_circle_x + ", " + this.beat_signifier_circle_y + ")" + " for beat #: " + this.beat_num_from_metronome);
         }
@@ -146,6 +146,10 @@ public class DrawingView extends View {
         //Log.d("", "num_X_has_been: " + this.num_times_drawn_since_beat_occurred);
 
         this.invalidate();
+
+        Paint line_test_paint = new Paint();
+        canvas.drawLine(0, 0, drawCanvas.getWidth(), drawCanvas.getHeight(), line_test_paint);
+
     }
 
     public void startNew() {
