@@ -9,18 +9,18 @@ use the following style guide.
 Project SAEJE style guide:
 
  - Camel case naming should be observed
- - Functions should declerations should follow the form
-      public int camelCase(parameters) { </br>
-          return 1; <br/>
-      }
-      
+ - Functions should declerations should follow the form 
+ <div> public int camelCase(parameters) { </br>
+ &nbsp return 1; <br/>
+ }
+ </div>
       NOT
-      
+<div>
       public int non_camel_case(parameters) </br>
       { </br>
-        return 1; <br/>
+      &nbsp return 1; <br/>
       }
-    
+</div>
 
 
 
