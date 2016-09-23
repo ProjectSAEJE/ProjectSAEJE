@@ -1,15 +1,17 @@
 # ProjectSAEJE
 <html>
 
-Project SAEJE is an Android app designed to take sung melody and convert it into scored music. It is written in Java and should
-use the following style guide.
+<p> Project SAEJE is an Android app designed to take sung melody and convert it into scored music. It is written in Java and should
+use the following style guide. </p>
 
 
 
 Project SAEJE style guide:
 
- - Camel case naming should be observed
- - Functions should declerations should follow the form </br>
+ <ul>
+ <li> Camel case naming should be observed </li>
+ <li> Functions should declerations should follow the form </li>
+ </ul>
 
 <div> public int camelCase(parameters) { </br>
 return 1; <br/>
@@ -22,6 +24,7 @@ public int non_camel_case(parameters) </br>
 return 1; <br/>
 }
 </div>
+
 
 
 
