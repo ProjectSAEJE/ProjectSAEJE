@@ -14,7 +14,7 @@ Project SAEJE style guide:
 <div> public int camelCase(parameters) { </br>
 return 1; <br/>
 }
-</div>
+</div> </br>
 NOT
 <div>
 public int non_camel_case(parameters) </br>
