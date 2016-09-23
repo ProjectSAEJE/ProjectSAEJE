@@ -12,14 +12,14 @@ Project SAEJE style guide:
  - Functions should declerations should follow the form </br>
 
 <div> public int camelCase(parameters) { </br>
-<p style="text-indent:5em;"> return 1; </p> <br/>
+return 1; <br/>
 }
 </div>
 NOT
 <div>
 public int non_camel_case(parameters) </br>
 { </br>
-<p style="text-indent:5em;"> return 1; </p><br/>
+return 1; <br/>
 }
 </div>
 
