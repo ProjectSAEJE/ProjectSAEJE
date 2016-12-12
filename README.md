@@ -13,15 +13,15 @@ Project SAEJE style guide:
  <li> Functions declerations should follow the form </li>
  </ul>
 
-<div> public int camelCase(parameters) { </br>
-    return 1; <br/>
+<div> public int camelCase(parameters) { <br>
+&emsp return 1; <br>
 }
-</div> </br>
+</div> <br>
 NOT
 <div>
-public int non_camel_case(parameters) </br>
-{ </br>
-    return 1; <br/>
+public int non_camel_case(parameters) <br>
+{ <br>
+&emsp return 1; <br/>
 }
 </div>
 
