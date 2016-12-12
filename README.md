@@ -10,7 +10,7 @@ Project SAEJE style guide:
 
  <ul>
  <li> Camel case naming should be observed </li>
- <li> Functions should declerations should follow the form </li>
+ <li> Functions declerations should follow the form </li>
  </ul>
 
 <div> public int camelCase(parameters) { </br>
