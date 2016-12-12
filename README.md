@@ -14,14 +14,14 @@ Project SAEJE style guide:
  </ul>
 
 <div> public int camelCase(parameters) { </br>
-return 1; <br/>
+    return 1; <br/>
 }
 </div> </br>
 NOT
 <div>
 public int non_camel_case(parameters) </br>
 { </br>
-return 1; <br/>
+    return 1; <br/>
 }
 </div>
 
