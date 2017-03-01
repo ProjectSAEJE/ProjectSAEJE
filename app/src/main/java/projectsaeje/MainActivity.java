@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
     public static Staff staff = null;
     public static int beatNum = 4;
     public static int beats = 4;
-    private static psSoundPlayer s_player;
+    private static psSoundPlayer sPlayer;
     public static int bpm = 120;
     private static EditText editText;
 
@@ -173,11 +173,11 @@ public class MainActivity extends Activity {
                 for (Notation a_measure_notation : staff.getElements()) {
                     for (Notation a_musical_symbol_notation : (a_measure_notation.getElements())) {
                         MusicalSymbol a_musical_symbol = (MusicalSymbol) a_musical_symbol_notation;
-                        s_player.addToPlaybackQueue(a_musical_symbol);
+                        sPlayer.addToPlaybackQueue(a_musical_symbol);
                     }
                 }
 
-                s_player.playBackComposition();
+                sPlayer.playBackComposition();
                 */
 
             default:

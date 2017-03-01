@@ -29,7 +29,6 @@ import music.model.Notation.MusicalSymbols.*;
 import music.model.PureDataTypes.*;
 import music.model.Notation.*;
 
-
 public class AudioHandler extends Activity {
 
     private static boolean firstNote = true;
@@ -38,10 +37,10 @@ public class AudioHandler extends Activity {
     public static CaptureThread mCapture;
 
     //Variables used for rhythmic interpretation
-    private int previously_updated_tone;
-    private int rhythmic_preciseness = 16;
-    private int starting_precision_of_note;
-    private int length_in_sixteenths_of_ended_note;
+    private int previouslyUpdatedTone;
+    private int rhythmicPrecision = 16;
+    private int startingPrecisionOfNote;
+    private int lengthInSixteenthsOfEndedNote;
     private Metronome metronome;
 
     //Variables used for tonal interpretation
@@ -76,7 +75,7 @@ public class AudioHandler extends Activity {
         accidentals.add(10);
 
         Tuple2<Integer, Integer> timeSigntature = new Tuple2<>(4, 4);
-        metronome = new Metronome(MainActivity.bpm, timeSigntature, false, this, rhythmic_preciseness, MainActivity.drawView);
+        metronome = new Metronome(MainActivity.bpm, timeSigntature, false, this, rhythmicPrecision, MainActivity.drawView);
         captureNotes();
     }
 
@@ -223,37 +222,37 @@ public class AudioHandler extends Activity {
         return theBitmap;
     }
 
-    private int updateRhythm(int new_tone) {
+    private int updateRhythm(int newTone) {
         //If the tone is the same tone as the previous tone, the note is still being sung and we simply return 0
-        if (new_tone == previously_updated_tone) {
+        if (newTone == previouslyUpdatedTone) {
             return -1;  //return -1 to indicate that the note length is still being continued/determined
         }
 
         //If the tone is not the same, we change the previously updated tone to the new tone, calculate the length of the note, and reset the starting precision
         else {
-            previously_updated_tone = new_tone;
+            previouslyUpdatedTone = newTone;
             //The note has just ended, so the length of the note is the number of precisions that have passed since the one at which it began
-            length_in_sixteenths_of_ended_note = metronome.get_rp_precision_counter() - starting_precision_of_note;
+            lengthInSixteenthsOfEndedNote = metronome.getRpPrecisionCounter() - startingPrecisionOfNote;
 
-            if (length_in_sixteenths_of_ended_note == 0) {
+            if (lengthInSixteenthsOfEndedNote == 0) {
                 return -1;
             }
 
             //reset start time for the newest note
-            starting_precision_of_note = metronome.get_rp_precision_counter();
+            startingPrecisionOfNote = metronome.getRpPrecisionCounter();
 
             //temporary ceiling value of 16
-            if (length_in_sixteenths_of_ended_note > 16) {
+            if (lengthInSixteenthsOfEndedNote > 16) {
                 return 16;
             }
             else {
-                return length_in_sixteenths_of_ended_note; //then return the length of the note in sixteenth precisions
+                return lengthInSixteenthsOfEndedNote; //then return the length of the note in sixteenth precisions
             }
         }
     }
 
     private float getRhythmicValueOfEndedNoteWithLength(int length) {
-        return ((float) rhythmic_preciseness) / ((float) length);
+        return ((float) rhythmicPrecision) / ((float) length);
     }
 
     public void rebuildNote(MusicalSymbol aNote, Context context) {

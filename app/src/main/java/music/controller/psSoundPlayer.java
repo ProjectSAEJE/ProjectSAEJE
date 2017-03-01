@@ -18,8 +18,8 @@ import music.model.Notation.MusicalSymbols.MusicalSymbol;
 public class psSoundPlayer {
 
     private Context context;
-    private MediaPlayer m_player;
-    private ArrayList<Integer> playback_queue;
+    private MediaPlayer mPlayer;
+    private ArrayList<Integer> playbackQueue;
     private Handler mHandler;
 
     public psSoundPlayer(Context context) {
@@ -35,13 +35,13 @@ public class psSoundPlayer {
     }
 
     public void delete() {
-        m_player.release();
-        m_player = null;
+        mPlayer.release();
+        mPlayer = null;
     }
 
     public void playSound(int resource) {
-        m_player = m_player.create(context, /*e.g. R.raw.sound_file_1 */ resource);
-        m_player.start(); // no need to call prepare(); create() does that for you
+        mPlayer = mPlayer.create(context, /*e.g. R.raw.sound_file_1 */ resource);
+        mPlayer.start(); // no need to call prepare(); create() does that for you
     }
 
     public void addToPlaybackQueue(MusicalSymbol symbol) {
@@ -51,27 +51,27 @@ public class psSoundPlayer {
         //
         int x = symbol.getRhythmicValue();
         for (int i = 0; i < x; ++i) {
-            playback_queue.add(symbol.getTonalValue());
+            playbackQueue.add(symbol.getTonalValue());
         }
     }
 
     public void playBackComposition() {
-        for (int a_tonal_value : playback_queue) {
-            int resource_ID_for_this_tonal_value = getResourceIDForTonalValue(a_tonal_value);
+        for (int aTonalValue : playbackQueue) {
+            int resourceIdForThisTonalValue = getResourceIDForTonalValue(aTonalValue);
             //*** When Metronome signals the occurrence of a rhythmic precision ***///
-            playSound(resource_ID_for_this_tonal_value);
+            playSound(resourceIdForThisTonalValue);
         }
     }
 
-    public int getResourceIDForTonalValue(int a_tonal_value) {
+    public int getResourceIDForTonalValue(int aTonalValue) {
         int ID = 0;
         //find the ID
         return ID;
     }
 
     public void OutputTonalValueAtPosition(int pos) {
-        int tonal_value = this.playback_queue.get(pos);
-        int resource_id = getResourceIDForTonalValue(tonal_value);
-        playSound(resource_id);
+        int tonalValue = this.playbackQueue.get(pos);
+        int resourceId = getResourceIDForTonalValue(tonalValue);
+        playSound(resourceId);
     }
 }

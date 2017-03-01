@@ -31,18 +31,18 @@ public class DrawingView extends View {
     public Canvas drawCanvas;
     //canvas bitmap
     private Bitmap canvasBitmap;
-    private int num_times_drawn_since_beat_occurred;
-    private static int num_times_beat_signifier_will_be_drawn;
-    public static boolean a_beat_just_occurred;
-    public static int beat_num_from_metronome;
-    public static int time_signature_top_num_from_metronome = 4;
-    private Paint the_circle_paint;
-    private Paint the_text_paint;
+    private int numTimesDrawnSinceLastBeat;
+    private static int numTimesToDrawBeatSignifier;
+    public static boolean aBeatJustOccurred;
+    public static int metronomeBeatNum;
+    public static int timeSigTopNumber = 4;
+    private Paint theCirclePaint;
+    private Paint theTextPaint;
     public static boolean isDrawingViewSet = false;
-    private static int beat_signifier_circle_x;
-    private static int beat_signifier_circle_y;
-    private static int beat_signifier_text_x;
-    private static int beat_signifier_text_y;
+    private static int beatSignifierCircleX;
+    private static int beatSignifierCircleY;
+    private static int beatSignifierTextX;
+    private static int beatSignifierTextY;
     
     private static double x = 0;
     
@@ -50,18 +50,18 @@ public class DrawingView extends View {
     public DrawingView(Context context, AttributeSet attrs){
         super(context, attrs);
         setupDrawing();
-        this.num_times_drawn_since_beat_occurred = 0;
-        num_times_beat_signifier_will_be_drawn = 7;
-        beat_signifier_circle_x = 340;
-        beat_signifier_circle_y = 150;
-        beat_signifier_text_x = beat_signifier_circle_x + 45;
-        beat_signifier_text_y = beat_signifier_circle_y + 45;
-        the_text_paint = new Paint();
-        the_text_paint.setColor(Color.BLACK);
-        the_text_paint.setTextSize(140);
+        this.numTimesDrawnSinceLastBeat = 0;
+        numTimesToDrawBeatSignifier = 7;
+        beatSignifierCircleX = 340;
+        beatSignifierCircleY = 150;
+        beatSignifierTextX = beatSignifierCircleX + 45;
+        beatSignifierTextY = beatSignifierCircleY + 45;
+        theTextPaint = new Paint();
+        theTextPaint.setColor(Color.BLACK);
+        theTextPaint.setTextSize(140);
 
-        the_circle_paint = new Paint();
-        the_circle_paint.setColor(Color.GREEN);
+        theCirclePaint = new Paint();
+        theCirclePaint.setColor(Color.GREEN);
 
     }
 
@@ -100,55 +100,55 @@ public class DrawingView extends View {
             }
         };
 
-        //Log.d("is_drawing_...: ", "" + this.a_beat_just_occurred);
+        //Log.d("is_drawing_...: ", "" + this.aBeatJustOccurred);
 
         //The following logic is intended to draw a beat signifier (circle or some shape) if either
         // 1) A beat just occured or
         // 2) a beat occurred very recently and we still want to see the signifier.
 
-        //boolean is_drawing_beat_signifier = false;
+        //boolean isDrawingBeatSignifier = false;
 
-        //Log.d("", "a_beat_just_occurred: " + this.a_beat_just_occurred);
-        if (a_beat_just_occurred) {
-            this.num_times_drawn_since_beat_occurred = 0;
+        //Log.d("", "aBeatJustOccurred: " + this.aBeatJustOccurred);
+        if (aBeatJustOccurred) {
+            this.numTimesDrawnSinceLastBeat = 0;
         }
 
         /*
-        if ((this.a_beat_just_occurred) { ||
-                ((0 <= this.num_times_drawn_since_beat_occurred) && (this.num_times_drawn_since_beat_occurred < this.num_times_beat_signifier_will_be_drawn))) {
-            is_drawing_beat_signifier = true;
+        if ((this.aBeatJustOccurred) { ||
+                ((0 <= this.numTimesDrawnSinceLastBeat) && (this.numTimesDrawnSinceLastBeat < this.numTimesToDrawBeatSignifier))) {
+            isDrawingBeatSignifier = true;
         }
         */
 
-        if (this.num_times_drawn_since_beat_occurred < num_times_beat_signifier_will_be_drawn) {
-            //Log.d("", "adding one to: " + this.num_times_drawn_since_beat_occurred);
-            this.num_times_drawn_since_beat_occurred += 1;
+        if (this.numTimesDrawnSinceLastBeat < numTimesToDrawBeatSignifier) {
+            //Log.d("", "adding one to: " + this.numTimesDrawnSinceLastBeat);
+            this.numTimesDrawnSinceLastBeat += 1;
 
-            String text_to_display = "" + (beat_num_from_metronome % time_signature_top_num_from_metronome);
-            if (text_to_display.equals("0")) {
-                text_to_display = "" + time_signature_top_num_from_metronome;
+            String textToDisplay = "" + (metronomeBeatNum % timeSigTopNumber);
+            if (textToDisplay.equals("0")) {
+                textToDisplay = "" + timeSigTopNumber;
             }
-            if(text_to_display.equals("1")) {
-                the_circle_paint.setColor(Color.rgb(255, 220, 120));
+            if(textToDisplay.equals("1")) {
+                theCirclePaint.setColor(Color.rgb(255, 220, 120));
             }
             else {
-                the_circle_paint.setColor(Color.rgb(50, 255, 255));
+                theCirclePaint.setColor(Color.rgb(50, 255, 255));
             }
 
-            //Log.d("", "Drawing circle b/c this.is_drawing = " + this.a_beat_just_occurred + " and num_X_has_been = " + this.num_times_drawn_since_beat_occurred);
-            the_circle_paint.setAlpha((int) ((255) / num_times_drawn_since_beat_occurred));
-            the_text_paint.setAlpha((int) ((255) / num_times_drawn_since_beat_occurred));
-            canvas.drawCircle(width - beat_signifier_circle_x, beat_signifier_circle_y, 70, the_circle_paint);
-            canvas.drawText(text_to_display, width - beat_signifier_text_x, beat_signifier_text_y, this.the_text_paint);
-            //Log.d("", "Drawing circle #: " + this.num_times_drawn_since_beat_occurred + " at: (" + this.beat_signifier_circle_x + ", " + this.beat_signifier_circle_y + ")" + " for beat #: " + this.beat_num_from_metronome);
+            //Log.d("", "Drawing circle b/c this.is_drawing = " + this.aBeatJustOccurred + " and num_X_has_been = " + this.numTimesDrawnSinceLastBeat);
+            theCirclePaint.setAlpha((int) ((255) / numTimesDrawnSinceLastBeat));
+            theTextPaint.setAlpha((int) ((255) / numTimesDrawnSinceLastBeat));
+            canvas.drawCircle(width - beatSignifierCircleX, beatSignifierCircleY, 70, theCirclePaint);
+            canvas.drawText(textToDisplay, width - beatSignifierTextX, beatSignifierTextY, this.theTextPaint);
+            //Log.d("", "Drawing circle #: " + this.numTimesDrawnSinceLastBeat + " at: (" + this.beatSignifierCircleX + ", " + this.beatSignifierCircleY + ")" + " for beat #: " + this.metronomeBeatNum);
         }
 
-        //Log.d("", "num_X_has_been: " + this.num_times_drawn_since_beat_occurred);
+        //Log.d("", "num_X_has_been: " + this.numTimesDrawnSinceLastBeat);
 
         this.invalidate();
 
-        Paint line_test_paint = new Paint();
-        canvas.drawLine(0, 0, drawCanvas.getWidth(), drawCanvas.getHeight(), line_test_paint);
+        Paint lineTestPaint = new Paint();
+        canvas.drawLine(0, 0, drawCanvas.getWidth(), drawCanvas.getHeight(), lineTestPaint);
 
     }
 
